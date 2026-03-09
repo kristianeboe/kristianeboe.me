@@ -1,0 +1,16 @@
+## Squarespace CDN Images to Download
+
+# Profile photo
+https://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1548616754553-6S4M5LUM6C6UEVMTQXXD/Kristian_work+copy+smaller.jpg
+
+# Leading
+https://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1491640220517-LUPDBK73BK74HLCSC196/a+Boss+Leader.jpg
+
+# Speaking
+https://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1491640534365-K4SJCX2C626BWV9CUZRF/speaking.jpeg
+
+# Coding
+https://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1491640577590-5KH3VCZ5Y433DLOHJWGW/Coding.jpg
+
+# Traveling
+https://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1491640807170-1PDM1VFCJQL5CZDAMIJ0/traveling.jpg

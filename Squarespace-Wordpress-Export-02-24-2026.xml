@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:wp="http://wordpress.org/export/1.2/">
+  <channel>
+    <title>kristianeboe.me</title>
+    <link>https://kristianeboe.me</link>
+    <pubDate>Wed, 02 Jul 2014 12:48:12 +0000</pubDate>
+    <description>Travel, programming and tech</description>
+    <language>no-NO</language>
+    <wp:wxr_version>1.2</wp:wxr_version>
+    <wp:author>
+      <wp:author_id>-1896301726</wp:author_id>
+      <wp:author_login>kristian.e.boe@idaisolutions.com</wp:author_login>
+      <wp:author_email>kristian.e.boe@idaisolutions.com</wp:author_email>
+      <wp:author_display_name><![CDATA[Kristian Bø]]></wp:author_display_name>
+      <wp:author_first_name><![CDATA[Kristian]]></wp:author_first_name>
+      <wp:author_last_name><![CDATA[Bø]]></wp:author_last_name>
+    </wp:author>
+    <wp:author>
+      <wp:author_id>76421067</wp:author_id>
+      <wp:author_login>kristian.e.boe@gmail.com</wp:author_login>
+      <wp:author_email>kristian.e.boe@gmail.com</wp:author_email>
+      <wp:author_display_name><![CDATA[Kristian Bø]]></wp:author_display_name>
+      <wp:author_first_name><![CDATA[Kristian]]></wp:author_first_name>
+      <wp:author_last_name><![CDATA[Bø]]></wp:author_last_name>
+    </wp:author>
+    <wp:category>
+      <wp:cat_name><![CDATA[Personal - null]]></wp:cat_name>
+      <wp:category_nicename>Personal-null</wp:category_nicename>
+      <wp:category_parent />
+    </wp:category>
+    <item />
+    <item />
+    <item />
+    <item />
+    <item>
+      <title>New Gallery</title>
+      <link>/new-gallery</link>
+      <pubDate>Sun, 26 Feb 2017 15:06:24 +0000</pubDate>
+      <content:encoded><![CDATA[<div><img src="http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121514184-L2C13DW4YOELCDUWXJ1U/DSC_0275.JPG" /><img src="http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121516628-7O4JCNH3CIG2DPJ5ZPQM/IMG_1783-ANIMATION.gif" /><img src="http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121513712-YS569RFRMJEZZU9BYFIC/DSC_0310.JPG" /></div>]]></content:encoded>
+      <wp:post_name>new-gallery</wp:post_name>
+      <wp:post_type>page</wp:post_type>
+      <wp:post_id>4</wp:post_id>
+      <wp:status>publish</wp:status>
+    </item>
+    <item>
+      <wp:attachment_url>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121514184-L2C13DW4YOELCDUWXJ1U/DSC_0275.JPG</wp:attachment_url>
+      <link>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121514184-L2C13DW4YOELCDUWXJ1U/DSC_0275.JPG</link>
+      <title>attachment-58b2eea68419c27c671bb508</title>
+      <wp:post_name>DSC-0275-JPG</wp:post_name>
+      <wp:post_type>attachment</wp:post_type>
+      <wp:post_id>5</wp:post_id>
+      <wp:post_parent>4</wp:post_parent>
+      <wp:status>inherit</wp:status>
+      <content:encoded><![CDATA[img-58b2eea68419c27c671bb508]]></content:encoded>
+      <excerpt:encoded><![CDATA[exc-58b2eea68419c27c671bb508]]></excerpt:encoded>
+      <pubDate>Sun, 26 Feb 2017 15:05:10 +0000</pubDate>
+      <wp:post_date>2017-02-26 15:05:10</wp:post_date>
+      <wp:post_date_gmt>2017-02-26 15:05:10</wp:post_date_gmt>
+      <dc:creator>kristian.e.boe@idaisolutions.com</dc:creator>
+    </item>
+    <item>
+      <wp:attachment_url>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121516628-7O4JCNH3CIG2DPJ5ZPQM/IMG_1783-ANIMATION.gif</wp:attachment_url>
+      <link>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121516628-7O4JCNH3CIG2DPJ5ZPQM/IMG_1783-ANIMATION.gif</link>
+      <title>attachment-58b2eea9ebbd1abb37076f95</title>
+      <wp:post_name>IMG-1783-ANIMATION-gif</wp:post_name>
+      <wp:post_type>attachment</wp:post_type>
+      <wp:post_id>6</wp:post_id>
+      <wp:post_parent>4</wp:post_parent>
+      <wp:status>inherit</wp:status>
+      <content:encoded><![CDATA[img-58b2eea9ebbd1abb37076f95]]></content:encoded>
+      <excerpt:encoded><![CDATA[exc-58b2eea9ebbd1abb37076f95]]></excerpt:encoded>
+      <pubDate>Sun, 26 Feb 2017 15:05:13 +0000</pubDate>
+      <wp:post_date>2017-02-26 15:05:13</wp:post_date>
+      <wp:post_date_gmt>2017-02-26 15:05:13</wp:post_date_gmt>
+      <dc:creator>kristian.e.boe@idaisolutions.com</dc:creator>
+    </item>
+    <item>
+      <wp:attachment_url>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121513712-YS569RFRMJEZZU9BYFIC/DSC_0310.JPG</wp:attachment_url>
+      <link>http://images.squarespace-cdn.com/content/v1/53b3ff8ce4b0e73ebe0b6f2b/1488121513712-YS569RFRMJEZZU9BYFIC/DSC_0310.JPG</link>
+      <title>attachment-58b2eea6ebbd1abb37076f6d</title>
+      <wp:post_name>DSC-0310-JPG</wp:post_name>
+      <wp:post_type>attachment</wp:post_type>
+      <wp:post_id>7</wp:post_id>
+      <wp:post_parent>4</wp:post_parent>
+      <wp:status>inherit</wp:status>
+      <content:encoded><![CDATA[img-58b2eea6ebbd1abb37076f6d]]></content:encoded>
+      <excerpt:encoded><![CDATA[exc-58b2eea6ebbd1abb37076f6d]]></excerpt:encoded>
+      <pubDate>Sun, 26 Feb 2017 15:05:10 +0000</pubDate>
+      <wp:post_date>2017-02-26 15:05:10</wp:post_date>
+      <wp:post_date_gmt>2017-02-26 15:05:10</wp:post_date_gmt>
+      <dc:creator>kristian.e.boe@idaisolutions.com</dc:creator>
+    </item>
+    <item />
+  </channel>
+</rss>
+
