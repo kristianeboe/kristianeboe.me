@@ -11,6 +11,10 @@ import { Quote } from "./Quote";
 import { Stats } from "./Stats";
 import { TLDR } from "./TLDR";
 import { Video } from "./Video";
+import { ImageGallery } from "../blog/ImageGallery";
+import { InfoBox } from "../blog/InfoBox";
+import { ParallaxHero } from "../blog/ParallaxHero";
+import { YouTubeEmbed } from "../blog/YouTubeEmbed";
 
 const sharedComponents = {
   CalloutBox,
@@ -21,6 +25,10 @@ const sharedComponents = {
   Stats,
   TLDR,
   Video,
+  ImageGallery,
+  InfoBox,
+  ParallaxHero,
+  YouTubeEmbed,
 };
 
 // Parse the Velite generated MDX code into a React component function
