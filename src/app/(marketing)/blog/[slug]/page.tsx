@@ -98,7 +98,7 @@ export default async function BlogPostPage({
   // Simple layout without sticky CTA
   if (!showStickyCTA) {
     return (
-      <div className={cn("bg-white", meta.heroImage && "hero-blog-page")} lang={meta.language}>
+      <div className={cn("bg-white", meta.heroImage && "-mt-[84px]")} lang={meta.language}>
         {meta.heroImage && <TransparentHeader />}
         {meta.heroImage ? (
           <ParallaxHero

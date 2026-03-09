@@ -32,7 +32,7 @@ export default function MarketingLayout({
   return (
     <div className="bg-background">
       <Header container />
-      <main className="isolate">{children}</main>
+      <main className="isolate pt-[84px]">{children}</main>
       <Footer />
     </div>
   );

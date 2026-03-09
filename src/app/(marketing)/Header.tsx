@@ -57,11 +57,9 @@ export default function Header({
   return (
     <header
       className={cn(
-        "inset-x-0 z-30",
-        transparent
-          ? "fixed top-0 bg-transparent"
-          : "bg-background/10 border-border/20 sticky border-b backdrop-blur-sm",
-        !transparent && (showBanner ? "top-28 md:top-16 lg:top-12" : "top-0"),
+        "fixed inset-x-0 top-0 z-30",
+        "bg-background/10 border-border/20 border-b backdrop-blur-sm",
+        showBanner && "top-28 md:top-16 lg:top-12",
       )}
     >
       <nav
