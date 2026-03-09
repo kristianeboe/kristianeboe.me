@@ -34,7 +34,7 @@ export function TransparentHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-30 transition-all duration-300",
+        "hero-header fixed inset-x-0 top-0 z-30 transition-all duration-300",
         scrolled
           ? "bg-background/80 border-border/20 border-b backdrop-blur-sm"
           : "bg-transparent",

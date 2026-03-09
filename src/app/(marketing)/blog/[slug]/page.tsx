@@ -99,7 +99,13 @@ export default async function BlogPostPage({
   if (!showStickyCTA) {
     return (
       <div className={cn("bg-white", meta.heroImage && "-mt-[84px]")} lang={meta.language}>
-        {meta.heroImage && <TransparentHeader />}
+        {/* Hide the layout header and show transparent one for hero pages */}
+        {meta.heroImage && (
+          <>
+            <style dangerouslySetInnerHTML={{ __html: `header:not(.hero-header) { display: none !important; }` }} />
+            <TransparentHeader />
+          </>
+        )}
         {meta.heroImage ? (
           <ParallaxHero
             image={meta.heroImage}
