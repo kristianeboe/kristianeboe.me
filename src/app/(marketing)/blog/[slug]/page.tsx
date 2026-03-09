@@ -10,6 +10,7 @@ import { env } from "@/env";
 import { CtaInjector } from "@/components/mdx/CtaInjector";
 import { MDXContent } from "@/components/mdx/MDXContent";
 import { Prose } from "@/components/mdx/Prose";
+import { ParallaxHero } from "@/components/blog/ParallaxHero";
 import { StickyCtaCard } from "@/components/mdx/StickyCtaCard";
 import { posts } from ".velite";
 import NewsletterCTA from "../../NewsletterCTA";
@@ -96,19 +97,28 @@ export default async function BlogPostPage({
   if (!showStickyCTA) {
     return (
       <div className="bg-white" lang={meta.language}>
-        <div className="mx-auto max-w-4xl px-6 py-24 lg:px-8">
-          <div className="mt-8">
-            <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-              {meta.h1}
-            </h1>
-
-            {meta.h1Subtitle && (
-              <p className="mt-6 text-xl leading-8 text-gray-700">
-                {meta.h1Subtitle}
-              </p>
-            )}
+        {meta.heroImage ? (
+          <ParallaxHero
+            image={meta.heroImage}
+            title={meta.h1}
+            subtitle={meta.h1Subtitle}
+          />
+        ) : (
+          <div className="mx-auto max-w-4xl px-6 pt-24 lg:px-8">
+            <div className="mt-8">
+              <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+                {meta.h1}
+              </h1>
+              {meta.h1Subtitle && (
+                <p className="mt-6 text-xl leading-8 text-gray-700">
+                  {meta.h1Subtitle}
+                </p>
+              )}
+            </div>
           </div>
+        )}
 
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
           {/* Article content */}
           <div className="mt-16 max-w-none">
             <Prose>

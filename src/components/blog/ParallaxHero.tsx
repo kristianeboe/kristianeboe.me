@@ -7,7 +7,7 @@ interface ParallaxHeroProps {
 export function ParallaxHero({ image, title, subtitle }: ParallaxHeroProps) {
   return (
     <div
-      className="not-prose relative left-1/2 -ml-[50vw] flex min-h-[60vh] w-screen items-center justify-center"
+      className="not-prose relative left-1/2 -ml-[50vw] flex min-h-screen w-screen items-center justify-center"
       style={{
         backgroundImage: `url(${image})`,
         backgroundAttachment: "fixed",

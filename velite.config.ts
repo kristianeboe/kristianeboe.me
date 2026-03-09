@@ -34,6 +34,9 @@ const posts = defineCollection({
       h1: s.string().max(120),
       h1Subtitle: s.string().max(200).optional(),
 
+      // Hero image (renders as full-bleed ParallaxHero instead of default title)
+      heroImage: s.string().optional(),
+
       // SEO metadata (for <head>)
       metaTitle: s.string().max(60),
       metaDescription: s.string().max(160),
