@@ -46,17 +46,22 @@ const navigation = {
 interface HeaderProps {
   container?: boolean;
   showBanner?: boolean;
+  transparent?: boolean;
 }
 
 export default function Header({
   container = false,
   showBanner = false,
+  transparent = false,
 }: HeaderProps) {
   return (
     <header
       className={cn(
-        "bg-background/10 border-border/20 sticky inset-x-0 z-30 border-b backdrop-blur-sm",
-        showBanner ? "top-28 md:top-16 lg:top-12" : "top-0",
+        "inset-x-0 z-30",
+        transparent
+          ? "fixed top-0 bg-transparent"
+          : "bg-background/10 border-border/20 sticky border-b backdrop-blur-sm",
+        !transparent && (showBanner ? "top-28 md:top-16 lg:top-12" : "top-0"),
       )}
     >
       <nav

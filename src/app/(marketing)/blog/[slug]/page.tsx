@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import { ArrowLeft, Calendar, Clock, Instagram } from "lucide-react";
 
+import { cn } from "@/components/ui";
 import { AUTHORS, type Author } from "@/lib/blog-authors";
 import { env } from "@/env";
 
@@ -11,6 +12,7 @@ import { CtaInjector } from "@/components/mdx/CtaInjector";
 import { MDXContent } from "@/components/mdx/MDXContent";
 import { Prose } from "@/components/mdx/Prose";
 import { ParallaxHero } from "@/components/blog/ParallaxHero";
+import { TransparentHeader } from "../../TransparentHeader";
 import { StickyCtaCard } from "@/components/mdx/StickyCtaCard";
 import { posts } from ".velite";
 import NewsletterCTA from "../../NewsletterCTA";
@@ -96,7 +98,8 @@ export default async function BlogPostPage({
   // Simple layout without sticky CTA
   if (!showStickyCTA) {
     return (
-      <div className="bg-white" lang={meta.language}>
+      <div className={cn("bg-white", meta.heroImage && "hero-blog-page")} lang={meta.language}>
+        {meta.heroImage && <TransparentHeader />}
         {meta.heroImage ? (
           <ParallaxHero
             image={meta.heroImage}

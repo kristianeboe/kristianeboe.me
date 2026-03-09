@@ -13,6 +13,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { BarChart3 } from "lucide-react";
 
+import { cn } from "@/components/ui";
 import { ButtonLink } from "@/components/ui/button";
 
 import { authClient } from "@/server/better-auth/client";
@@ -40,9 +41,10 @@ interface NavigationStructure {
 
 interface HeaderClientProps {
   navigation: NavigationStructure;
+  transparent?: boolean;
 }
 
-export default function HeaderClient({ navigation }: HeaderClientProps) {
+export default function HeaderClient({ navigation, transparent = false }: HeaderClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession();
 
@@ -180,7 +182,12 @@ export default function HeaderClient({ navigation }: HeaderClientProps) {
           <Link
             key={item.name}
             href={item.href}
-            className="text-foreground hover:text-primary hover:bg-muted/50 rounded-full px-3 py-1.5 text-sm/6 font-semibold transition-all"
+            className={cn(
+              "rounded-full px-3 py-1.5 text-sm/6 font-semibold transition-all",
+              transparent
+                ? "text-white/90 hover:text-white hover:bg-white/10"
+                : "text-foreground hover:text-primary hover:bg-muted/50",
+            )}
           >
             {item.name}
           </Link>

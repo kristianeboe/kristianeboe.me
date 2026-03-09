@@ -374,3 +374,9 @@
   --animate-pulse-think: pulse-think 2s ease-in-out infinite;
   --animate-spin-slow: spin-slow 3s linear infinite;
 }
+
+/* Hide default header on hero blog pages - TransparentHeader takes over */
+.hero-blog-page {
+  margin-top: -73px;
+}
+
