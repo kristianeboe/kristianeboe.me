@@ -76,14 +76,15 @@ export function HeroBeam({
     // Outer glow (wide, soft)
     const outerGlow = ctx.createRadialGradient(
       cx,
-      h * 0.1,
+      h * 0.05,
       0,
       cx,
-      h * 0.4,
-      beamWidth * 3,
+      h * 0.5,
+      beamWidth * 4,
     );
-    outerGlow.addColorStop(0, `rgba(${color}, ${intensity * 0.15})`);
-    outerGlow.addColorStop(0.5, `rgba(${color}, ${intensity * 0.05})`);
+    outerGlow.addColorStop(0, `rgba(${color}, ${intensity * 0.4})`);
+    outerGlow.addColorStop(0.3, `rgba(${color}, ${intensity * 0.15})`);
+    outerGlow.addColorStop(0.7, `rgba(${color}, ${intensity * 0.05})`);
     outerGlow.addColorStop(1, `rgba(${color}, 0)`);
     ctx.fillStyle = outerGlow;
     ctx.fillRect(0, 0, w, h);
@@ -103,9 +104,11 @@ export function HeroBeam({
         y,
       );
       grad.addColorStop(0, `rgba(${color}, 0)`);
-      grad.addColorStop(0.3, `rgba(${color}, ${intensity * falloff * 0.3})`);
-      grad.addColorStop(0.5, `rgba(${color}, ${intensity * falloff * 0.6})`);
-      grad.addColorStop(0.7, `rgba(${color}, ${intensity * falloff * 0.3})`);
+      grad.addColorStop(0.2, `rgba(${color}, ${intensity * falloff * 0.4})`);
+      grad.addColorStop(0.4, `rgba(${color}, ${intensity * falloff * 0.7})`);
+      grad.addColorStop(0.5, `rgba(${color}, ${intensity * falloff * 0.9})`);
+      grad.addColorStop(0.6, `rgba(${color}, ${intensity * falloff * 0.7})`);
+      grad.addColorStop(0.8, `rgba(${color}, ${intensity * falloff * 0.4})`);
       grad.addColorStop(1, `rgba(${color}, 0)`);
 
       ctx.fillStyle = grad;
@@ -113,11 +116,12 @@ export function HeroBeam({
     }
 
     // Inner bright core
-    const coreWidth = beamWidth * 0.15;
+    const coreWidth = beamWidth * 0.25;
     const coreGrad = ctx.createLinearGradient(cx, 0, cx, h);
-    coreGrad.addColorStop(0, `rgba(255, 255, 255, ${intensity * 0.9})`);
-    coreGrad.addColorStop(0.3, `rgba(${color}, ${intensity * 0.5})`);
-    coreGrad.addColorStop(0.7, `rgba(${color}, ${intensity * 0.15})`);
+    coreGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(intensity * 1.2, 1)})`);
+    coreGrad.addColorStop(0.2, `rgba(${color}, ${intensity * 0.8})`);
+    coreGrad.addColorStop(0.5, `rgba(${color}, ${intensity * 0.4})`);
+    coreGrad.addColorStop(0.8, `rgba(${color}, ${intensity * 0.1})`);
     coreGrad.addColorStop(1, `rgba(${color}, 0)`);
 
     for (let i = 0; i < segments; i++) {
@@ -192,7 +196,7 @@ export function HeroBeam({
         style={{
           width: "100%",
           height: "100%",
-          mixBlendMode: "screen",
+          mixBlendMode: "lighten",
         }}
       />
     </div>

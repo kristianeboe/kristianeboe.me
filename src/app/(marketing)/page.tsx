@@ -191,10 +191,10 @@ export default function HomePage() {
       {/* Hero with beam effect */}
       <div className="relative overflow-hidden">
         <HeroBeam
-          color="0, 200, 255"
-          intensity={0.5}
-          beamWidth={140}
-          speed={0.8}
+          color="0, 210, 255"
+          intensity={1.0}
+          beamWidth={200}
+          speed={0.6}
           className="pointer-events-none"
         />
 
@@ -309,9 +309,9 @@ export default function HomePage() {
             <Resume />
             <ElectricBorder
               colorA="0, 220, 255"
-              colorB="0, 180, 200"
-              intensity={0.5}
-              speed={0.8}
+              colorB="100, 255, 218"
+              intensity={0.9}
+              speed={1.2}
               borderRadius={16}
             >
               <div className="rounded-2xl border border-zinc-700/50 bg-zinc-900/50 p-6">
