@@ -125,27 +125,54 @@ export const auth = betterAuth({
   // so there's no additional performance overhead.
   hooks: {
     after: createAuthMiddleware(async (ctx) => {
-      // Only handle anonymous sign-in endpoint (early return for all other endpoints)
-      if (ctx.path !== "/sign-in/anonymous") return;
-
       const newSession = ctx.context.newSession;
       if (!newSession?.user) return;
 
-      // Read source from custom header (passed from client via fetchOptions)
-      // This lets us track where anonymous users are coming from for analytics
-      const sourceHeader = ctx.headers?.get("x-anonymous-source");
-      const source = sourceHeader ?? "direct";
+      if (ctx.path === "/sign-in/anonymous") {
+        // Read source from custom header (passed from client via fetchOptions)
+        // This lets us track where anonymous users are coming from for analytics
+        const sourceHeader = ctx.headers?.get("x-anonymous-source");
+        const source = sourceHeader ?? "direct";
 
-      // Track anonymous user creation with specific source
-      if (newSession.user.isAnonymous) {
-        console.log(
-          `[Auth] Anonymous user created: ${newSession.user.id} (source: ${source})`,
-        );
-        // Track anonymous user creation (not user_signed_up)
-        trackServerEvent(newSession.user.id, "anonymous_user_created", {
-          source,
-        });
+        // Track anonymous user creation with specific source
+        if (newSession.user.isAnonymous) {
+          console.log(
+            `[Auth] Anonymous user created: ${newSession.user.id} (source: ${source})`,
+          );
+          // Track anonymous user creation (not user_signed_up)
+          trackServerEvent(newSession.user.id, "anonymous_user_created", {
+            source,
+          });
+        }
+        return;
       }
+
+      // Genuine returning sign-ins: explicit login endpoints only. Sessions
+      // are also created on sign-up (autoSignIn defaults to true), anonymous
+      // sign-in, email verification (autoSignInAfterVerification), and admin
+      // impersonation — those are registration/system side effects tracked as
+      // user_signed_up / anonymous_user_created, not sign-ins.
+      const isCredentialSignIn =
+        ctx.path === "/sign-in/email" || ctx.path === "/sign-in/username";
+      const isSocialSignIn =
+        ctx.path === "/sign-in/social" || ctx.path.startsWith("/callback/");
+      if (!isCredentialSignIn && !isSocialSignIn) return;
+
+      // OAuth shares one callback endpoint for first-time sign-up and
+      // returning sign-in — a user created within this request window is a
+      // registration (tracked via user.create.after), not a sign-in.
+      const userAgeMs =
+        Date.now() - new Date(newSession.user.createdAt).getTime();
+      if (userAgeMs < 30_000) return;
+
+      trackServerEvent(newSession.user.id, "user_signed_in", {
+        method:
+          ctx.path === "/sign-in/username"
+            ? "username"
+            : ctx.path === "/sign-in/email"
+              ? "email"
+              : "google",
+      });
     }),
   },
   // ─────────────────────────────────────────────────
@@ -214,27 +241,9 @@ export const auth = betterAuth({
       },
     },
     session: {
-      create: {
-        after: async (session) => {
-          try {
-            console.log("[Auth] Session created:", session.userId);
-
-            // Get the account to determine sign-in method
-            const account = await db.query.accountTable.findFirst({
-              where: eq(schema.accountTable.userId, session.userId),
-            });
-
-            // Determine the sign-in method
-            const method = account?.providerId ?? "credential";
-
-            trackServerEvent(session.userId, "user_signed_in", {
-              method,
-            });
-          } catch (error) {
-            console.error("[Auth] Error in session.create.after hook:", error);
-          }
-        },
-      },
+      // user_signed_in is tracked in hooks.after (path-filtered) instead of
+      // session.create — sessions are also created on sign-up, anonymous
+      // sign-in, email verification, and impersonation, which are not sign-ins.
       delete: {
         after: async (session) => {
           try {
