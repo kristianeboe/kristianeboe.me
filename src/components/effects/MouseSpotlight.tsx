@@ -1,18 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 interface MouseSpotlightProps {
-  /** Spotlight radius in px (default: 200) */
   radius?: number;
-  /** Spotlight intensity 0-1 (default: 0.7) */
   intensity?: number;
-  /** Edge softness — ratio of soft edge to radius (default: 0.4) */
   softness?: number;
-  /** Overlay darkness 0-1 (default: 0.85) */
   overlayOpacity?: number;
-  /** Lerp factor for smooth following (default: 0.1) */
   lerpFactor?: number;
+  color?: string;
   children: React.ReactNode;
   className?: string;
 }
@@ -23,6 +19,7 @@ export function MouseSpotlight({
   softness = 0.4,
   overlayOpacity = 0.85,
   lerpFactor = 0.1,
+  color = "0, 210, 255",
   children,
   className,
 }: MouseSpotlightProps) {
@@ -32,12 +29,16 @@ export function MouseSpotlight({
   const currentPos = useRef({ x: -1000, y: -1000 });
   const animationRef = useRef<number>(0);
   const isActive = useRef(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const prefersReducedMotion = useRef(false);
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    setIsTouchDevice(
+      "ontouchstart" in window || navigator.maxTouchPoints > 0,
+    );
   }, []);
 
   const updateOverlay = useCallback(() => {
@@ -58,23 +59,19 @@ export function MouseSpotlight({
     const transparent = `rgba(0, 0, 0, ${overlayOpacity * (1 - intensity)})`;
     const opaque = `rgba(0, 0, 0, ${overlayOpacity})`;
 
+    // Spotlight reveal + colored glow halo
     overlay.style.background = isActive.current
-      ? `radial-gradient(circle ${radius}px at ${x}px ${y}px, ${transparent} ${innerRadius}px, ${opaque} ${radius}px)`
+      ? `radial-gradient(circle ${radius}px at ${x}px ${y}px, ${transparent} ${innerRadius}px, ${opaque} ${radius}px), radial-gradient(circle ${radius * 1.5}px at ${x}px ${y}px, rgba(${color}, 0.15) 0px, transparent ${radius * 1.5}px)`
       : opaque;
 
     if (isActive.current) {
       animationRef.current = requestAnimationFrame(updateOverlay);
     }
-  }, [radius, intensity, softness, overlayOpacity, lerpFactor]);
+  }, [radius, intensity, softness, overlayOpacity, lerpFactor, color]);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
-
-    // Skip on mobile (no hover)
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    if (!container || isTouchDevice) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -105,7 +102,16 @@ export function MouseSpotlight({
       container.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animationRef.current);
     };
-  }, [overlayOpacity, updateOverlay]);
+  }, [overlayOpacity, updateOverlay, isTouchDevice]);
+
+  // On touch devices: show photos fully, no overlay
+  if (isTouchDevice) {
+    return (
+      <div className={className} style={{ position: "relative" }}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div

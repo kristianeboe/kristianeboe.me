@@ -4,17 +4,11 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
 interface ElectricBorderProps {
-  /** Primary border color (default: cyan) */
   colorA?: string;
-  /** Secondary border color (default: teal) */
   colorB?: string;
-  /** Border glow intensity 0-1 (default: 0.7) */
   intensity?: number;
-  /** Border width in px (default: 1.5) */
   borderWidth?: number;
-  /** Animation speed multiplier (default: 1) */
   speed?: number;
-  /** Border radius in px (default: 12) */
   borderRadius?: number;
   children: React.ReactNode;
   className?: string;
@@ -43,7 +37,6 @@ export function ElectricBorder({
     ).matches;
   }, []);
 
-  // IntersectionObserver — only animate when visible
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -66,25 +59,42 @@ export function ElectricBorder({
 
     const dpr = window.devicePixelRatio || 1;
     const rect = container.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
+    const pad = borderWidth * 8;
+    canvas.width = (rect.width + pad * 2) * dpr;
+    canvas.height = (rect.height + pad * 2) * dpr;
     ctx.scale(dpr, dpr);
 
     const w = rect.width;
     const h = rect.height;
     const time = Date.now() * 0.001 * speed;
 
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w + pad * 2, h + pad * 2);
+    ctx.save();
+    ctx.translate(pad, pad);
 
-    // Draw the electric border by tracing the perimeter
+    // Ambient glow around the entire border
+    const ambientGrad = ctx.createRadialGradient(
+      w / 2,
+      h / 2,
+      Math.min(w, h) * 0.3,
+      w / 2,
+      h / 2,
+      Math.max(w, h) * 0.8,
+    );
+    ambientGrad.addColorStop(0, `rgba(${colorA}, 0)`);
+    ambientGrad.addColorStop(0.7, `rgba(${colorA}, ${intensity * 0.03})`);
+    ambientGrad.addColorStop(1, `rgba(${colorA}, 0)`);
+    ctx.fillStyle = ambientGrad;
+    ctx.fillRect(-pad, -pad, w + pad * 2, h + pad * 2);
+
+    // Draw the electric border segments — brighter and thicker
     const perimeter = 2 * (w + h);
-    const steps = Math.floor(perimeter / 2);
+    const steps = Math.floor(perimeter / 1.5);
 
     for (let i = 0; i < steps; i++) {
       const t = i / steps;
       const pos = t * perimeter;
 
-      // Calculate position along the rounded rect perimeter
       let x: number, y: number;
       if (pos < w) {
         x = pos;
@@ -100,11 +110,9 @@ export function ElectricBorder({
         y = h - (pos - 2 * w - h);
       }
 
-      // Noise-based intensity variation
       const n = noise3D.current(t * 3, time * 0.8, 0);
-      const alpha = Math.max(0, (0.3 + n * 0.7)) * intensity;
+      const alpha = Math.max(0, 0.4 + n * 0.6) * intensity;
 
-      // Color interpolation based on noise
       const colorMix = (noise3D.current(t * 5, 0, time * 0.5) + 1) / 2;
       const r = lerp(
         parseFloat(colorA.split(",")[0]!),
@@ -122,41 +130,77 @@ export function ElectricBorder({
         colorMix,
       );
 
-      // Draw glow dot
-      const glowSize = borderWidth + n * 2;
-      const grad = ctx.createRadialGradient(x, y, 0, x, y, glowSize * 4);
+      const glowSize = borderWidth * 1.5 + n * 3;
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, glowSize * 5);
       grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha})`);
-      grad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${alpha * 0.3})`);
+      grad.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
+      grad.addColorStop(0.6, `rgba(${r}, ${g}, ${b}, ${alpha * 0.15})`);
       grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
       ctx.fillStyle = grad;
-      ctx.fillRect(x - glowSize * 4, y - glowSize * 4, glowSize * 8, glowSize * 8);
+      ctx.fillRect(
+        x - glowSize * 5,
+        y - glowSize * 5,
+        glowSize * 10,
+        glowSize * 10,
+      );
     }
 
-    // Bright traveling pulse
-    const pulseT = ((time * 0.3) % 1);
-    const pulsePos = pulseT * perimeter;
-    let px: number, py: number;
-    if (pulsePos < w) {
-      px = pulsePos;
-      py = 0;
-    } else if (pulsePos < w + h) {
-      px = w;
-      py = pulsePos - w;
-    } else if (pulsePos < 2 * w + h) {
-      px = w - (pulsePos - w - h);
-      py = h;
-    } else {
-      px = 0;
-      py = h - (pulsePos - 2 * w - h);
+    // Two traveling pulses at different speeds for more energy
+    const pulseConfigs = [
+      { speedMul: 0.25, size: 60, whiteIntensity: 1.0 },
+      { speedMul: 0.4, size: 40, whiteIntensity: 0.7 },
+    ];
+
+    for (const pulse of pulseConfigs) {
+      const pulseT = ((time * pulse.speedMul) % 1);
+      const pulsePos = pulseT * perimeter;
+      let px: number, py: number;
+      if (pulsePos < w) {
+        px = pulsePos;
+        py = 0;
+      } else if (pulsePos < w + h) {
+        px = w;
+        py = pulsePos - w;
+      } else if (pulsePos < 2 * w + h) {
+        px = w - (pulsePos - w - h);
+        py = h;
+      } else {
+        px = 0;
+        py = h - (pulsePos - 2 * w - h);
+      }
+
+      const pulseGrad = ctx.createRadialGradient(
+        px,
+        py,
+        0,
+        px,
+        py,
+        pulse.size,
+      );
+      pulseGrad.addColorStop(
+        0,
+        `rgba(255, 255, 255, ${intensity * pulse.whiteIntensity})`,
+      );
+      pulseGrad.addColorStop(
+        0.15,
+        `rgba(${colorA}, ${intensity * 0.8})`,
+      );
+      pulseGrad.addColorStop(0.5, `rgba(${colorA}, ${intensity * 0.2})`);
+      pulseGrad.addColorStop(1, `rgba(${colorA}, 0)`);
+
+      ctx.globalCompositeOperation = "screen";
+      ctx.fillStyle = pulseGrad;
+      ctx.fillRect(
+        px - pulse.size,
+        py - pulse.size,
+        pulse.size * 2,
+        pulse.size * 2,
+      );
+      ctx.globalCompositeOperation = "source-over";
     }
 
-    const pulseGrad = ctx.createRadialGradient(px, py, 0, px, py, 40);
-    pulseGrad.addColorStop(0, `rgba(255, 255, 255, ${intensity * 0.9})`);
-    pulseGrad.addColorStop(0.2, `rgba(${colorA}, ${intensity * 0.6})`);
-    pulseGrad.addColorStop(1, `rgba(${colorA}, 0)`);
-    ctx.fillStyle = pulseGrad;
-    ctx.fillRect(px - 40, py - 40, 80, 80);
+    ctx.restore();
 
     if (!prefersReducedMotion.current) {
       animationRef.current = requestAnimationFrame(draw);
@@ -170,6 +214,8 @@ export function ElectricBorder({
     return () => cancelAnimationFrame(animationRef.current);
   }, [draw, isVisible]);
 
+  const pad = borderWidth * 8;
+
   return (
     <div
       ref={containerRef}
@@ -180,9 +226,9 @@ export function ElectricBorder({
         ref={canvasRef}
         style={{
           position: "absolute",
-          inset: -borderWidth * 4,
-          width: `calc(100% + ${borderWidth * 8}px)`,
-          height: `calc(100% + ${borderWidth * 8}px)`,
+          inset: -pad,
+          width: `calc(100% + ${pad * 2}px)`,
+          height: `calc(100% + ${pad * 2}px)`,
           pointerEvents: "none",
           borderRadius,
           mixBlendMode: "screen",

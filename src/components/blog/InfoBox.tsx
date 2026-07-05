@@ -2,22 +2,42 @@ import type React from "react";
 import { Info } from "lucide-react";
 
 interface InfoBoxProps {
-  title: string;
-  children: React.ReactNode;
+  title?: string;
+  items?: string[];
+  children?: React.ReactNode;
 }
 
-export function InfoBox({ title, children }: InfoBoxProps) {
+export function InfoBox({ title, items, children }: InfoBoxProps) {
   return (
-    <div className="not-prose my-6 rounded-r-lg border-l-4 border-blue-400 bg-blue-50 p-5">
-      <div className="flex items-start gap-3">
-        <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-500" />
-        <div className="flex-1">
-          <h4 className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-800">
-            {title}
-          </h4>
-          <div className="prose prose-sm max-w-none text-blue-700 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
-            {children}
-          </div>
+    <div className="not-prose border-primary/15 from-primary/[0.06] my-6 overflow-hidden rounded-2xl border bg-gradient-to-br to-transparent shadow-sm">
+      <div className="flex gap-3 p-5">
+        <span className="bg-primary/10 text-primary flex size-8 flex-none items-center justify-center rounded-full">
+          <Info className="size-4" />
+        </span>
+        <div className="flex-1 pt-0.5">
+          {title && (
+            <h4 className="text-foreground mb-2 text-sm font-semibold tracking-wide">
+              {title}
+            </h4>
+          )}
+          {items && items.length > 0 && (
+            <ul className="space-y-1.5">
+              {items.map((item, i) => (
+                <li
+                  key={i}
+                  className="text-muted-foreground flex gap-2 text-sm leading-relaxed"
+                >
+                  <span className="bg-primary/50 mt-2 size-1 flex-none rounded-full" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {children && (
+            <div className="prose prose-sm text-muted-foreground max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+              {children}
+            </div>
+          )}
         </div>
       </div>
     </div>

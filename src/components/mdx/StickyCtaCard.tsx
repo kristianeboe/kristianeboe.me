@@ -31,7 +31,7 @@ export function StickyCtaCard({
   ],
 }: StickyCtaCardProps) {
   return (
-    <div className="rounded-xl border border-amber-200/60 bg-linear-to-r from-white via-gray-50 to-white p-6 shadow-lg">
+    <div className="rounded-xl border border-blue-200/60 bg-linear-to-r from-white via-gray-50 to-white p-6 shadow-lg">
       {/* Title */}
       <h3 className="text-lg font-bold text-gray-900">{title}</h3>
 
@@ -41,7 +41,7 @@ export function StickyCtaCard({
       </p>
 
       {/* Trust badge */}
-      <div className="mt-4 flex items-center gap-2 text-xs font-medium text-amber-700">
+      <div className="mt-4 flex items-center gap-2 text-xs font-medium text-primary">
         <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
@@ -80,7 +80,7 @@ export function StickyCtaCard({
             className="flex items-start gap-2 text-xs text-gray-600"
           >
             <Check
-              className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-700"
+              className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary"
               strokeWidth={2.5}
             />
             <span>{feature.label}</span>

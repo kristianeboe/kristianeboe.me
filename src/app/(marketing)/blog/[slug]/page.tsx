@@ -1,21 +1,26 @@
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { format, parseISO } from "date-fns";
-import { ArrowLeft, Calendar, Clock, Instagram } from "lucide-react";
 
 import { cn } from "@/components/ui";
-import { AUTHORS, type Author } from "@/lib/blog-authors";
+import { AUTHORS } from "@/lib/blog-authors";
 import { env } from "@/env";
 
 import { CtaInjector } from "@/components/mdx/CtaInjector";
 import { MDXContent } from "@/components/mdx/MDXContent";
 import { Prose } from "@/components/mdx/Prose";
+import { RelatedPosts } from "@/components/mdx/RelatedPosts";
 import { ParallaxHero } from "@/components/blog/ParallaxHero";
 import { TransparentHeader } from "../../TransparentHeader";
 import { StickyCtaCard } from "@/components/mdx/StickyCtaCard";
 import { posts } from ".velite";
-import NewsletterCTA from "../../NewsletterCTA";
+
+function getRelatedPosts(current: (typeof posts)[number]) {
+  return posts.filter(
+    (p) =>
+      p.slug !== current.slug &&
+      p.isPublished &&
+      p.tags.some((tag) => current.tags.includes(tag)),
+  );
+}
 
 export const dynamic = "force-static";
 
@@ -86,19 +91,29 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
-  if (!post?.isPublished) {
+  // Drafts (publishedAt in the future) are always visible outside of
+  // production so they can be reviewed locally without publishing them.
+  if (!post || (!post.isPublished && env.NODE_ENV === "production")) {
     notFound();
   }
 
-  const { content, ...meta } = post;
-  const readingTime = meta.readingTime || 5;
-  const authorInfo: Author = AUTHORS[meta.author] ?? AUTHORS.default;
+  const { content, ...meta } = post!;
   const showStickyCTA = meta.showStickyCTA;
+
+  // Fixed to the bottom rather than the top — both layout branches have
+  // their own fixed/transparent header at top-0, and a top banner here
+  // would fight them for the same space depending on which one is active.
+  const draftBanner = !meta.isPublished && (
+    <div className="fixed inset-x-0 bottom-0 z-50 bg-amber-400 py-2 text-center text-sm font-semibold text-amber-950">
+      Draft — not published. Only visible locally.
+    </div>
+  );
 
   // Simple layout without sticky CTA
   if (!showStickyCTA) {
     return (
       <div className={cn("bg-white", meta.heroImage && "-mt-[84px]")} lang={meta.language}>
+        {draftBanner}
         {/* Hide the layout header and show transparent one for hero pages */}
         {meta.heroImage && (
           <>
@@ -111,6 +126,7 @@ export default async function BlogPostPage({
             image={meta.heroImage}
             title={meta.h1}
             subtitle={meta.h1Subtitle}
+            size="full"
           />
         ) : (
           <div className="mx-auto max-w-4xl px-6 pt-24 lg:px-8">
@@ -129,7 +145,7 @@ export default async function BlogPostPage({
 
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           {/* Article content */}
-          <div className="mt-16 max-w-none">
+          <div className="mt-16 max-w-none pb-16 sm:pb-24">
             <Prose>
               <MDXContent code={content} />
             </Prose>
@@ -139,128 +155,7 @@ export default async function BlogPostPage({
           </div>
         </div>
 
-        {/* Author section */}
-        <div className="bg-white py-16">
-          <div className="mx-auto max-w-4xl px-6 lg:px-8">
-            <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-              About the Author
-            </h2>
-
-            <div className="mx-auto mt-10 max-w-2xl">
-              <div className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
-                <Image
-                  src={authorInfo.image}
-                  alt={authorInfo.name}
-                  width={96}
-                  height={96}
-                  className="h-24 w-24 rounded-full object-cover shadow-md"
-                />
-
-                <div className="mt-4 flex items-center gap-2">
-                  <h3 className="text-xl font-bold text-gray-900">
-                    {authorInfo.name}
-                  </h3>
-                  {authorInfo.instagram && (
-                    <a
-                      href={authorInfo.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-rose-600"
-                      aria-label="Instagram"
-                    >
-                      <Instagram className="h-5 w-5" />
-                    </a>
-                  )}
-                </div>
-
-                <p className="mt-2 text-gray-600">{authorInfo.description}</p>
-
-                {/* Meta info */}
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-500">
-                  <div className="flex items-center gap-x-2">
-                    <Calendar className="h-4 w-4" />
-                    <time dateTime={meta.publishedAt}>
-                      {format(parseISO(meta.publishedAt), "MMM dd, yyyy")}
-                    </time>
-                  </div>
-                  <div className="flex items-center gap-x-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{readingTime} min read</span>
-                  </div>
-                </div>
-
-                {meta.updatedAt && meta.updatedAt !== meta.publishedAt && (
-                  <div className="mt-2 text-xs text-gray-400">
-                    Updated {format(parseISO(meta.updatedAt), "MMM dd, yyyy")}
-                  </div>
-                )}
-
-                {/* Category */}
-                {/* {meta.category && (
-                  <div className="mt-6 flex flex-col items-center">
-                    <span className="text-xs font-medium text-gray-500">
-                      Category
-                    </span>
-                    <div className="mt-2 flex justify-center">
-                      <span className="inline-flex items-center rounded-lg bg-rose-100 px-4 py-2 text-sm font-semibold text-rose-700">
-                        {meta.category}
-                      </span>
-                    </div>
-                  </div>
-                )} */}
-
-                {/* Tags */}
-                {/* {meta.tags.length > 0 && (
-                  <div className="mt-4 flex flex-col items-center">
-                    <span className="text-xs font-medium text-gray-500">
-                      Tags
-                    </span>
-                    <div className="mt-2 flex flex-wrap justify-center gap-2">
-                      {meta.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="inline-flex items-center rounded-md bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )} */}
-
-                {/* Back to Blog */}
-                <div className="mt-8 w-full border-t border-gray-200 pt-6">
-                  <Link
-                    href="/blog"
-                    className="flex items-center justify-center gap-2 text-base font-semibold text-amber-600 hover:text-amber-700"
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                    Back to Blog
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter CTA */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <NewsletterCTA />
-        </div>
-
-        {/* Related posts */}
-        {/* <RelatedPosts too be re-introduced soon
-          posts={posts
-            .filter((p) => p.slug !== meta.slug && p.isPublished)
-            .filter(
-              (p) =>
-                // Match by category (primary)
-                (p.category && meta.category && p.category === meta.category) ||
-                // Or match by tags (secondary)
-                p.tags.some((tag) => meta.tags.includes(tag)),
-            )}
-          basePath="/blog"
-        /> */}
+        <RelatedPosts posts={getRelatedPosts(post)} basePath="/blog" />
       </div>
     );
   }
@@ -268,6 +163,7 @@ export default async function BlogPostPage({
   // Sticky CTA layout (default)
   return (
     <div className="isolate mt-12" lang={meta.language}>
+      {draftBanner}
       {/* Hero Section */}
       <div className="relative px-6 pt-14 lg:px-8">
         {/* Background decoration */}
@@ -301,7 +197,7 @@ export default async function BlogPostPage({
 
       {/* Main Content with Sidebar */}
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex gap-8 pb-16">
+        <div className="flex gap-8 pb-16 sm:pb-24">
           {/* Main Content */}
           <div className="mx-auto w-full max-w-3xl flex-1">
             {/* Article content */}
@@ -324,128 +220,7 @@ export default async function BlogPostPage({
         </div>
       </div>
 
-      {/* Author section */}
-      <div className="bg-white py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-            About the Author
-          </h2>
-
-          <div className="mx-auto mt-10 max-w-2xl">
-            <div className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
-              <Image
-                src={authorInfo.image}
-                alt={authorInfo.name}
-                width={96}
-                height={96}
-                className="h-24 w-24 rounded-full object-cover shadow-md"
-              />
-
-              <div className="mt-4 flex items-center gap-2">
-                <h3 className="text-xl font-bold text-gray-900">
-                  {authorInfo.name}
-                </h3>
-                {authorInfo.instagram && (
-                  <a
-                    href={authorInfo.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-rose-600"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
-                )}
-              </div>
-
-              <p className="mt-2 text-gray-600">{authorInfo.description}</p>
-
-              {/* Meta info */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-500">
-                <div className="flex items-center gap-x-2">
-                  <Calendar className="h-4 w-4" />
-                  <time dateTime={meta.publishedAt}>
-                    {format(parseISO(meta.publishedAt), "MMM dd, yyyy")}
-                  </time>
-                </div>
-                <div className="flex items-center gap-x-2">
-                  <Clock className="h-4 w-4" />
-                  <span>{readingTime} min read</span>
-                </div>
-              </div>
-
-              {meta.updatedAt && meta.updatedAt !== meta.publishedAt && (
-                <div className="mt-2 text-xs text-gray-400">
-                  Updated {format(parseISO(meta.updatedAt), "MMM dd, yyyy")}
-                </div>
-              )}
-
-              {/* Category */}
-              {/* {meta.category && (
-                <div className="mt-6 flex flex-col items-center">
-                  <span className="text-xs font-medium text-gray-500">
-                    Category
-                  </span>
-                  <div className="mt-2 flex justify-center">
-                    <span className="inline-flex items-center rounded-lg bg-rose-100 px-4 py-2 text-sm font-semibold text-rose-700">
-                      {meta.category}
-                    </span>
-                  </div>
-                </div>
-              )} */}
-
-              {/* Tags */}
-              {/* {meta.tags.length > 0 && (
-                <div className="mt-4 flex flex-col items-center">
-                  <span className="text-xs font-medium text-gray-500">
-                    Tags
-                  </span>
-                  <div className="mt-2 flex flex-wrap justify-center gap-2">
-                    {meta.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center rounded-md bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )} */}
-
-              {/* Back to Blog */}
-              <div className="mt-8 w-full border-t border-gray-200 pt-6">
-                <Link
-                  href="/blog"
-                  className="flex items-center justify-center gap-2 text-base font-semibold text-amber-600 hover:text-amber-700"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Blog
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Newsletter CTA */}
-      <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-8">
-        <NewsletterCTA />
-      </div>
-
-      {/* Related posts */}
-      {/* <RelatedPosts too be re-introduced soon
-        posts={posts
-          .filter((p) => p.slug !== meta.slug && p.isPublished)
-          .filter(
-            (p) =>
-              // Match by category (primary)
-              (p.category && meta.category && p.category === meta.category) ||
-              // Or match by tags (secondary)
-              p.tags.some((tag) => meta.tags.includes(tag)),
-          )}
-        basePath="/blog"
-      /> */}
+      <RelatedPosts posts={getRelatedPosts(post)} basePath="/blog" />
     </div>
   );
 }

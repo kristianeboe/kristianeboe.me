@@ -5,22 +5,22 @@ import Header from "./Header";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | AppName",
-    default: "AppName - Your App Description",
+    template: "%s | Kristian Elset Bø",
+    default: "Kristian Elset Bø — Software for the messy parts of modern life",
   },
   description:
-    "A brief description of what your app does and how it helps users.",
+    "Norwegian founder and engineer in Brooklyn. Building Homi, SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
   openGraph: {
-    title: "AppName - Your App Description",
+    title: "Kristian Elset Bø",
     description:
-      "A brief description of what your app does and how it helps users.",
-    siteName: "AppName",
+      "Norwegian founder and engineer in Brooklyn. Building Homi, SwipeStats, and other tools for the messy parts of modern life.",
+    siteName: "kristianeboe.me",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AppName - Your App Description",
+    title: "Kristian Elset Bø",
     description:
-      "A brief description of what your app does and how it helps users.",
+      "Norwegian founder and engineer in Brooklyn. Building Homi, SwipeStats, and other tools for the messy parts of modern life.",
   },
 };
 

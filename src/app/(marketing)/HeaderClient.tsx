@@ -2,16 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
+} from "@headlessui/react";
 import { PhoneIcon } from "@heroicons/react/20/solid";
 import {
   Bars3Icon,
   ChartPieIcon,
+  ChevronDownIcon,
   CursorArrowRaysIcon,
   FingerPrintIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { BarChart3 } from "lucide-react";
 
 import { cn } from "@/components/ui";
 import { ButtonLink } from "@/components/ui/button";
@@ -34,7 +41,7 @@ interface NavigationItem {
 }
 
 interface NavigationStructure {
-  product: NavigationItem[];
+  travel: NavigationItem[];
   callsToAction: NavigationItem[];
   simple: NavigationItem[];
 }
@@ -59,7 +66,7 @@ export default function HeaderClient({ navigation, transparent = false }: Header
     <>
       {/* Mobile Header - Auth Buttons + Menu */}
       <div className="flex items-center gap-x-2 lg:hidden">
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <ButtonLink
             href="/app/dashboard"
             variant="default"
@@ -68,25 +75,6 @@ export default function HeaderClient({ navigation, transparent = false }: Header
           >
             Dashboard
           </ButtonLink>
-        ) : (
-          <>
-            <ButtonLink
-              href="/signin"
-              variant="ghost"
-              size="sm"
-              className="h-7 px-2 py-1.5 text-xs font-semibold text-gray-900"
-            >
-              Sign in
-            </ButtonLink>
-            <ButtonLink
-              href="/signup"
-              variant="default"
-              size="sm"
-              className="h-7 px-2.5 py-1.5 text-xs font-semibold"
-            >
-              Get started
-            </ButtonLink>
-          </>
         )}
         <button
           type="button"
@@ -100,83 +88,50 @@ export default function HeaderClient({ navigation, transparent = false }: Header
 
       {/* Desktop Navigation */}
       <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-        {/* Temporarily hidden Product dropdown */}
-        {/* <Popover className="relative">
-          {({ close }) => (
-            <>
-              <PopoverButton className="text-foreground hover:text-primary hover:bg-muted/50 flex cursor-pointer items-center gap-x-1 rounded-full px-3 py-1.5 text-sm/6 font-semibold transition-all">
-                Product
-                <ChevronDownIcon
-                  aria-hidden="true"
-                  className="text-muted-foreground size-5 flex-none"
-                />
-              </PopoverButton>
+        {navigation.travel.length > 0 && (
+          <Popover className="relative">
+            {({ close }) => (
+              <>
+                <PopoverButton
+                  className={cn(
+                    "flex cursor-pointer items-center gap-x-1 rounded-full px-3 py-1.5 text-sm/6 font-semibold transition-all",
+                    transparent
+                      ? "text-white/90 hover:bg-white/10 hover:text-white"
+                      : "text-foreground hover:text-primary hover:bg-muted/50",
+                  )}
+                >
+                  Travel
+                  <ChevronDownIcon aria-hidden="true" className="size-5 flex-none" />
+                </PopoverButton>
 
-              <PopoverPanel
-                transition
-                className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
-              >
-                <div className="p-4">
-                  {navigation.product.map((item) => {
-                    const IconComponent = item.icon ? getIcon(item.icon) : null;
-                    return (
-                      <div
-                        key={item.name}
-                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
-                      >
-                        {IconComponent && (
-                          <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                            <IconComponent
-                              aria-hidden="true"
-                              className="size-6 text-gray-600 group-hover:text-blue-600"
-                            />
-                          </div>
-                        )}
-                        <div className="flex-auto">
-                          <Link
-                            href={item.href}
-                            className="block font-semibold text-gray-900"
-                            onClick={close}
-                          >
-                            {item.name}
-                            <span className="absolute inset-0" />
-                          </Link>
-                          {item.description && (
-                            <p className="mt-1 text-gray-600">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="grid grid-cols-1 divide-y divide-gray-900/5 bg-gray-50">
-                  {navigation.callsToAction.map((item) => {
-                    const IconComponent = item.icon ? getIcon(item.icon) : null;
-
-                    return (
+                <PopoverPanel
+                  transition
+                  className="absolute left-1/2 z-10 mt-3 w-72 -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
+                >
+                  <div className="p-2">
+                    {navigation.travel.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
+                        className="group relative block rounded-lg p-3 text-sm/6 hover:bg-gray-50"
                         onClick={close}
                       >
-                        {IconComponent && (
-                          <IconComponent
-                            aria-hidden="true"
-                            className="size-5 flex-none text-gray-400"
-                          />
+                        <span className="block font-semibold text-gray-900">
+                          {item.name}
+                        </span>
+                        {item.description && (
+                          <span className="mt-0.5 block text-gray-600">
+                            {item.description}
+                          </span>
                         )}
-                        {item.name}
                       </Link>
-                    );
-                  })}
-                </div>
-              </PopoverPanel>
-            </>
-          )}
-        </Popover> */}
+                    ))}
+                  </div>
+                </PopoverPanel>
+              </>
+            )}
+          </Popover>
+        )}
 
         {navigation.simple.map((item) => (
           <Link
@@ -195,8 +150,8 @@ export default function HeaderClient({ navigation, transparent = false }: Header
       </PopoverGroup>
 
       {/* Desktop Auth Buttons */}
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-        {isLoggedIn ? (
+      {isLoggedIn && (
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
           <ButtonLink
             href="/app/dashboard"
             variant="default"
@@ -205,27 +160,8 @@ export default function HeaderClient({ navigation, transparent = false }: Header
           >
             Dashboard
           </ButtonLink>
-        ) : (
-          <>
-            <ButtonLink
-              href="/signin"
-              variant="ghost"
-              size="sm"
-              className="text-sm/6 font-semibold text-gray-900"
-            >
-              Sign in
-            </ButtonLink>
-            <ButtonLink
-              href="/signup"
-              variant="default"
-              size="sm"
-              className="text-sm/6 font-semibold"
-            >
-              Sign up
-            </ButtonLink>
-          </>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Mobile Navigation Dialog */}
       <Dialog
@@ -239,12 +175,9 @@ export default function HeaderClient({ navigation, transparent = false }: Header
             <div className="flex items-center justify-between">
               <Link
                 href="/"
-                className="flex items-center space-x-2"
+                className="flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-                  <BarChart3 className="size-4" />
-                </div>
                 <span className="text-xl font-bold">kristianeboe.me</span>
               </Link>
               <button
@@ -258,30 +191,24 @@ export default function HeaderClient({ navigation, transparent = false }: Header
             </div>
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
-                {/* Temporarily hidden Product items */}
-                {/* <div className="space-y-2 py-6">
-                  {navigation.product.map((item) => {
-                    const IconComponent = item.icon ? getIcon(item.icon) : null;
-                    return (
+                {/* Travel guides */}
+                {navigation.travel.length > 0 && (
+                  <div className="space-y-2 py-6">
+                    <p className="text-muted-foreground -mx-3 px-3 text-sm/6 font-semibold">
+                      Travel
+                    </p>
+                    {navigation.travel.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="group text-foreground hover:bg-muted/50 hover:text-primary -mx-3 flex items-center gap-x-6 rounded-lg p-3 text-base/7 font-semibold transition-all"
+                        className="text-foreground hover:bg-muted/50 hover:text-primary -mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-all"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        {IconComponent && (
-                          <div className="bg-muted group-hover:bg-background flex size-11 flex-none items-center justify-center rounded-lg">
-                            <IconComponent
-                              aria-hidden="true"
-                              className="text-muted-foreground group-hover:text-primary size-6"
-                            />
-                          </div>
-                        )}
                         {item.name}
                       </Link>
-                    );
-                  })}
-                </div> */}
+                    ))}
+                  </div>
+                )}
 
                 {/* Simple navigation items */}
                 <div className="space-y-2 py-6">
@@ -298,8 +225,8 @@ export default function HeaderClient({ navigation, transparent = false }: Header
                 </div>
 
                 {/* Auth buttons */}
-                <div className="space-y-3 py-6">
-                  {isLoggedIn ? (
+                {isLoggedIn && (
+                  <div className="space-y-3 py-6">
                     <ButtonLink
                       href="/app/dashboard"
                       variant="default"
@@ -309,29 +236,8 @@ export default function HeaderClient({ navigation, transparent = false }: Header
                     >
                       Dashboard
                     </ButtonLink>
-                  ) : (
-                    <>
-                      <ButtonLink
-                        href="/signin"
-                        variant="ghost"
-                        size="sm"
-                        className="w-full justify-center text-base/7 font-semibold text-gray-900"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Sign in
-                      </ButtonLink>
-                      <ButtonLink
-                        href="/signup"
-                        variant="default"
-                        size="sm"
-                        className="w-full justify-center text-base/7 font-semibold"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Sign up
-                      </ButtonLink>
-                    </>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

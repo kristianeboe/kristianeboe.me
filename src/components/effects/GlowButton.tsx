@@ -5,15 +5,10 @@ import { cn } from "@/components/ui/lib/utils";
 
 interface GlowButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Glow color as CSS color string (default: cyan) */
   glowColor?: string;
-  /** Glow radius in px (default: 100) */
   glowRadius?: number;
-  /** Glow intensity 0-1 (default: 0.6) */
   glowIntensity?: number;
-  /** Button variant matching shadcn styles */
   variant?: "default" | "outline" | "secondary" | "ghost";
-  /** Button size */
   size?: "default" | "sm" | "lg";
 }
 
@@ -62,19 +57,17 @@ export function GlowButton({
   }, []);
 
   const variantClasses = {
-    default:
-      "bg-primary text-primary-foreground shadow-xs dark:text-white",
+    default: "bg-primary text-primary-foreground shadow-xs dark:text-white",
     outline:
       "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
-    secondary:
-      "bg-secondary text-secondary-foreground border shadow-xs",
+    secondary: "bg-secondary text-secondary-foreground border shadow-xs",
     ghost: "hover:bg-accent hover:text-accent-foreground",
   };
 
   const sizeClasses = {
     default: "h-9 px-4 py-2",
     sm: "h-8 px-3 text-sm",
-    lg: "h-10 px-6",
+    lg: "h-11 px-8 text-base",
   };
 
   return (
@@ -99,9 +92,9 @@ export function GlowButton({
         aria-hidden
         style={{
           position: "absolute",
-          inset: -2,
+          inset: -4,
           opacity: 0,
-          transition: "opacity 0.3s ease",
+          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
           pointerEvents: "none",
           borderRadius: "inherit",
           mixBlendMode: "screen",
@@ -114,10 +107,23 @@ export function GlowButton({
           position: "absolute",
           inset: -1,
           borderRadius: "inherit",
-          opacity: isHovered ? 0.5 : 0,
-          transition: "opacity 0.3s ease",
+          opacity: isHovered ? 0.7 : 0,
+          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
           pointerEvents: "none",
-          boxShadow: `0 0 15px 2px ${glowColor}, inset 0 0 15px 2px ${glowColor}`,
+          boxShadow: `0 0 20px 4px ${glowColor}, inset 0 0 20px 4px ${glowColor}`,
+        }}
+      />
+      {/* Ambient idle glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: -2,
+          borderRadius: "inherit",
+          opacity: isHovered ? 0 : 0.3,
+          transition: "opacity 0.4s ease-out",
+          pointerEvents: "none",
+          boxShadow: `0 0 12px 2px ${glowColor}`,
         }}
       />
       <span className="relative z-10 flex items-center gap-2">{children}</span>

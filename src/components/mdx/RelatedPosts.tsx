@@ -32,8 +32,8 @@ function seededRandom(seed: number): () => number {
 
 export function RelatedPosts({
   posts,
-  title = "Related Posts",
-  description = "Continue reading with these related articles",
+  title = "Where to next?",
+  description = "A few more trips from the archive.",
   maxPosts = 3,
   basePath = "/blog",
 }: RelatedPostsProps) {
@@ -74,10 +74,10 @@ export function RelatedPosts({
   const getGradientClasses = (title: string, index: number) => {
     const gradients = [
       "from-blue-400 to-purple-500",
-      "from-purple-400 to-amber-500",
-      "from-amber-400 to-orange-500",
-      "from-red-400 to-orange-500",
-      "from-orange-400 to-yellow-500",
+      "from-purple-400 to-blue-500",
+      "from-blue-400 to-cyan-500",
+      "from-indigo-400 to-purple-500",
+      "from-sky-400 to-blue-500",
       "from-green-400 to-blue-500",
     ];
     return gradients[index % gradients.length];
@@ -128,29 +128,12 @@ export function RelatedPosts({
                 <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
                 <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
 
-                <div className="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
-                  <time dateTime={post.publishedAt} className="mr-8">
-                    {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
-                  </time>
-                  {post.author && (
-                    <div className="-ml-4 flex items-center gap-x-4">
-                      <svg
-                        viewBox="0 0 2 2"
-                        className="-ml-0.5 size-0.5 flex-none fill-white/50"
-                      >
-                        <circle r={1} cx={1} cy={1} />
-                      </svg>
-                      <div className="flex gap-x-2.5">
-                        <div className="flex size-6 flex-none items-center justify-center rounded-full bg-white/10">
-                          <span className="text-xs font-semibold text-white">
-                            {post.author.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                        <span>{post.author}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <time
+                  dateTime={post.publishedAt}
+                  className="text-sm leading-6 text-gray-300"
+                >
+                  {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
+                </time>
 
                 <h3 className="mt-3 text-lg leading-6 font-semibold text-white">
                   <Link href={`${basePath}/${post.slug}`}>

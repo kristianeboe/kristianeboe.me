@@ -13,6 +13,7 @@ import { TLDR } from "./TLDR";
 import { Video } from "./Video";
 import { ImageGallery } from "../blog/ImageGallery";
 import { InfoBox } from "../blog/InfoBox";
+import { Itinerary } from "../blog/Itinerary";
 import { ParallaxHero } from "../blog/ParallaxHero";
 import { YouTubeEmbed } from "../blog/YouTubeEmbed";
 
@@ -27,6 +28,7 @@ const sharedComponents = {
   Video,
   ImageGallery,
   InfoBox,
+  Itinerary,
   ParallaxHero,
   YouTubeEmbed,
 };
