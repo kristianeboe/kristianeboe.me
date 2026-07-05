@@ -1,7 +1,7 @@
 ---
 h1: "Bali"
 h1Subtitle: "Two weeks in paradise"
-heroImage: "/blog/bali/melb-bali.jpg"
+heroImage: "/blog/bali/bali-banner.jpg"
 metaTitle: "Bali Travel Guide"
 metaDescription: "A travel blog covering two weeks in Bali — Ubud's monkey forest, Mount Batur sunrise hike, Gili Islands, and Amed."
 publishedAt: "2026-03-09"
@@ -11,7 +11,7 @@ language: "en-US"
 showStickyCTA: false
 enableAutoCtAs: false
 readingTime: 10
-thumbnail: "/blog/bali/melb-bali.jpg"
+thumbnail: "/blog/bali/bali-banner.jpg"
 ---
 
 ## Introduction
@@ -32,23 +32,41 @@ Bali is one of the top destinations for people residing in Australia, presenting
 
 </InfoBox>
 
-<InfoBox title="Itinerary">
+<Itinerary
+  stops={[
+    { location: "Ubud", duration: "2 nights", detail: "Balibbu · ~10 AUD/night" },
+    { location: "Jimbaran (South Bali)", duration: "3 nights", detail: "Noonas Bali · ~30 AUD/night" },
+    { location: "Gili T", duration: "3 nights", detail: "Gili Divers · ~18 AUD/night" },
+    { location: "Amed", duration: "2 nights", detail: "Homestay · ~20 AUD/night" },
+    { location: "Seminyak", duration: "1 night", detail: "~20 AUD/night" },
+  ]}
+/>
 
-| Destination | Duration | Accommodation | Price/night |
-|-------------|----------|---------------|-------------|
-| Ubud | 2 nights | Balibbu | ~10 AUD |
-| Jimbaran (South Bali) | 3 nights | Noonas Bali | ~30 AUD |
-| Gili T | 3 nights | Gili Divers | ~18 AUD |
-| Amed | 2 nights | Homestay | ~20 AUD |
-| Seminyak | 1 night | — | ~20 AUD |
+<ParallaxHero image="/blog/bali/ubud-banner.jpg" title="UBUD" />
 
-</InfoBox>
-
-## Ubud
+## Monkeying around Ubud
 
 After a six-hour flight from Melbourne, we rented a cab to the Balibbu hostel. The drive was over an hour — practice aggressive negotiations with cab drivers (we paid 30,000 rupiah). First night: explored the area, discovered an abandoned temple, watched the sunset over a rice field, and attended our hostel host's son's wedding — free food and cheap drinks!
 
-Next morning: rented scooters to the monkey forest. Pay a small fee to enter. We bought bananas as monkey bait — one monkey stole the bananas from my pocket while another distracted me! We spent the rest of the day scootering through the countryside, visiting a rice plantation, getting foot massages, and enjoying cheap dinners.
+<ImageGallery
+  images={[
+    { src: "/blog/bali/wedding.jpg", alt: "Balinese wedding", caption: "Free food, alcohol and performances all night" },
+    { src: "/blog/bali/rice-field.jpg", alt: "Rice fields" },
+    { src: "/blog/bali/temple-visit.jpg", alt: "Visiting temples", caption: "While scootering we found this gem" },
+    { src: "/blog/bali/monkey-close.jpg", alt: "Monkey!", caption: "Up close with furry friends" },
+    { src: "/blog/bali/monkey-temple-gates.jpg", alt: "Monkey temple gates", caption: "Monkey forest, Ubud" },
+  ]}
+/>
+
+Next morning: rented scooters to the monkey forest. Pay a small fee to enter. We bought bananas as monkey bait — one monkey stole the bananas from my pocket while another distracted me!
+
+<ImageGallery
+  images={[
+    { src: "/blog/bali/monkey-steal.gif", alt: "Monkey see monkey take", caption: "Ryan got more than he bargained for" },
+  ]}
+/>
+
+We spent the rest of the day scootering through the countryside, visiting a rice plantation, getting foot massages, and enjoying cheap dinners.
 
 <InfoBox title="Where to Stay">
 
@@ -58,18 +76,15 @@ Next morning: rented scooters to the monkey forest. Pay a small fee to enter. We
 
 <ImageGallery
   images={[
-    { src: "/blog/bali/monkey-close.jpg", alt: "Monkey!", caption: "Up close with furry friends" },
-    { src: "/blog/bali/monkey-temple-gates.jpg", alt: "Monkey temple gates", caption: "Monkey forest, Ubud" },
-    { src: "/blog/bali/monkey-steal.gif", alt: "Monkey see monkey take", caption: "Ryan got more than he bargained for" },
-    { src: "/blog/bali/wedding.jpg", alt: "Balinese wedding", caption: "Free food, alcohol and performances all night" },
-    { src: "/blog/bali/rice-field.jpg", alt: "Rice fields" },
     { src: "/blog/bali/scooter-view.jpg", alt: "Scootering around" },
-    { src: "/blog/bali/temple-visit.jpg", alt: "Visiting temples", caption: "While scootering we found this gem" },
     { src: "/blog/bali/monkey-tricks.jpg", alt: "Monkey tricks", caption: "Monkey forest, Ubud" },
+    { src: "/blog/bali/ubud-portrait.jpg", alt: "Exploring the Ubud countryside" },
   ]}
 />
 
-## Mt Batur
+<ParallaxHero image="/blog/bali/mt-batur-banner.jpg" title="MT BATUR" />
+
+## Sunrise at Mt Batur
 
 The sunrise hike up Mount Batur was the most worthwhile thing we did in Bali. It's advertised everywhere in Ubud — practice your barter skills (we got the price down from 300,000 to 50,000 rupiah). Pick up is at 2–3am, with an hour's drive to the base. There's a huge mob of people making their way up in procession — commercialised but epic. The sunrise from the top is spectacular, and there are friendly monkeys up there too.
 
@@ -85,7 +100,7 @@ The hike takes about 2 hours up and 1 hour down. It's hard not to appreciate the
   ]}
 />
 
-<ParallaxHero image="/blog/bali/waterfall-1.jpg" title="TEGENUNGAN WATERFALL" />
+<ParallaxHero image="/blog/bali/tegenungan-waterfall-banner.jpg" title="TEGENUNGAN WATERFALL" />
 
 ## Braving the Tegenungan Waterfall
 
@@ -95,16 +110,7 @@ Our next stop was Tegenungan waterfall. After traversing through a small local v
 
 <YouTubeEmbed id="PXh9seaTzgU" />
 
-<ImageGallery
-  images={[
-    { src: "/blog/bali/waterfall-1.jpg", alt: "Tegenungan Waterfall", caption: "The magnificent Tegenungan waterfall" },
-    { src: "/blog/bali/waterfall-2.jpg", alt: "At the waterfall", caption: "Getting up close" },
-    { src: "/blog/bali/into-water.jpg", alt: "Into the water", caption: "Taking the plunge" },
-    { src: "/blog/bali/waterfall-map.png", alt: "Map to Tegenungan", caption: "How to get there" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/south-bali-pool-01.jpg" title="SOUTH BALI" />
+<ParallaxHero image="/blog/bali/south-bali-banner.jpg" title="SOUTH BALI" />
 
 ## Enjoying a piece of paradise in South Bali
 
@@ -119,49 +125,55 @@ To get to Padang Padang Bay we hired one of the villa staff to take us around ha
 <InfoBox title="Where to Stay in South Bali" items={["Noonas Bali — compound of 3 villas with staff and bar, great for large groups", "Jimbaran is quieter and removed from the tourist strip — scooters are essential", "Staff can arrange scooter rentals, laundry, drivers, and speedboat pickups"]} />
 
 <ImageGallery images={[
-  { src: "/blog/bali/south-bali-villa-01.jpg", alt: "Villa compound in South Bali", caption: "Our villa compound in Jimbaran" },
-  { src: "/blog/bali/south-bali-pool-01.jpg", alt: "Pool at the villa" },
+  { src: "/blog/bali/south-bali-villa-01.jpg", alt: "Route to Padang Padang Bay", caption: "It looks close on the map — it isn't" },
+  { src: "/blog/bali/south-bali-pool-01.jpg", alt: "Getting patched up after the scooter spill", caption: "The damage from the fall, before the trip to the clinic" },
   { src: "/blog/bali/south-bali-pool-02.jpg", alt: "Villa pool vibes", caption: "Chilling by the pool" },
 ]} />
 
-<ParallaxHero image="/blog/bali/uluwatu-sunset-01.jpg" title="ULUWATU" />
+<ParallaxHero image="/blog/bali/uluwatu-banner.jpg" title="ULUWATU" />
 
 ## Marveling at the sunset in Uluwatu
 
-The stunning Uluwatu temple is located amongst the craggy cliffs of South West Bali. I'm sure it's beautiful no matter what time of day you go, but I find it hard to believe anything can be more beautiful than the sunset. This also coincides with a show put on by the locals — while it was interesting enough, just walking around the temple grounds and finding a nice lookout might be just as worthwhile (and cheaper).
+The stunning Uluwatu temple is located amongst the craggy cliffs of South West Bali. I'm sure it's beautiful no matter what time of day you go, but I find it hard to believe anything can be more beautiful than the sunset. This also coincides with a show put on by the locals — the famous Kecak fire dance. While it was interesting enough, just walking around the temple grounds and finding a nice lookout might be just as worthwhile (and cheaper).
 
 If you're feeling festive the bar Single Fin is definitely worth a visit. We went home to our villa to change and then rented three cars to drive us there, and wait for us to take us back home.
 
 <ImageGallery images={[
-  { src: "/blog/bali/uluwatu-temple-01.jpg", alt: "Uluwatu temple at sunset", caption: "Uluwatu at golden hour" },
-  { src: "/blog/bali/uluwatu-sunset-01.jpg", alt: "Sunset view from Uluwatu", caption: "The sunset from the cliffs" },
+  { src: "/blog/bali/bali-banner.jpg", alt: "Uluwatu temple at sunset", caption: "Uluwatu at golden hour" },
+  { src: "/blog/bali/uluwatu-sunset-01.jpg", alt: "The Kecak fire dance crowd", caption: "The nightly Kecak fire dance draws a huge crowd" },
   { src: "/blog/bali/uluwatu-temple-02.jpg", alt: "Uluwatu temple cliffs", caption: "Temple perched on the cliffs" },
 ]} />
 
-<ParallaxHero image="/blog/bali/gili-underwater-01.jpg" title="GILI TRAWANGAN" />
+<ParallaxHero image="/blog/bali/gili-trawagan-banner.jpg" title="GILI TRAWANGAN" />
 
 ## Exploring the underwater wonders of Gili T
+
+<ImageGallery images={[
+  { src: "/blog/bali/gili-underwater-02.jpg", alt: "Diving at Gili T" },
+  { src: "/blog/bali/gili-underwater-03.jpg", alt: "Reef diving at Gili T" },
+  { src: "/blog/bali/gili-underwater-04.jpg", alt: "Fish at Gili T" },
+]} />
 
 Gili T is mostly known for its extreme party culture and while that's certainly a reason to give this island a visit, there is more to this island than meets the eye.
 
 The Gili islands — Gili T, Gili Air and Gili Meno — are three little islands just off the coast of Lombok and they are home to some of the finest diving in the world. The main reason for me going to Bali was actually to get the Open Water diving course. You would have thought that with a left foot swollen to unholy proportions due to the earlier scooter accident, the dream would be as good as lost, but I'm tenacious when I want to be and convinced them to let me dive.
+
+<ImageGallery images={[
+  { src: "/blog/bali/gili-diving-01.jpg", alt: "Into the blue — SSI Open Water course", caption: "Into the blue. Open water SSI dive course, with theory online, 450,000 rupiah" },
+]} />
 
 Three days and four dives later I was certified and ready to head back to Bali, but Gili T will always stand out as one of the best experiences of my life. My only regret is not taking more photos — I guess I was too busy having fun.
 
 <YouTubeEmbed id="VgQpQ1EOE9M" />
 
 <ImageGallery images={[
-  { src: "/blog/bali/gili-diving-01.jpg", alt: "Into the blue — SSI Open Water course", caption: "Into the blue. Open water SSI dive course, with theory online, 450,000 rupiah" },
   { src: "/blog/bali/gili-underwater-01.jpg", alt: "Underwater at Gili T", caption: "The underwater world of Gili T" },
-  { src: "/blog/bali/gili-underwater-02.jpg", alt: "Diving at Gili T" },
-  { src: "/blog/bali/gili-underwater-03.jpg", alt: "Reef diving at Gili T" },
-  { src: "/blog/bali/gili-underwater-04.jpg", alt: "Fish at Gili T" },
   { src: "/blog/bali/gili-underwater-05.jpg", alt: "Coral diving at Gili T" },
 ]} />
 
 <InfoBox title="Where to Stay on Gili T" items={["Gili Divers — if you come to Gili to dive, no better hostel. Superb instructors and a discount on accommodation as long as you dive at least once a day.", "Open Water SSI course: ~450,000 rupiah with theory online"]} />
 
-<ParallaxHero image="/blog/bali/amed-dive-01.jpg" title="AMED & TULAMBEN" />
+<ParallaxHero image="/blog/bali/amed-and-tulamben-banner.jpg" title="AMED & TULAMBEN" />
 
 ## Taking a break from it all in Amed
 
@@ -181,25 +193,31 @@ The dive itself was incredible, with literal tons of fish and even a mantis shri
   { src: "/blog/bali/amed-scenery-01.jpg", alt: "Amed coastline" },
 ]} />
 
-<ParallaxHero image="/blog/bali/north-south-tirta-gangga-panorama.jpg" title="FROM NORTH TO SOUTH" />
+<ParallaxHero image="/blog/bali/from-north-to-south-banner.jpg" title="FROM NORTH TO SOUTH" />
 
 ## Traversing the country in style
 
-My last real day in Bali consisted of me basically traversing half the island and visiting temples on the way. I had already decided I would rent a driver for the day — the long-nailed man from earlier intervened and said he'd do it for 800,000 rupiah, roughly 80 AUD. There was only one problem: I didn't really like the guy and I felt like I was being ripped off.
-
-The guy didn't really take no for an answer so I ended up escaping over to the dive shop from the day before where I negotiated with one of the staff there. He said he would drive me down for around 50 AUD and seemed like a cool guy. However it turned out I misunderstood and it was actually his cousin who was going to drive me — and after driving for around 15 minutes we turned down a side road and picked up his brother. Reading this I realize it almost sounds like a set up, but the truth is these guys made my day! They were both in their early twenties and it was really interesting learning about their lives and joking around while driving in the sweltering heat.
-
-On the way from Amed to the first stop, the small water temple Tirta Gangga, there were some impressive rice fields and panoramic views — and the little temple itself didn't disappoint either.
-
 <ImageGallery images={[
-  { src: "/blog/bali/north-south-map-01.jpg", alt: "Route map from Amed to Denpasar", caption: "Trust me, the trip was way longer than 3.5 hours" },
-  { src: "/blog/bali/north-south-tirta-gangga-panorama.jpg", alt: "Tirta Gangga 360 panorama", caption: "Tirta Gangga — this is actually a 360 panorama!" },
   { src: "/blog/bali/north-south-drivers-01.jpg", alt: "My drivers for the day" },
   { src: "/blog/bali/north-south-drivers-02.jpg", alt: "Roadside stop on the drive" },
   { src: "/blog/bali/north-south-drivers-03.jpg", alt: "Scenery on the drive south" },
 ]} />
 
-<ParallaxHero image="/blog/bali/besakih-temple-01.jpg" title="BESAKIH TEMPLE" />
+My last real day in Bali consisted of me basically traversing half the island and visiting temples on the way. I had already decided I would rent a driver for the day — the long-nailed man from earlier intervened and said he'd do it for 800,000 rupiah, roughly 80 AUD. There was only one problem: I didn't really like the guy and I felt like I was being ripped off.
+
+The guy didn't really take no for an answer so I ended up escaping over to the dive shop from the day before where I negotiated with one of the staff there. He said he would drive me down for around 50 AUD and seemed like a cool guy. However it turned out I misunderstood and it was actually his cousin who was going to drive me — and after driving for around 15 minutes we turned down a side road and picked up his brother. Reading this I realize it almost sounds like a set up, but the truth is these guys made my day! They were both in their early twenties and it was really interesting learning about their lives and joking around while driving in the sweltering heat.
+
+<ImageGallery images={[
+  { src: "/blog/bali/north-south-map-01.jpg", alt: "Route map from Amed to Denpasar", caption: "Trust me, the trip was way longer than 3.5 hours" },
+]} />
+
+On the way from Amed to the first stop, the small water temple Tirta Gangga, there were some impressive rice fields and panoramic views — and the little temple itself didn't disappoint either.
+
+<ImageGallery images={[
+  { src: "/blog/bali/north-south-tirta-gangga-panorama.jpg", alt: "Tirta Gangga 360 panorama", caption: "Tirta Gangga — this is actually a 360 panorama!" },
+]} />
+
+<ParallaxHero image="/blog/bali/besakih-temple-banner.jpg" title="BESAKIH TEMPLE" />
 
 ## Paying respects at the mother temple
 
@@ -216,7 +234,7 @@ When the tour finished I got lunch with my taxi drivers and started the longest 
   { src: "/blog/bali/besakih-temple-02.jpg", alt: "Dressed in temple sarong at Besakih", caption: "Decked out in full temple gear" },
 ]} />
 
-<ParallaxHero image="/blog/bali/life-hacks-street-food-01.jpg" title="BALI LIFE HACKS" />
+<ParallaxHero image="/blog/bali/life-hacks-banner.jpg" title="BALI LIFE HACKS" />
 
 ## Things you wish you knew before you went
 
@@ -237,147 +255,3 @@ When the tour finished I got lunch with my taxi drivers and started the longest 
 <ImageGallery images={[
   { src: "/blog/bali/life-hacks-street-food-01.jpg", alt: "50 cent street food meal", caption: "A full meal for 50 cents — yes, really" },
 ]} />
-
-<ParallaxHero image="/blog/bali/south-bali-1.png" title="SOUTH BALI" />
-
-## Villa Life in Jimbaran
-
-If you are more than a few people going, say 5 or more, I strongly recommend renting a villa for a couple of days. We were 23 people so we pretty much rented a compound of 3 villas, complete with staff and even a bar.
-
-We were situated quite deep in Jimbaran, not really close to the beach or the city, but because we rented scooters this wasn't really a problem. The staff helped out with everything from scooter rentals to laundry — I can't say enough how nice and hospitable the people of Bali are. Don't be afraid to ask for anything.
-
-The plan was to stay here for three days to chill, surf and read up on the theory for the SSI Open Water course, then head up to Padang Padang Bay to take the speed boat to Gili T. But because I managed to fall off my scooter, my left leg got pretty banged up — so no surf for me. On the bright side, I had plenty of time to chill by the pool and soak up all the SSI theory, most of which is about all the terrible things that can happen to you underwater.
-
-<InfoBox>
-**Getting around:** To get to Padang Padang Bay we hired one of the villa staff to take us around halfway and then the boat company to collect us there. It might look close on the map, but with traffic conditions and not always ideal roads, distances in Bali can be deceiving.
-</InfoBox>
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/south-bali-2.jpg", alt: "Villa life in Jimbaran" },
-    { src: "/blog/bali/south-bali-3.jpg", alt: "South Bali views" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/uluwatu-1.jpg" title="ULUWATU" />
-
-## The Cliffs of Uluwatu
-
-The stunning Uluwatu temple is located amongst the craggy cliffs of South West Bali.
-
-I'm sure it's beautiful no matter what time of day you go, but I find it hard to believe anything can be more beautiful than the sunset. This also coincides with a show put on by the locals — the famous Kecak fire dance. Some of my friends and I went to see it and while it was interesting enough, just walking around the temple grounds and finding a nice lookout might be just as worthwhile (and cheaper).
-
-<InfoBox>
-**Night out:** If you're feeling festive, the bar Single Fin is definitely worth a visit. We went home to our villa to change and then rented three cars to drive us there — and wait for us to take us back home.
-</InfoBox>
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/uluwatu-1.jpg", alt: "Uluwatu temple at sunset", caption: "Uluwatu temple perched on the cliffs" },
-    { src: "/blog/bali/uluwatu-2.png", alt: "Uluwatu map" },
-    { src: "/blog/bali/uluwatu-3.jpg", alt: "Uluwatu views", caption: "The stunning cliffside views" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/gili-trawagan-1.jpg" title="GILI TRAWANGAN" />
-
-## Island of a Thousand Parties (and Turtles)
-
-Gili T is mostly known for its extreme party culture, and while that's certainly a reason to give this island a visit, there is more to it than meets the eye.
-
-The Gili islands — Gili T, Gili Air and Gili Meno — are three little islands just off the coast of Lombok and they are home to some of the finest diving in the world. The main reason for me going to Bali was actually to get the Open Water diving course. You would have thought that with a left foot swollen to unholy proportions (view at your own discretion) due to the earlier scooter accident, the dream would be as good as lost. But I'm tenacious when I want to be and convinced them to let me dive.
-
-Three days and four dives later I was certified and ready to head back to Bali, but Gili T will always stand out as one of the best experiences of my life. My only regret is not taking more photos — I guess I was too busy having fun.
-
-<YouTubeEmbed id="VgQpQ1EOE9M" />
-
-<InfoBox>
-**Diving info:** Open Water SSI dive course with theory online — 450,000 rupiah at Gili Divers. If you come to Gili to dive, I can recommend no other hostel. The dive instructors are superb and they give you a discount on accommodation as long as you dive at least once a day.
-</InfoBox>
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/gili-trawagan-2.jpg", alt: "Gili Trawangan" },
-    { src: "/blog/bali/gili-trawagan-3.jpg", alt: "Gili island life" },
-    { src: "/blog/bali/gili-trawagan-4.jpg", alt: "Diving at Gili T" },
-    { src: "/blog/bali/gili-trawagan-5.jpg", alt: "Underwater world" },
-    { src: "/blog/bali/gili-trawagan-6.jpg", alt: "Gili T sunset" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/amed-and-tulamben-1.jpg" title="AMED & TULAMBEN" />
-
-## The Shipwreck Dive
-
-After the intense stay at Gili T it felt pretty great to catch up on some sleep on the boat back to mainland Bali. Limping up the beach, my foot looked worse than ever, when my friend and I were stopped by a very long-nailed man insisting we should come to the hostel he worked for. I usually have a hostel prebooked when I rock up to a new place, but this was an exception and I was pretty tired and hot so I decided to for once leave where I slept to someone else's hands. Luckily the gambit paid off and he led us to a beautiful, rather big, homestay a little bit left of the main beach.
-
-At the homestay we actually ran into some other friends staying there, and when I saw the blood drain from their face when they saw my poorly bandaged foot, I finally conceded it was time to see a doctor. One nerve-wracking ride on the back of the hostel owner's scooter later, I arrived at a not completely unsanitary medical clinic where I got patched up and was given some broad spectrum antibiotics.
-
-After a night of some well deserved sleep we went over to the nearby dive shop to gear up for our dive of the USAT Liberty, a sunken shipwreck off the coast. The dive itself was incredible with literal tons of fish and even a mantis shrimp — the coolest animal on earth — near the end.
-
-<InfoBox>
-**Diving:** Two dives, one at the USAT Liberty wreck, the other at "The Wall" — 100,000 Rupiah at Eco Divers.
-</InfoBox>
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/amed-and-tulamben-2.png", alt: "Amed area map" },
-    { src: "/blog/bali/amed-and-tulamben-3.jpg", alt: "Tulamben diving" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/from-north-to-south-2.jpg" title="FROM NORTH TO SOUTH" />
-
-## The Long Road Home
-
-My last real day in Bali — seeing as the next morning was just spent getting to the airport — consisted of me basically traversing half the island and visiting temples on the way. I had already decided I would rent a driver for the day and discussed how I should go about getting one with my friend, when the long-nailed man from earlier intervened and said he'd do it for 800,000 rupiah, roughly 80 AUD. There was only one problem: I didn't really like the guy, and I felt like I was being ripped off.
-
-The guy didn't really take no for an answer though, so I ended up escaping over to the dive shop from the day before where I negotiated with one of the staff. He said he would drive me down for around 50 AUD and seemed like a cool guy, so I agreed. However it turned out I misunderstood and it was actually his cousin who was going to drive me — and after driving for around 15 minutes we turned down a side road and picked up his brother. Reading this I realize it almost sounds like a setup, but the truth is these guys made my day! They were both in their early twenties and it was really interesting learning about their lives and joking around while driving in the sweltering heat.
-
-On the way from Amed to the first stop, the small water temple Tirta Gangga, there were some impressive rice fields and panoramic views, and the little temple itself didn't disappoint either.
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/from-north-to-south-1.png", alt: "Route map from north to south" },
-    { src: "/blog/bali/from-north-to-south-3.jpg", alt: "Rice fields along the way" },
-    { src: "/blog/bali/from-north-to-south-4.jpg", alt: "Tirta Gangga water temple" },
-    { src: "/blog/bali/from-north-to-south-5.jpg", alt: "On the road" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/besakih-temple-1.jpg" title="BESAKIH TEMPLE" />
-
-## The Mother Temple
-
-The Besakih temple, also known as the mother temple, is one of the largest temple complexes of its kind in the world — it is absolutely massive. Upon arrival you are surrounded by local women dressing you in some form of religious garb that is actually mandatory when walking around the temple. When you're all dressed up they start asking for payment, which was of course not discussed beforehand.
-
-<InfoBox>
-**Watch out for scams:** Be sure you only pay for the minimum — the bottom piece and the "hat" — and don't get tricked into buying the whole package of praying candles etc. like I was. Once inside the temple courtyard you'll be approached by a manager to be assigned a guide, also mandatory inside the complex. This guy really tried to rip me off and it was the first time I actually got quite angry in Bali. Negotiate hard!
-</InfoBox>
-
-At least I lucked out with the guide — a rather corpulent man who wanted to take photos of me with every conceivable background and angle. Precisely what I was looking for, haha.
-
-When the tour finished I got lunch with my taxi drivers and started the longest part of the drive. I actually fell asleep during most of this ride, so before I knew it I was in downtown Denpasar linking up with my friends who I would be going back to Melbourne with the next morning. My adventure in Bali was over this time, but the island has plenty of other places, beaches and treasures I didn't get to discover on my 11-day journey. I guess I'll have to come back one day :D
-
-<ImageGallery
-  images={[
-    { src: "/blog/bali/besakih-temple-1.jpg", alt: "Besakih mother temple", caption: "The massive Besakih temple complex" },
-    { src: "/blog/bali/besakih-temple-2.jpg", alt: "Temple grounds", caption: "Walking the temple grounds" },
-  ]}
-/>
-
-<ParallaxHero image="/blog/bali/life-hacks-1.jpg" title="BALI LIFE HACKS" />
-
-## Tips & Tricks
-
-<InfoBox>
-**Budget eats:** You can eat incredibly well in Bali for almost nothing. Local warungs (small family restaurants) serve massive plates of nasi goreng or mie goreng for around 15,000–25,000 rupiah — that's roughly 50 cents to a dollar.
-</InfoBox>
-
-<InfoBox>
-**Transport:** Rent a scooter — it's the best way to get around. Just be careful on the roads (trust me, I learned the hard way). For longer distances, negotiate with a local driver for a day rate rather than per-trip.
-</InfoBox>
-
-<InfoBox>
-**Diving:** If diving is your thing, Bali and the Gili islands are world-class. Get your Open Water certification at Gili T (cheapest and best instructors) and then dive the USAT Liberty wreck at Tulamben. Two unmissable experiences.
-</InfoBox>

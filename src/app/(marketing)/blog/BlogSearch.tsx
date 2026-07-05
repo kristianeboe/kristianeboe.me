@@ -85,7 +85,7 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
           placeholder="Search posts by title, description, category, tags, or author..."
           value={searchQuery}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="block w-full rounded-lg border border-gray-300 bg-white py-3 pr-12 pl-11 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none sm:text-sm"
+          className="block w-full rounded-lg border border-gray-300 bg-white py-3 pr-12 pl-11 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none sm:text-sm"
         />
         {searchQuery && (
           <button
@@ -111,7 +111,7 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
                 onClick={() => handleCategoryClick(category)}
                 className={`rounded-lg px-3 py-1.5 text-sm font-semibold transition-all ${
                   isActive
-                    ? "bg-linear-to-r from-amber-600 to-amber-700 text-white shadow-sm"
+                    ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-sm"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -122,7 +122,7 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
           {selectedCategory && (
             <button
               onClick={() => handleCategoryClick(selectedCategory)}
-              className="text-sm font-medium text-amber-600 transition-colors hover:text-amber-700"
+              className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
             >
               Clear
             </button>

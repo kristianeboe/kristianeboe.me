@@ -81,11 +81,11 @@ export function FeatureGrid({
             {/* Content section */}
             <div className="p-6">
               {feature.icon && iconMap[feature.icon] && (
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-amber-50">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                   {(() => {
                     const IconComponent = iconMap[feature.icon];
                     // @ts-expect-error - this is ok
-                    return <IconComponent className="h-6 w-6 text-amber-700" />;
+                    return <IconComponent className="h-6 w-6 text-primary" />;
                   })()}
                 </div>
               )}
@@ -111,8 +111,8 @@ export function FeatureGrid({
         return (
           <div key={index} className="rounded-lg border border-gray-200 p-6">
             {IconComponent && (
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-amber-50">
-                <IconComponent className="h-6 w-6 text-amber-700" />
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <IconComponent className="h-6 w-6 text-primary" />
               </div>
             )}
             <h3 className="mb-2 text-lg font-semibold text-gray-900">

@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { BarChart3 } from "lucide-react";
 
 import { cn } from "@/components/ui";
+import { getTravelNavigation } from "@/lib/travel-nav";
 
 import HeaderClient from "./HeaderClient";
 
 const navigation = {
-  product: [],
+  travel: getTravelNavigation(),
   callsToAction: [],
   simple: [
     { name: "About", href: "/about" },
@@ -45,17 +45,7 @@ export function TransparentHeader() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="flex items-center space-x-2">
-            <div
-              className={cn(
-                "flex size-6 items-center justify-center rounded-md transition-colors duration-300",
-                scrolled
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-white/20 text-white",
-              )}
-            >
-              <BarChart3 className="size-4" />
-            </div>
+          <Link href="/" className="flex items-center">
             <span
               className={cn(
                 "text-xl font-bold transition-colors duration-300",

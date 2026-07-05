@@ -107,15 +107,22 @@ function BlogCard({
           className="aspect-video w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
         />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
+        {!post.isPublished && (
+          <span className="absolute top-3 left-3 rounded-full bg-amber-400 px-2.5 py-1 text-xs font-semibold text-amber-950">
+            Draft
+          </span>
+        )}
       </Link>
 
       <div className="flex max-w-xl grow flex-col justify-between">
         <div className="mt-8 flex flex-wrap items-center gap-2 text-xs">
-          <time dateTime={post.publishedAt} className="text-gray-500">
-            {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
-          </time>
+          {post.isPublished && (
+            <time dateTime={post.publishedAt} className="text-gray-500">
+              {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
+            </time>
+          )}
           {post.category && (
-            <span className="relative z-10 rounded-full bg-amber-50 px-3 py-1.5 font-semibold text-amber-700">
+            <span className="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-semibold text-primary">
               {post.category}
             </span>
           )}
@@ -152,79 +159,6 @@ function BlogCard({
           author={post.author}
           authorImage={AUTHORS[post.author].image}
         />
-      </div>
-    </article>
-  );
-}
-
-// Blog Card Component without Image (Simple)
-function BlogCardSimple({
-  post,
-  basePath = "/blog",
-}: {
-  post: Post;
-  basePath?: string;
-}) {
-  return (
-    <article className="flex max-w-xl flex-col items-start justify-between">
-      <div className="flex flex-wrap items-center gap-2 text-xs">
-        <time dateTime={post.publishedAt} className="text-gray-500">
-          {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
-        </time>
-        {post.category && (
-          <span className="relative z-10 rounded-md bg-linear-to-r from-amber-600 to-amber-700 px-3 py-1.5 font-bold text-white shadow-sm">
-            {post.category}
-          </span>
-        )}
-        {(post.tags || []).map((tag: string) => (
-          <span
-            key={tag}
-            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-900"
-          >
-            #{tag}
-          </span>
-        ))}
-      </div>
-      <div className="group relative grow">
-        <h3 className="mt-3 text-lg leading-6 font-semibold text-gray-900 group-hover:text-gray-600">
-          <Link href={`${basePath}/${post.slug}`}>
-            <span className="absolute inset-0" />
-            {post.h1}
-          </Link>
-        </h3>
-        {(post.h1Subtitle || post.metaDescription) && (
-          <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-            {post.h1Subtitle || post.metaDescription}
-          </p>
-        )}
-      </div>
-      <div className="relative mt-8 flex items-center gap-x-4 justify-self-end">
-        {AUTHORS[post.author].image ? (
-          <Image
-            src={
-              AUTHORS[post.author].image.startsWith("/")
-                ? AUTHORS[post.author].image
-                : `/images/people/${AUTHORS[post.author].image}`
-            }
-            alt={post.author}
-            width={40}
-            height={40}
-            className="size-10 rounded-full bg-gray-50"
-          />
-        ) : (
-          <div className="flex size-10 items-center justify-center rounded-full bg-gray-50">
-            <span className="text-sm font-semibold text-gray-600">
-              {post.author.charAt(0)}
-            </span>
-          </div>
-        )}
-        <div className="text-sm leading-6">
-          <p className="font-semibold text-gray-900">
-            <span className="absolute inset-0" />
-            {post.author}
-          </p>
-          <p className="text-gray-600">Author</p>
-        </div>
       </div>
     </article>
   );
@@ -292,7 +226,7 @@ export function BlogGrid({
                       )}
                     </time>
                     {featuredPosts[0].category && (
-                      <span className="relative z-10 cursor-pointer rounded-full bg-amber-600/80 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-amber-600">
+                      <span className="relative z-10 cursor-pointer rounded-full bg-primary/80 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-primary">
                         {featuredPosts[0].category}
                       </span>
                     )}
@@ -417,11 +351,7 @@ export function BlogGrid({
           {posts.length > 0 ? (
             <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
               {posts.map((post) => (
-                <BlogCardSimple
-                  key={post.slug}
-                  post={post}
-                  basePath={basePath}
-                />
+                <BlogCard key={post.slug} post={post} basePath={basePath} />
               ))}
             </div>
           ) : (

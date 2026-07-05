@@ -1,47 +1,9 @@
 import Link from "next/link";
-import { BarChart3 } from "lucide-react";
 
 import { cn } from "@/components/ui";
+import { getTravelNavigation } from "@/lib/travel-nav";
 
 import HeaderClient from "./HeaderClient";
-
-// Navigation structure for the header
-const navigation = {
-  product: [
-    {
-      name: "Features",
-      description: "See what we can do for you",
-      href: "/#features",
-      icon: "ChartPieIcon" as const,
-    },
-    {
-      name: "How it Works",
-      description: "Learn how it works",
-      href: "/#how-it-works",
-      icon: "CursorArrowRaysIcon" as const,
-    },
-    {
-      name: "About",
-      description: "Learn more about us",
-      href: "/#about",
-      icon: "FingerPrintIcon" as const,
-    },
-  ],
-  callsToAction: [
-    {
-      name: "Contact",
-      href: "mailto:hello@example.com",
-      icon: "PhoneIcon" as const,
-    },
-  ],
-  simple: [
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Speaking", href: "/speaking" },
-    { name: "Uses", href: "/uses" },
-    { name: "Blog", href: "/blog" },
-  ],
-};
 
 interface HeaderProps {
   container?: boolean;
@@ -54,6 +16,25 @@ export default function Header({
   showBanner = false,
   transparent = false,
 }: HeaderProps) {
+  // Navigation structure for the header
+  const navigation = {
+    travel: getTravelNavigation(),
+    callsToAction: [
+      {
+        name: "Contact",
+        href: "mailto:hello@example.com",
+        icon: "PhoneIcon" as const,
+      },
+    ],
+    simple: [
+      { name: "About", href: "/about" },
+      { name: "Projects", href: "/projects" },
+      { name: "Speaking", href: "/speaking" },
+      { name: "Uses", href: "/uses" },
+      { name: "Blog", href: "/blog" },
+    ],
+  };
+
   return (
     <header
       className={cn(
@@ -71,10 +52,7 @@ export default function Header({
       >
         {/* Logo Section */}
         <div className="flex lg:flex-1">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-              <BarChart3 className="size-4" />
-            </div>
+          <Link href="/" className="flex items-center">
             <span className="text-xl font-bold">kristianeboe.me</span>
           </Link>
         </div>
