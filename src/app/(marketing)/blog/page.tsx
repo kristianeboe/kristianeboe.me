@@ -39,9 +39,18 @@ export const metadata = {
   },
 };
 
+// Posts that exist for local reference (e.g. the MDX component showcase)
+// but shouldn't show up once the site is actually deployed.
+const HIDDEN_IN_PRODUCTION_SLUGS = ["showcase"];
+
 export default function BlogPage() {
   const publishedPosts = allPosts
     .filter((post) => post.isPublished)
+    .filter(
+      (post) =>
+        env.NODE_ENV !== "production" ||
+        !HIDDEN_IN_PRODUCTION_SLUGS.includes(post.slug),
+    )
     .sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),

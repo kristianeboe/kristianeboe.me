@@ -154,11 +154,6 @@ function BlogCard({
             </Link>
           )}
         </div>
-
-        <AuthorInfo
-          author={post.author}
-          authorImage={AUTHORS[post.author].image}
-        />
       </div>
     </article>
   );

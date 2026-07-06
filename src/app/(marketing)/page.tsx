@@ -14,9 +14,9 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Kristian Elset Bø — Software for the messy parts of modern life",
+  title: "Kristian Elset Bø — Software, stories, and the messy parts of modern life",
   description:
-    "Norwegian founder and engineer in Brooklyn. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
+    "Norwegian founder and engineer in Oslo. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
 };
 
 // Direction E — "Card Tower" from the claude.ai/design kristianeboe.me project.
@@ -70,7 +70,7 @@ function Hero() {
           <div>
             <div className={cn(monoLabel, "mb-5 text-[#C9923D]")}>
               <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#C9923D] align-middle" />
-              Currently · Brooklyn
+              Currently · Oslo, Norway
             </div>
             <h1
               className={cn(
@@ -78,16 +78,19 @@ function Hero() {
                 "text-5xl leading-[0.98] sm:text-6xl lg:text-7xl xl:text-[84px]",
               )}
             >
-              Software for the{" "}
+              Software, stories, and the{" "}
               <em className="italic text-[#1F4D3C]">messy</em> parts of{" "}
               <em className="italic">modern life</em>.
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
-              I&apos;m Kristian Elset Bø — Norwegian founder and engineer.
-              Building tools that help people decide where to live, who to
-              meet, how to move. Right now that&apos;s{" "}
-              <strong className="font-semibold text-[#15110C]">Homi</strong>,
-              an AI-powered way to find and collaborate on your next home.
+              I&apos;m Kristian Elset Bø — I build products like{" "}
+              <strong className="font-semibold text-[#15110C]">Homi</strong>{" "}
+              and{" "}
+              <strong className="font-semibold text-[#15110C]">
+                SwipeStats
+              </strong>
+              , write about travel and nomad life, and document the
+              experiments that shape how I work, move, and think.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -132,7 +135,7 @@ function Hero() {
             <div
               className={cn(monoLabel, "mt-4 flex gap-3 text-[10px]")}
             >
-              <span className="text-[#FAF6EE]/70">Brooklyn</span>
+              <span className="text-[#FAF6EE]/70">Oslo</span>
               <span className="text-[#C9923D]">—</span>
               <span className="text-[#FAF6EE]/70">since Sep &apos;25</span>
             </div>

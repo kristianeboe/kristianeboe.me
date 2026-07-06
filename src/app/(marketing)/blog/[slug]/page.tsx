@@ -93,7 +93,12 @@ export default async function BlogPostPage({
 
   // Drafts (publishedAt in the future) are always visible outside of
   // production so they can be reviewed locally without publishing them.
-  if (!post || (!post.isPublished && env.NODE_ENV === "production")) {
+  // The component showcase is the same idea in reverse: real content for
+  // local/staging reference that shouldn't be reachable once deployed.
+  const isHiddenInProduction =
+    env.NODE_ENV === "production" &&
+    (!post?.isPublished || post?.slug === "showcase");
+  if (!post || isHiddenInProduction) {
     notFound();
   }
 

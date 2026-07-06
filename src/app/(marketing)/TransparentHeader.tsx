@@ -17,6 +17,7 @@ const navigation = {
     { name: "Speaking", href: "/speaking" },
     { name: "Uses", href: "/uses" },
     { name: "Blog", href: "/blog" },
+    { name: "Resume", href: "/downloads/kristian-elset-boe-cv.pdf" },
   ],
 };
 

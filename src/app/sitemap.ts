@@ -1,9 +1,15 @@
 import { posts } from ".velite";
 import { type MetadataRoute } from "next";
+import { env } from "@/env";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Filter for published posts only
-  const publishedPosts = posts.filter((post) => post.isPublished);
+  // Filter for published posts only, excluding the component showcase
+  // (kept around for local/staging reference, hidden once deployed).
+  const publishedPosts = posts.filter(
+    (post) =>
+      post.isPublished &&
+      !(env.NODE_ENV === "production" && post.slug === "showcase"),
+  );
 
   const baseUrl = "https://example.com";
 

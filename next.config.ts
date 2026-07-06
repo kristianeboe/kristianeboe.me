@@ -9,6 +9,13 @@ const config: NextConfig = {
   /** Enable MDX pages */
   pageExtensions: ["ts", "tsx", "md", "mdx"],
 
+  // Lets a second concurrent `next dev` (e.g. a separate preview session) run
+  // against its own build output instead of fighting over .next/dev/lock.
+  // Unset by default, so normal dev/build behavior is unchanged.
+  ...(process.env.PREVIEW_DIST_DIR
+    ? { distDir: process.env.PREVIEW_DIST_DIR }
+    : {}),
+
   images: {
     remotePatterns: [
       {
