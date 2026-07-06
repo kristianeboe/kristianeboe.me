@@ -5,6 +5,9 @@ import { Newsreader } from "next/font/google";
 
 import { posts as allPosts } from ".velite";
 import { cn } from "@/lib/utils";
+import { getTravelPosts } from "@/lib/travel-nav";
+
+import { HomeHeader } from "./HomeHeader";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -60,7 +63,7 @@ function Hero() {
       style={{ background: heroGradient }}
     >
       <Grain />
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-7 px-6 py-14 sm:py-20 lg:grid-cols-[1.5fr_1fr] lg:px-8">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-7 px-6 pt-28 pb-14 sm:pt-32 sm:pb-20 lg:grid-cols-[1.5fr_1fr] lg:px-8">
         <div
           className={cn(
             glass,
@@ -197,6 +200,79 @@ function Focus() {
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const TRIP_TILT = [-1.4, 1, -0.7];
+
+function Travel() {
+  const trips = getTravelPosts();
+
+  return (
+    <section className="overflow-hidden bg-[#FAF6EE] px-6 pt-2 pb-16 sm:pb-22 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3">
+          <h2 className={cn(serif, "text-4xl text-[#15110C] sm:text-5xl")}>
+            Also, I travel. <em className="italic text-[#C9923D]">A lot.</em>
+          </h2>
+          <Link
+            href="/blog"
+            className="text-sm font-semibold text-[#15110C] hover:text-[#1F4D3C]"
+          >
+            All travel guides →
+          </Link>
+        </div>
+        <p className="mb-9 max-w-xl text-base text-[#15110C]/62">
+          Working guides from places I&apos;ve actually lived and worked —
+          real costs, real itineraries, zero &ldquo;hidden gem&rdquo;
+          listicles.
+        </p>
+        <div className="grid grid-cols-1 gap-7 sm:grid-cols-3">
+          {trips.map((trip, i) => (
+            <Link
+              key={trip.slug}
+              href={`/blog/${trip.slug}`}
+              className={cn(
+                glassSolid,
+                "block p-3.5 transition-transform hover:-translate-y-1 hover:rotate-0",
+              )}
+              style={{ transform: `rotate(${TRIP_TILT[i % TRIP_TILT.length]}deg)` }}
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[12px]">
+                {trip.thumbnail && (
+                  <Image
+                    src={trip.thumbnail}
+                    alt={trip.h1}
+                    fill
+                    sizes="(min-width: 640px) 30vw, 100vw"
+                    className="object-cover"
+                  />
+                )}
+              </div>
+              <div className="px-2.5 pt-4 pb-2">
+                <div className="flex items-baseline justify-between">
+                  <h3 className={cn(serif, "text-3xl text-[#15110C]")}>
+                    {trip.h1}
+                  </h3>
+                  {trip.readingTime && (
+                    <span
+                      className={cn(monoLabel, "text-[10px] text-[#C9923D]")}
+                    >
+                      {trip.readingTime} min
+                    </span>
+                  )}
+                </div>
+                {trip.h1Subtitle && (
+                  <p className="mt-2 text-sm leading-relaxed text-[#15110C]/62">
+                    {trip.h1Subtitle}
+                  </p>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
@@ -483,9 +559,18 @@ function Quote() {
 
 export default function HomePage() {
   return (
-    <div className={cn(newsreader.variable, "bg-[#FAF6EE]")}>
+    <div className={cn(newsreader.variable, "-mt-[84px] bg-[#FAF6EE]")}>
+      {/* The homepage gets its own contained pill nav instead of the site's
+          edge-to-edge header — hide the layout's <Header /> in favor of it. */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `header:not(.hero-header) { display: none !important; }`,
+        }}
+      />
+      <HomeHeader />
       <Hero />
       <Focus />
+      <Travel />
       <Projects />
       <Themes />
       <WritingSpeaking />
