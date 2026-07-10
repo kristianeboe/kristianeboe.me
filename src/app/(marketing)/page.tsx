@@ -411,7 +411,7 @@ function Projects() {
               "text-4xl leading-[0.95] text-[#15110C] sm:text-5xl",
             )}
           >
-            Selected <span className="block">work</span>
+            Things in <em className="block text-[#1F4D3C] italic">motion.</em>
           </h2>
           <span className={cn(monoLabel, "text-[#15110C]/62")}>
             Bets, long runs &amp; experiments
@@ -732,7 +732,7 @@ function Quote() {
 const aboutDetails = [
   { label: "Foundation", value: "Computer Science · NTNU" },
   { label: "Home base", value: "Oslo · Norway" },
-  { label: "Selected work", value: "Homi · SwipeStats" },
+  { label: "Current work", value: "Homi · SwipeStats" },
 ];
 
 function About() {

@@ -42,18 +42,8 @@ export function SiteHeaderContent({
         )}
       />
 
-      <div className="flex items-center gap-2">
+      <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2">
         <HeaderClient navigation={navigation} transparent={transparent} />
-        <span
-          className={cn(
-            "hidden rounded-full px-3 py-1.5 font-mono text-[10px] tracking-[0.08em] uppercase lg:inline-block",
-            transparent
-              ? "bg-[#FAF6EE] text-[#15110C]"
-              : "bg-[#15110C] text-[#FAF6EE]",
-          )}
-        >
-          ● Oslo, Norway
-        </span>
       </div>
     </nav>
   );

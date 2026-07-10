@@ -10,7 +10,7 @@ function ToolsSection({
 }: React.ComponentPropsWithoutRef<typeof Section>) {
   return (
     <Section {...props}>
-      <ul role="list" className="space-y-16">
+      <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {children}
       </ul>
     </Section>
@@ -45,6 +45,7 @@ export const metadata: Metadata = {
 export default function Uses() {
   return (
     <SimpleLayout
+      eyebrow="Uses"
       title="Software I use, gear I rely on, and tools I actually recommend."
       intro={
         "People ask what I use to build and stay productive. Here's the honest answer — the stuff that's actually on my desk and in my dock, not a sponsored list."

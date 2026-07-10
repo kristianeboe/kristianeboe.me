@@ -74,23 +74,23 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="rounded-[20px] border border-white/60 bg-[#FFFDF8] p-4 shadow-[0_18px_50px_rgba(21,17,12,0.07)] sm:p-5">
       {/* Search Input */}
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-          <Search className="size-5 text-gray-400" />
+          <Search className="size-4 text-[#15110C]/40" />
         </div>
         <input
           type="text"
-          placeholder="Search posts by title, description, category, tags, or author..."
+          placeholder="Search notes, places, and ideas..."
           value={searchQuery}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="block w-full rounded-lg border border-gray-300 bg-white py-3 pr-12 pl-11 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none sm:text-sm"
+          className="block w-full rounded-[12px] border border-[#1F1B14]/12 bg-[#FAF6EE] py-3 pr-12 pl-10 text-sm text-[#1F1B14] placeholder:text-[#1F1B14]/42 focus:border-[#1F4D3C] focus:ring-2 focus:ring-[#1F4D3C]/15 focus:outline-none"
         />
         {searchQuery && (
           <button
             onClick={() => handleSearchChange("")}
-            className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 transition-colors hover:text-gray-600"
+            className="absolute inset-y-0 right-0 flex items-center pr-4 text-[#15110C]/40 transition-colors hover:text-[#15110C]"
             aria-label="Clear search"
           >
             <X className="size-5" />
@@ -100,8 +100,10 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
 
       {/* Category Filters - Flat Layout */}
       {allCategories.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm font-medium text-gray-700">Category:</span>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="mr-1 font-mono text-[10px] tracking-[0.08em] text-[#B0573F] uppercase">
+            Filter
+          </span>
           {allCategories.map((category) => {
             const isActive =
               selectedCategory?.toLowerCase() === category.toLowerCase();
@@ -109,10 +111,10 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className={`rounded-lg px-3 py-1.5 text-sm font-semibold transition-all ${
+                className={`rounded-full px-3 py-1.5 text-[12px] font-semibold transition-all ${
                   isActive
-                    ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-sm"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-[#1F4D3C] text-[#FAF6EE]"
+                    : "border border-[#1F1B14]/12 bg-[#FAF6EE] text-[#15110C]/65 hover:border-[#1F4D3C]/35 hover:text-[#1F4D3C]"
                 }`}
               >
                 {category}
@@ -122,7 +124,7 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
           {selectedCategory && (
             <button
               onClick={() => handleCategoryClick(selectedCategory)}
-              className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="ml-1 text-[12px] font-semibold text-[#B0573F] transition-colors hover:text-[#1F4D3C]"
             >
               Clear
             </button>
@@ -131,17 +133,19 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
       )}
 
       {/* Results Info & Clear Button - Flat Layout */}
-      <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-        <p className="text-sm text-gray-600">
+      <div className="mt-4 flex items-center justify-between border-t border-[#1F1B14]/10 pt-4">
+        <p className="text-[12px] text-[#15110C]/55">
           {isPending ? (
             <span className="opacity-50">Searching...</span>
           ) : (
             <>
               Showing{" "}
-              <span className="font-semibold text-gray-900">{resultCount}</span>{" "}
+              <span className="font-semibold text-[#15110C]">
+                {resultCount}
+              </span>{" "}
               {resultCount === 1 ? "post" : "posts"}
               {hasActiveFilters && (
-                <span className="text-gray-500"> (filtered)</span>
+                <span className="text-[#15110C]/45"> (filtered)</span>
               )}
             </>
           )}
@@ -149,7 +153,7 @@ export function BlogSearch({ allPosts, resultCount }: BlogSearchProps) {
         {hasActiveFilters && (
           <button
             onClick={handleClearAll}
-            className="text-sm font-medium text-pink-600 transition-colors hover:text-pink-700"
+            className="text-[12px] font-semibold text-[#B0573F] transition-colors hover:text-[#1F4D3C]"
           >
             Clear all filters
           </button>

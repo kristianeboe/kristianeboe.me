@@ -1,8 +1,8 @@
-import { type Metadata } from 'next'
+import { type Metadata } from "next";
 
-import { Card } from '@/components/spotlight/Card'
-import { Section } from '@/components/spotlight/Section'
-import { SimpleLayout } from '@/components/spotlight/SimpleLayout'
+import { Card } from "@/components/spotlight/Card";
+import { Section } from "@/components/spotlight/Section";
+import { SimpleLayout } from "@/components/spotlight/SimpleLayout";
 
 function SpeakingSection({
   children,
@@ -10,9 +10,9 @@ function SpeakingSection({
 }: React.ComponentPropsWithoutRef<typeof Section>) {
   return (
     <Section {...props}>
-      <div className="space-y-16">{children}</div>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">{children}</div>
     </Section>
-  )
+  );
 }
 
 function Appearance({
@@ -22,11 +22,11 @@ function Appearance({
   cta,
   href,
 }: {
-  title: string
-  description: string
-  event: string
-  cta: string
-  href: string
+  title: string;
+  description: string;
+  event: string;
+  cta: string;
+  href: string;
 }) {
   return (
     <Card as="article">
@@ -37,18 +37,19 @@ function Appearance({
       <Card.Description>{description}</Card.Description>
       <Card.Cta>{cta}</Card.Cta>
     </Card>
-  )
+  );
 }
 
 export const metadata: Metadata = {
-  title: 'Speaking',
+  title: "Speaking",
   description:
     "I speak about building products with AI, growth engineering, and the lessons learned from running multiple startups simultaneously.",
-}
+};
 
 export default function Speaking() {
   return (
     <SimpleLayout
+      eyebrow="Speaking"
       title="I speak about building, shipping, and the unglamorous parts of startups."
       intro="I love getting on stage to talk about the things I've learned building products — the useful, funny, annoying, and occasionally expensive parts that usually get cut from the polished version. If you'd like me to speak at your event, reach out."
     >
@@ -94,5 +95,5 @@ export default function Speaking() {
         </SpeakingSection>
       </div>
     </SimpleLayout>
-  )
+  );
 }

@@ -1,9 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { AUTHORS } from "@/lib/blog-authors";
+import { Newsreader } from "next/font/google";
 
 import type { Post } from ".velite";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500"],
+  variable: "--font-newsreader",
+});
+
+const serif = "font-[family-name:var(--font-newsreader)] tracking-[-0.015em]";
+const monoLabel = "font-mono text-[10px] uppercase tracking-[0.08em]";
 
 interface BlogGridProps {
   posts: readonly Post[];
@@ -15,144 +25,93 @@ interface BlogGridProps {
   searchComponent?: React.ReactNode;
 }
 
-// Moved outside component to avoid recreation on every render
 function getDisplayImageUrl(post: Post): string {
-  // Priority 1: Use thumbnail if available
   if (post.thumbnail) {
     return post.thumbnail;
   }
-  // Priority 2: Generate display OG image
+
   const title = encodeURIComponent(post.h1);
-  const tag = post.category || post.tags[0] || "dating";
+  const tag = post.category || post.tags[0] || "journal";
   return `/api/og/display?title=${title}&tag=${encodeURIComponent(tag)}`;
 }
 
-// Extract author component to eliminate duplication
-function AuthorInfo({
-  author,
-  authorImage,
-  theme = "light",
-  className = "mt-8",
-}: {
-  author: string;
-  authorImage?: string;
-  theme?: "light" | "dark";
-  className?: string;
-}) {
-  const isDark = theme === "dark";
-
+function PostMeta({ post }: { post: Post }) {
   return (
-    <div
-      className={`relative flex cursor-pointer items-center gap-x-4 transition-opacity hover:opacity-70 ${className}`}
-    >
-      {authorImage ? (
-        <Image
-          src={
-            authorImage.startsWith("/")
-              ? authorImage
-              : `/images/people/${authorImage}`
-          }
-          alt={author}
-          width={40}
-          height={40}
-          className={`size-10 flex-none rounded-full object-cover ring-2 ${
-            isDark ? "ring-white/20" : "ring-white"
-          }`}
-        />
-      ) : (
-        <div
-          className={`flex size-10 flex-none items-center justify-center rounded-full ${
-            isDark
-              ? "bg-white/10"
-              : "bg-gradient-to-br from-blue-500 to-purple-600"
-          }`}
-        >
-          <span className="text-sm font-semibold text-white">
-            {author.charAt(0)}
-          </span>
-        </div>
+    <div className={monoLabel + " flex items-center gap-3 text-[#15110C]/52"}>
+      {post.category && <span className="text-[#B0573F]">{post.category}</span>}
+      {post.isPublished && (
+        <time dateTime={post.publishedAt}>
+          {format(parseISO(post.publishedAt), "MMM yyyy")}
+        </time>
       )}
-      <div className="text-sm leading-6">
-        <p
-          className={`font-semibold ${isDark ? "text-white" : "text-gray-900"}`}
-        >
-          {author}
-        </p>
-        <p className={isDark ? "text-gray-300" : "text-gray-600"}>Author</p>
-      </div>
+      {!post.isPublished && <span className="text-[#B0573F]">Draft</span>}
     </div>
   );
 }
 
-// Blog Card Component with Image (unused, keeping for future use)
-function BlogCard({
+function PostCard({
   post,
   basePath = "/blog",
+  featured = false,
 }: {
   post: Post;
   basePath?: string;
+  featured?: boolean;
 }) {
   return (
-    <article className="group flex flex-col items-start justify-between">
+    <article
+      className={`group overflow-hidden rounded-[20px] border border-white/60 bg-[#FFFDF8] shadow-[0_18px_50px_rgba(21,17,12,0.07)] transition-shadow hover:shadow-[0_22px_60px_rgba(21,17,12,0.11)] ${
+        featured ? "lg:grid lg:grid-cols-[1.08fr_0.92fr]" : ""
+      }`}
+    >
       <Link
         href={`${basePath}/${post.slug}`}
-        className="relative w-full transition-transform group-hover:scale-[1.02]"
+        className={`relative block overflow-hidden ${featured ? "min-h-64 lg:h-full" : ""}`}
       >
         <Image
           src={getDisplayImageUrl(post)}
           alt={post.h1}
-          width={640}
-          height={360}
-          className="aspect-video w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+          width={800}
+          height={520}
+          className={`w-full object-cover transition duration-500 group-hover:scale-[1.03] ${
+            featured ? "h-full min-h-64" : "aspect-[4/3]"
+          }`}
         />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
         {!post.isPublished && (
-          <span className="absolute top-3 left-3 rounded-full bg-amber-400 px-2.5 py-1 text-xs font-semibold text-amber-950">
+          <span className="absolute top-4 left-4 rounded-full border border-[#B0573F]/30 bg-[#FFFDF8]/90 px-2.5 py-1 font-mono text-[9px] tracking-[0.08em] text-[#B0573F] uppercase backdrop-blur">
             Draft
           </span>
         )}
       </Link>
 
-      <div className="flex max-w-xl grow flex-col justify-between">
-        <div className="mt-8 flex flex-wrap items-center gap-2 text-xs">
-          {post.isPublished && (
-            <time dateTime={post.publishedAt} className="text-gray-500">
-              {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
-            </time>
-          )}
-          {post.category && (
-            <span className="bg-primary/10 text-primary relative z-10 rounded-full px-3 py-1.5 font-semibold">
-              {post.category}
-            </span>
-          )}
-          {(post.tags || []).map((tag: string) => (
-            <span
-              key={tag}
-              className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-900"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="relative grow">
-          <h3 className="mt-3 text-lg leading-6 font-semibold text-gray-900">
-            <Link
-              href={`${basePath}/${post.slug}`}
-              className="hover:text-gray-600"
-            >
-              {post.h1}
-            </Link>
-          </h3>
-          {(post.h1Subtitle || post.metaDescription) && (
-            <Link
-              href={`${basePath}/${post.slug}`}
-              className="mt-5 line-clamp-3 block text-sm leading-6 text-gray-600 hover:text-gray-900"
-            >
-              {post.h1Subtitle || post.metaDescription}
-            </Link>
-          )}
-        </div>
+      <div className={`flex flex-col p-6 ${featured ? "lg:p-8" : ""}`}>
+        <PostMeta post={post} />
+        <h3
+          className={`${serif} mt-3 text-[30px] leading-[1.03] text-[#15110C] ${
+            featured ? "sm:text-[38px]" : ""
+          }`}
+        >
+          <Link
+            href={`${basePath}/${post.slug}`}
+            className="transition-colors hover:text-[#1F4D3C]"
+          >
+            {post.h1}
+          </Link>
+        </h3>
+        {(post.h1Subtitle || post.metaDescription) && (
+          <Link
+            href={`${basePath}/${post.slug}`}
+            className="mt-3 line-clamp-3 text-sm leading-relaxed text-[#15110C]/62 transition-colors hover:text-[#15110C]"
+          >
+            {post.h1Subtitle || post.metaDescription}
+          </Link>
+        )}
+        <Link
+          href={`${basePath}/${post.slug}`}
+          className="mt-6 text-[13px] font-semibold text-[#1F4D3C] transition hover:text-[#B0573F]"
+        >
+          Read note →
+        </Link>
       </div>
     </article>
   );
@@ -168,215 +127,99 @@ export function BlogGrid({
   searchComponent,
 }: BlogGridProps) {
   return (
-    <main className="bg-background min-h-screen">
-      <div className="mx-auto max-w-[1080px] space-y-8 px-4 py-6 sm:px-6 sm:py-12 lg:px-0">
-        {/* Page Header */}
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            {title}
+    <div className={`${newsreader.variable} bg-[#FAF6EE] text-[#1F1B14]`}>
+      <header className="border-b border-[#1F1B14]/10 bg-[#F1EBDD] px-6 pt-24 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
+        <div className="mx-auto max-w-[1080px]">
+          <div className={`${monoLabel} mb-4 text-[#B0573F]`}>Journal</div>
+          <h1
+            className={`${serif} max-w-4xl text-5xl leading-[0.98] sm:text-7xl`}
+          >
+            {title}{" "}
+            <em className="text-[#1F4D3C] italic">
+              from the road and the work.
+            </em>
           </h1>
-          <p className="text-muted-foreground text-base sm:text-lg">
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-[#1F1B14]/65">
             {description}
           </p>
         </div>
+      </header>
 
-        {/* Featured Posts Section - Isolated, not affected by search */}
-        {showFeatured && featuredPosts.length > 0 && (
-          <div className="space-y-6 border-b border-gray-200 pb-12">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">
-                Featured Posts
-              </h2>
-              <p className="text-muted-foreground mt-1">
-                Our most popular and impactful content
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              {/* Main Featured Post - Left Side */}
-              {featuredPosts[0] && (
-                <article className="group relative isolate flex flex-col justify-end overflow-hidden rounded-xl bg-gray-900 px-6 pt-80 pb-6 shadow-lg transition-shadow hover:shadow-xl lg:row-span-2 lg:px-8 lg:pb-8">
-                  {/* Background display image */}
-                  <div
-                    className="absolute inset-0 -z-10"
-                    style={{
-                      backgroundImage: `url(${getDisplayImageUrl(featuredPosts[0])})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  />
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 -z-10 bg-gray-900/60 mix-blend-multiply" />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/70" />
-                  <div className="absolute inset-0 -z-10 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
-                  <div className="flex flex-wrap items-center gap-2 overflow-hidden text-sm leading-6 text-gray-300">
-                    <time
-                      dateTime={featuredPosts[0].publishedAt}
-                      className="mr-4"
-                    >
-                      {format(
-                        parseISO(featuredPosts[0].publishedAt),
-                        "MMM dd, yyyy",
-                      )}
-                    </time>
-                    {featuredPosts[0].category && (
-                      <span className="bg-primary/80 hover:bg-primary relative z-10 cursor-pointer rounded-full px-3 py-1.5 font-semibold text-white transition-colors">
-                        {featuredPosts[0].category}
-                      </span>
-                    )}
-                    {featuredPosts[0].tags.length > 0 &&
-                      featuredPosts[0].tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="relative z-10 cursor-pointer rounded-full bg-gray-50/10 px-3 py-1.5 font-medium text-gray-300 transition-colors hover:bg-gray-50/30 hover:text-white"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
+      <div className="px-6 py-16 lg:px-8 lg:py-22">
+        <div className="mx-auto max-w-[1080px]">
+          {showFeatured && featuredPosts.length > 0 && (
+            <section aria-labelledby="featured-notes">
+              <div className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-[#1F1B14]/12 pb-4">
+                <div>
+                  <div className={`${monoLabel} text-[#B0573F]`}>
+                    Start here
                   </div>
-                  <h3 className="mt-6 text-3xl leading-tight font-semibold text-white sm:text-4xl sm:leading-tight">
-                    <Link
-                      href={`${basePath}/${featuredPosts[0].slug}`}
-                      className="transition-colors hover:text-blue-200"
-                    >
-                      {featuredPosts[0].h1}
-                    </Link>
-                  </h3>
-                  {(featuredPosts[0].h1Subtitle ||
-                    featuredPosts[0].metaDescription) && (
-                    <Link
-                      href={`${basePath}/${featuredPosts[0].slug}`}
-                      className="mt-4 line-clamp-3 block text-lg leading-relaxed text-gray-300 hover:text-white"
-                    >
-                      {featuredPosts[0].h1Subtitle ||
-                        featuredPosts[0].metaDescription}
-                    </Link>
-                  )}
-
-                  <AuthorInfo
-                    author={featuredPosts[0].author}
-                    authorImage={AUTHORS[featuredPosts[0].author].image}
-                    theme="dark"
-                    className="mt-6"
-                  />
-                </article>
-              )}
-
-              {/* Right Side - Two Smaller Featured Posts */}
-              {featuredPosts.slice(1, 3).map((post) => (
-                <article
-                  key={post.slug}
-                  className="group relative isolate flex flex-col justify-end overflow-hidden rounded-xl bg-gray-900 px-6 pt-60 pb-6 shadow-lg transition-shadow hover:shadow-xl lg:pt-32"
-                >
-                  {/* Background display image */}
-                  <div
-                    className="absolute inset-0 -z-10"
-                    style={{
-                      backgroundImage: `url(${getDisplayImageUrl(post)})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  />
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 -z-10 bg-gray-900/60 mix-blend-multiply" />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/70" />
-                  <div className="absolute inset-0 -z-10 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
-                  <div className="flex flex-wrap items-center gap-2 overflow-hidden text-sm leading-6 text-gray-300">
-                    <time dateTime={post.publishedAt} className="mr-2">
-                      {format(parseISO(post.publishedAt), "MMM dd, yyyy")}
-                    </time>
-                    {post.category && (
-                      <span className="relative z-10 cursor-pointer rounded-full bg-rose-500/80 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-rose-500">
-                        {post.category}
-                      </span>
-                    )}
-                    {post.tags.length > 0 &&
-                      post.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="relative z-10 cursor-pointer rounded-full bg-gray-50/10 px-3 py-1.5 font-medium text-gray-300 transition-colors hover:bg-gray-50/30 hover:text-white"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
+                  <h2
+                    id="featured-notes"
+                    className={`${serif} mt-1 text-3xl leading-none sm:text-[36px]`}
+                  >
+                    Notes worth keeping.
+                  </h2>
+                </div>
+                <span className={`${monoLabel} text-[#15110C]/45`}>
+                  {featuredPosts.length} featured
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                {featuredPosts[0] && (
+                  <div className="lg:col-span-2">
+                    <PostCard
+                      post={featuredPosts[0]}
+                      basePath={basePath}
+                      featured
+                    />
                   </div>
-                  <h3 className="mt-4 text-xl leading-tight font-semibold text-white sm:text-2xl sm:leading-tight">
-                    <Link
-                      href={`${basePath}/${post.slug}`}
-                      className="transition-colors hover:text-blue-200"
-                    >
-                      {post.h1}
-                    </Link>
-                  </h3>
-                  {(post.h1Subtitle || post.metaDescription) && (
-                    <Link
-                      href={`${basePath}/${post.slug}`}
-                      className="mt-3 line-clamp-2 block text-sm leading-relaxed text-gray-300 hover:text-white"
-                    >
-                      {post.h1Subtitle || post.metaDescription}
-                    </Link>
-                  )}
+                )}
+                {featuredPosts.slice(1, 3).map((post) => (
+                  <PostCard key={post.slug} post={post} basePath={basePath} />
+                ))}
+              </div>
+            </section>
+          )}
 
-                  <AuthorInfo
-                    author={post.author}
-                    authorImage={AUTHORS[post.author].image}
-                    theme="dark"
-                    className="mt-4"
-                  />
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Regular Posts Grid */}
-        <div className="space-y-6">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight">All Posts</h2>
-            <p className="text-muted-foreground mt-1">
-              Browse our complete collection of articles and guides
-            </p>
-          </div>
-
-          {/* Search Component - Always visible */}
-          {searchComponent}
-
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
-              {posts.map((post) => (
-                <BlogCard key={post.slug} post={post} basePath={basePath} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex items-center justify-center py-16">
-              <div className="rounded-xl border border-gray-200 bg-white px-6 py-12 text-center shadow-sm">
-                <svg
-                  className="mx-auto size-12 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
+          <section
+            aria-labelledby="all-notes"
+            className={`${showFeatured && featuredPosts.length > 0 ? "mt-16 border-t border-[#1F1B14]/12 pt-16" : ""}`}
+          >
+            <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <div className={`${monoLabel} text-[#B0573F]`}>The archive</div>
+                <h2
+                  id="all-notes"
+                  className={`${serif} mt-1 text-3xl leading-none sm:text-[36px]`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">
-                  No posts found
-                </h3>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  Try adjusting your search or filter to find what you&apos;re
-                  looking for.
+                  All notes.
+                </h2>
+              </div>
+              <span className={`${monoLabel} text-[#15110C]/45`}>
+                Places, products &amp; patterns
+              </span>
+            </div>
+
+            {searchComponent && <div className="mb-8">{searchComponent}</div>}
+
+            {posts.length > 0 ? (
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {posts.map((post) => (
+                  <PostCard key={post.slug} post={post} basePath={basePath} />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-[20px] border border-white/60 bg-[#FFFDF8] px-6 py-14 text-center shadow-[0_18px_50px_rgba(21,17,12,0.07)]">
+                <h3 className={`${serif} text-3xl`}>No notes found.</h3>
+                <p className="mt-3 text-sm text-[#1F1B14]/62">
+                  Try another search or clear the filters.
                 </p>
               </div>
-            </div>
-          )}
+            )}
+          </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,28 +1,31 @@
-import { useId } from 'react'
+import { useId } from "react";
 
 export function Section({
   title,
   children,
 }: {
-  title: string
-  children: React.ReactNode
+  title: string;
+  children: React.ReactNode;
 }) {
-  const id = useId()
+  const id = useId();
 
   return (
     <section
       aria-labelledby={id}
-      className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40"
+      className="border-t border-[#1F1B14]/12 pt-8 sm:pt-10"
     >
-      <div className="grid max-w-3xl grid-cols-1 items-baseline gap-y-8 md:grid-cols-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-4">
         <h2
           id={id}
-          className="text-sm font-semibold text-zinc-800 dark:text-zinc-100"
+          className="font-[family-name:var(--font-newsreader)] text-3xl tracking-[-0.015em] text-[#1F1B14] sm:text-[34px]"
         >
           {title}
         </h2>
-        <div className="md:col-span-3">{children}</div>
+        <span className="font-mono text-[10px] tracking-[0.08em] text-[#B0573F] uppercase">
+          Field notes
+        </span>
       </div>
+      <div className="mt-7">{children}</div>
     </section>
-  )
+  );
 }

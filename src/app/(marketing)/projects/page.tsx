@@ -1,11 +1,11 @@
-import { type Metadata } from 'next'
+import { type Metadata } from "next";
 
-import { CareerTimeline } from '@/components/CareerTimeline'
-import { Card } from '@/components/spotlight/Card'
-import { SimpleLayout } from '@/components/spotlight/SimpleLayout'
-import { career } from '@/data/career'
+import { CareerTimeline } from "@/components/CareerTimeline";
+import { Card } from "@/components/spotlight/Card";
+import { SimpleLayout } from "@/components/spotlight/SimpleLayout";
+import { career } from "@/data/career";
 
-function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function LinkIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -13,10 +13,10 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }
 
-function DownloadIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function DownloadIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -26,60 +26,64 @@ function DownloadIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }
 
 const projects = [
   {
-    name: 'Homi',
+    name: "Homi",
     description:
-      'AI-powered home search that matches buyers with properties based on lifestyle fit, not just filters. Built to solve the problem I first tackled in my NTNU thesis.',
-    link: { href: 'https://www.homi.so', label: 'www.homi.so' },
+      "AI-powered home search that matches buyers with properties based on lifestyle fit, not just filters. Built to solve the problem I first tackled in my NTNU thesis.",
+    link: { href: "https://www.homi.so", label: "www.homi.so" },
     stats: [
-      { value: '250+', label: 'Organic signups' },
-      { value: '2024', label: 'Broker pilots' },
+      { value: "250+", label: "Organic signups" },
+      { value: "2024", label: "Broker pilots" },
     ],
-    caseStudy: 'https://boe.ventures/work/homi',
+    caseStudy: "https://boe.ventures/work/homi",
   },
   {
-    name: 'SwipeStats',
+    name: "SwipeStats",
     description:
-      'Turn your Tinder and Hinge data exports into real analytics. Understand your dating patterns, match rates, and conversation stats. Used by hundreds of thousands of people.',
-    link: { href: 'https://swipestats.io', label: 'swipestats.io' },
+      "Turn your Tinder and Hinge data exports into real analytics. Understand your dating patterns, match rates, and conversation stats. Used by hundreds of thousands of people.",
+    link: { href: "https://swipestats.io", label: "swipestats.io" },
     stats: [
-      { value: '10K+', label: 'Data uploads' },
-      { value: '15K+', label: 'Reddit community' },
+      { value: "10K+", label: "Data uploads" },
+      { value: "15K+", label: "Reddit community" },
     ],
-    caseStudy: 'https://boe.ventures/work/swipestats',
+    caseStudy: "https://boe.ventures/work/swipestats",
   },
   {
-    name: 'Boe Ventures',
+    name: "Boe Ventures",
     description:
-      'My product holding company. Where ideas become products, and products find their market. Home to Homi, SwipeStats, and whatever comes next.',
-    link: { href: 'https://boe.ventures', label: 'boe.ventures' },
+      "My product holding company. Where ideas become products, and products find their market. Home to Homi, SwipeStats, and whatever comes next.",
+    link: { href: "https://boe.ventures", label: "boe.ventures" },
   },
   {
-    name: 'Jetpack',
+    name: "Jetpack",
     description:
-      'A production-ready Next.js SaaS starter with auth, database, payments, email, and AI built in. The template I wish I had when starting every new project.',
-    link: { href: 'https://github.com/kristianeboe/jetpack', label: 'github.com' },
+      "A production-ready Next.js SaaS starter with auth, database, payments, email, and AI built in. The template I wish I had when starting every new project.",
+    link: {
+      href: "https://github.com/kristianeboe/jetpack",
+      label: "github.com",
+    },
   },
   {
-    name: 'Wander',
+    name: "Wander",
     description:
-      'Series B vacation rental platform reimagining what it means to travel. I joined as Lead Growth Engineer to help scale the product and engineering teams.',
-    link: { href: 'https://wander.com', label: 'wander.com' },
+      "Series B vacation rental platform reimagining what it means to travel. I joined as Lead Growth Engineer to help scale the product and engineering teams.",
+    link: { href: "https://wander.com", label: "wander.com" },
   },
-]
+];
 
 export const metadata: Metadata = {
-  title: 'Projects',
+  title: "Projects",
   description: "Things I've built — from AI home search to dating analytics.",
-}
+};
 
 export default function Projects() {
   return (
     <SimpleLayout
+      eyebrow="Projects"
       title="Things I've built trying to match people with what they're looking for."
       intro="I keep coming back to the same core problem with better tools each time. Some of these are live products, some are experiments, and some are templates I built so the next project starts faster."
     >
@@ -137,8 +141,8 @@ export default function Projects() {
           </a>
         </div>
         <p className="mt-4 max-w-2xl text-base text-zinc-600 dark:text-zinc-400">
-          The long version — consulting, startups, an acquisition, and the
-          jobs that got me here.
+          The long version — consulting, startups, an acquisition, and the jobs
+          that got me here.
         </p>
         <div className="mt-10">
           <CareerTimeline entries={career} />
@@ -150,5 +154,5 @@ export default function Projects() {
         </p>
       </div>
     </SimpleLayout>
-  )
+  );
 }

@@ -60,7 +60,7 @@ const footerNavigation = {
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 z-0 overflow-hidden bg-[#101816] px-6 pt-16 text-[#FAF6EE] sm:pt-20 lg:px-8">
+    <footer className="sticky bottom-0 z-0 overflow-hidden bg-[#101816] px-6 pt-16 pb-8 text-[#FAF6EE] sm:pt-20 sm:pb-10 lg:px-8">
       <div className="mx-auto max-w-[1080px]">
         <div className="grid grid-cols-1 gap-12 border-b border-white/12 pb-12 sm:pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
           <div>
@@ -141,7 +141,7 @@ export default function Footer() {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none -mx-2 mt-7 translate-y-[0.1em] overflow-hidden text-center text-[clamp(3.4rem,12vw,13rem)] leading-[0.7] font-semibold tracking-[-0.085em] whitespace-nowrap select-none sm:mt-10"
+        className="pointer-events-none -mx-2 mt-7 text-center text-[clamp(3.4rem,12vw,13rem)] leading-[0.82] font-semibold tracking-[-0.085em] whitespace-nowrap select-none sm:mt-10"
       >
         <span className="bg-linear-to-b from-[#FAF6EE] via-[#BFC3B9] to-[#41504C] bg-clip-text text-transparent">
           kristianeboe
