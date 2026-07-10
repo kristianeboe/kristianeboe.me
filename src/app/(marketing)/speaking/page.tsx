@@ -50,7 +50,7 @@ export default function Speaking() {
   return (
     <SimpleLayout
       title="I speak about building, shipping, and the unglamorous parts of startups."
-      intro="I love getting on stage to talk about the things I've learned building products — the stuff that actually happens, not the polished LinkedIn version. If you'd like me to speak at your event, reach out."
+      intro="I love getting on stage to talk about the things I've learned building products — the useful, funny, annoying, and occasionally expensive parts that usually get cut from the polished version. If you'd like me to speak at your event, reach out."
     >
       <div className="space-y-20">
         <SpeakingSection title="Conferences">

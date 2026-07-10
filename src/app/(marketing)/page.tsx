@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Newsreader } from "next/font/google";
 
-import { posts as allPosts } from ".velite";
 import { cn } from "@/lib/utils";
 import { getTravelPosts } from "@/lib/travel-nav";
 
@@ -18,7 +17,7 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   title:
-    "Kristian Elset Bø — Software, stories, and the messy parts of modern life",
+    "Kristian Elset Bø — Software for freedom, outcomes, and stories",
   description:
     "Norwegian founder and engineer in Oslo. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
 };
@@ -58,6 +57,8 @@ function Grain() {
 }
 
 function Hero() {
+  const featuredTravel = getTravelPosts()[0];
+
   return (
     <section
       className="relative overflow-hidden"
@@ -126,18 +127,55 @@ function Hero() {
           </div>
           <div className={cn(glassDark, "p-6")}>
             <div className={cn(monoLabel, "mb-3 text-[10px] text-[#C9923D]")}>
-              Now playing
+              Worth a look
             </div>
-            <div className={cn(serif, "text-[26px] leading-tight")}>
-              Building <em className="text-[#C9923D] italic">Homi</em>.
-            </div>
-            <div className="mt-1.5 text-[13px] text-[#FAF6EE]/70">
-              AI home search · pre-seed · year one.
-            </div>
-            <div className={cn(monoLabel, "mt-4 flex gap-3 text-[10px]")}>
-              <span className="text-[#FAF6EE]/70">Oslo</span>
-              <span className="text-[#C9923D]">—</span>
-              <span className="text-[#FAF6EE]/70">since Sep &apos;25</span>
+            <div className="divide-y divide-white/10">
+              <a
+                href="https://www.homi.so"
+                className="group block py-3 first:pt-0 last:pb-0"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span
+                    className={cn(monoLabel, "text-[10px] text-[#FAF6EE]/55")}
+                  >
+                    Featured project
+                  </span>
+                  <span className="text-[#C9923D] transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </div>
+                <div className={cn(serif, "mt-1 text-[25px] leading-tight")}>
+                  Homi{" "}
+                  <em className="text-[#C9923D] italic">
+                    — home search for the life you want to build.
+                  </em>
+                </div>
+              </a>
+              {featuredTravel && (
+                <Link
+                  href={`/blog/${featuredTravel.slug}`}
+                  className="group block py-3 first:pt-0 last:pb-0"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span
+                      className={cn(monoLabel, "text-[10px] text-[#FAF6EE]/55")}
+                    >
+                      Featured travel guide
+                    </span>
+                    <span className="text-[#C9923D] transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+                  <div className={cn(serif, "mt-1 text-[25px] leading-tight")}>
+                    {featuredTravel.h1}
+                  </div>
+                  {featuredTravel.h1Subtitle && (
+                    <p className="mt-1 text-[13px] leading-relaxed text-[#FAF6EE]/65">
+                      {featuredTravel.h1Subtitle}
+                    </p>
+                  )}
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -481,7 +519,7 @@ function Themes() {
               "text-4xl leading-none text-[#15110C] sm:text-5xl",
             )}
           >
-            Tools for messy decisions in modern life.
+            Tools for better decisions and more freedom.
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
@@ -504,81 +542,123 @@ function Themes() {
   );
 }
 
-function WritingSpeaking() {
-  const posts = [...allPosts]
-    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
-    .slice(0, 4);
+const speakingEngagements = [
+  {
+    year: "2017",
+    event: "Lean Startup · Storebrand",
+    topic: "How teams can make room for experimentation.",
+  },
+  {
+    year: "2018",
+    event: "Abakus graduation dinner · NTNU",
+    topic:
+      "A motivational send-off for computer-science graduates and families.",
+  },
+  {
+    year: "2019",
+    event: "EdgeX · Netlight",
+    topic: "Google Search Engine Optimization.",
+  },
+  {
+    year: "2020–21",
+    event: "Lunsj / Scales",
+    topic: "Founder talks on building startups in public.",
+  },
+  {
+    year: "2022",
+    event: "Solana Hacker House · Stockholm",
+    topic: "Building in the Solana ecosystem.",
+  },
+  {
+    year: "2024",
+    event: "HackNight · GitHub",
+    topic: "A night with the local builder community.",
+  },
+  {
+    year: "2025–26",
+    event: "Techfolk consulting & Bouvet",
+    topic: "Agentic development for working teams.",
+  },
+  {
+    year: "2026",
+    event: "Tekna",
+    topic: "Homi and a more human way to search for a home.",
+  },
+];
 
+function Speaking() {
   return (
     <section className="bg-linear-to-b from-[#F0E9DA] to-[#3F4A4A] px-6 py-16 sm:py-22 lg:px-8">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-8 lg:grid-cols-[1.3fr_1fr]">
-        <div className={cn(glassSolid, "p-7 sm:p-9")}>
-          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>
-            Recent writing
-          </div>
-          <h2 className={cn(serif, "mb-6 text-4xl text-[#15110C]")}>
-            From the journal
-          </h2>
-          <ul>
-            {posts.map((post, i) => (
-              <li
-                key={post.slug}
-                className={cn(
-                  "grid grid-cols-[90px_1fr_60px] items-baseline gap-4 py-4",
-                  i > 0 && "border-t border-[#15110C]/16",
-                )}
-              >
-                <span className={cn(monoLabel, "text-[10px] text-[#C9923D]")}>
-                  {post.category ?? post.tags?.[0] ?? "Notes"}
-                </span>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className={cn(
-                    serif,
-                    "text-[22px] leading-snug text-[#15110C] hover:text-[#1F4D3C]",
-                  )}
-                >
-                  {post.h1}
-                </Link>
-                <span
-                  className={cn(
-                    monoLabel,
-                    "text-right text-[10px] text-[#15110C]/62",
-                  )}
-                >
-                  {post.readingTime ? `${post.readingTime} min` : ""}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={cn(glassDark, "flex flex-col p-7 sm:p-9")}>
+      <div className={cn(glassDark, "mx-auto max-w-7xl p-7 sm:p-10 lg:p-12")}>
+        <div className="mb-9 max-w-3xl">
           <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>On stage</div>
-          <h2 className={cn(serif, "mb-4 text-4xl")}>
-            Talks on AI, startups &amp; the unglamorous work.
+          <h2 className={cn(serif, "text-4xl leading-[0.98] sm:text-6xl")}>
+            Talking about the work behind the work.
           </h2>
-          <div className="relative mb-4 aspect-[5/4] overflow-hidden rounded-[14px]">
-            <Image
-              src="/images/home/speaking.jpg"
-              alt="Kristian speaking on stage"
-              fill
-              sizes="(min-width: 1024px) 35vw, 100vw"
-              className="object-cover"
-            />
+          <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-[#FAF6EE]/70">
+            From Lean Startup to agentic development, I share practical stories
+            about building products, leading teams, and making ambitious ideas
+            useful.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-9 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div>
+            <div className="relative aspect-[3/4] overflow-hidden rounded-[14px]">
+              <Image
+                src="/images/home/kristian-on-stage-lean-startup.webp"
+                alt="Kristian Elset Bø speaking about Lean Startup at Storebrand"
+                fill
+                sizes="(min-width: 1024px) 32vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <p className={cn(monoLabel, "mt-3 text-[10px] text-[#FAF6EE]/55")}>
+              Lean Startup · Storebrand · 2017
+            </p>
           </div>
-          <div className="text-[13px] leading-7 text-[#FAF6EE]/70">
-            Nordic Startup Summit · 2024
-            <br />
-            ProductTank Oslo · 2024
-            <br />
-            NTNU Alumni Day · 2023
+          <div className="flex flex-col">
+            <ol>
+              {speakingEngagements.map((engagement, i) => (
+                <li
+                  key={`${engagement.year}-${engagement.event}`}
+                  className="relative grid grid-cols-[62px_1fr] gap-4 py-3.5 first:pt-0 last:pb-0"
+                >
+                  <span
+                    className={cn(
+                      monoLabel,
+                      "pt-0.5 text-[10px] text-[#C9923D]",
+                    )}
+                  >
+                    {engagement.year}
+                  </span>
+                  <div className="relative border-l border-white/12 pl-5">
+                    {i < speakingEngagements.length - 1 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute top-5 -left-px h-[calc(100%+0.9rem)] w-px bg-white/12"
+                      />
+                    )}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-1.5 -left-[5px] h-2.5 w-2.5 rounded-full bg-[#C9923D] ring-4 ring-[#15110C]"
+                    />
+                    <h3 className={cn(serif, "text-[24px] leading-tight")}>
+                      {engagement.event}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[#FAF6EE]/65">
+                      {engagement.topic}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <Link
+              href="/speaking"
+              className="mt-8 inline-block self-start rounded-full bg-[#FAF6EE] px-5 py-2.5 text-[13px] font-semibold text-[#15110C] transition hover:bg-white"
+            >
+              Speaking topics &amp; details →
+            </Link>
           </div>
-          <Link
-            href="/speaking"
-            className="mt-auto inline-block self-start rounded-full bg-[#FAF6EE] px-5 py-2.5 pt-2.5 text-[13px] font-semibold text-[#15110C] transition hover:bg-white"
-          >
-            Topics &amp; testimonials →
-          </Link>
         </div>
       </div>
     </section>
@@ -622,7 +702,7 @@ export default function HomePage() {
       <Travel />
       <Projects />
       <Themes />
-      <WritingSpeaking />
+      <Speaking />
       <Quote />
     </div>
   );
