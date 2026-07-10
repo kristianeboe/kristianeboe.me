@@ -320,6 +320,17 @@ const projects = [
     desc: "The product holding company. Where experiments and side bets live before they grow up.",
     href: "https://boe.ventures",
   },
+  {
+    name: "What's next?",
+    status: "Get in touch",
+    year: "Email",
+    accent: "text-[#C9923D]",
+    image: "/favicon.svg",
+    desc: "Working on something around homes, agents, growth, data, or the messy bits in between? Send a note.",
+    href: "mailto:kristian@kristianeboe.me",
+    cta: "Get in touch →",
+    logoCard: true,
+  },
 ];
 
 function Projects() {
@@ -345,13 +356,29 @@ function Projects() {
               key={project.name}
               className={cn(glassSolid, "flex flex-col gap-3.5 p-6")}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#15110C]">
+              <div
+                className={cn(
+                  "relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#15110C]",
+                  project.logoCard &&
+                    "flex items-center justify-center bg-[#15110C]",
+                )}
+              >
                 <Image
                   src={project.image}
-                  alt={`${project.name} website screenshot`}
-                  fill
+                  alt={
+                    project.logoCard
+                      ? "Kristian Elset Bø kb mark"
+                      : `${project.name} website screenshot`
+                  }
+                  fill={!project.logoCard}
+                  width={project.logoCard ? 88 : undefined}
+                  height={project.logoCard ? 88 : undefined}
                   sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 100vw"
-                  className="object-cover object-top"
+                  className={
+                    project.logoCard
+                      ? "h-22 w-22 rounded-[18px] shadow-[0_18px_45px_rgba(0,0,0,0.35)]"
+                      : "object-cover object-top"
+                  }
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#15110C]/70 to-transparent p-4">
                   <span className={cn(monoLabel, "text-[10px] text-white/85")}>
@@ -382,7 +409,7 @@ function Projects() {
                 href={project.href}
                 className="mt-auto text-[13px] font-semibold text-[#15110C] hover:text-[#1F4D3C]"
               >
-                Open card →
+                {project.cta ?? "Open card →"}
               </a>
             </article>
           ))}
