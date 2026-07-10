@@ -73,8 +73,7 @@ function Hero() {
         >
           <div>
             <div className={cn(monoLabel, "mb-5 text-[#C9923D]")}>
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#C9923D] align-middle" />
-              Currently · Oslo, Norway
+              Norwegian digital nomad
             </div>
             <h1
               className={cn(
@@ -82,9 +81,8 @@ function Hero() {
                 "text-5xl leading-[0.98] sm:text-6xl lg:text-7xl xl:text-[84px]",
               )}
             >
-              Software, stories, and the{" "}
-              <em className="text-[#1F4D3C] italic">messy</em> parts of{" "}
-              <em className="italic">modern life</em>.
+              Software for more freedom, better outcomes, and{" "}
+              <em className="text-[#1F4D3C] italic">stories worth telling</em>.
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
               I&apos;m Kristian Elset Bø — I build products like{" "}
@@ -92,8 +90,9 @@ function Hero() {
               <strong className="font-semibold text-[#15110C]">
                 SwipeStats
               </strong>
-              , write about travel and nomad life, and document the experiments
-              that shape how I work, move, and think.
+              , write about travel and nomad life, and follow the experiments
+              that make work feel lighter, choices feel clearer, and life a bit
+              more fun.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -166,13 +165,13 @@ function Focus() {
               "text-4xl leading-[0.98] text-[#15110C] sm:text-6xl lg:text-7xl",
             )}
           >
-            Homi — find a home like a person with a broker.
+            Homi — find a place that fits the life you want.
           </h2>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[#15110C]">
-            Finding a home is fragmented: listings, spreadsheets, group chats,
-            forwarded links. Homi is the intelligent layer on top — a place to{" "}
-            <strong>collect, compare, collaborate</strong> — and eventually let
-            AI agents scout for you.
+            A home search should start with the life you&apos;re trying to
+            build, not just another filter panel. Homi helps people{" "}
+            <strong>collect, compare, collaborate</strong>, and eventually let
+            AI agents scout in the background while they go do something better.
           </p>
           <div
             className={cn(
@@ -180,8 +179,8 @@ function Focus() {
               "mt-6 rounded-[14px] bg-[#1F4D3C]/8 px-5 py-4 text-[22px] leading-snug text-[#1F4D3C] italic",
             )}
           >
-            Privilege expansion — giving regular people the kind of home-search
-            support usually reserved for those with brokers.
+            The bet: better home-search support means more freedom to move well,
+            choose well, and spend less of your life refreshing listings.
           </div>
           <a
             href="https://www.homi.so"
@@ -326,7 +325,7 @@ const projects = [
     year: "Email",
     accent: "text-[#C9923D]",
     image: "/favicon.svg",
-    desc: "Working on something around homes, agents, growth, data, or the messy bits in between? Send a note.",
+    desc: "Working on something around homes, agents, growth, data, freedom, or better outcomes? Send a note.",
     href: "mailto:kristian.e.boe@gmail.com",
     cta: "Get in touch →",
     logoCard: true,
