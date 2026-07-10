@@ -90,7 +90,7 @@ export default function About() {
             <p>
               Today I run{' '}
               <a
-                href="https://www.homi.so"
+                href="https://homi.so"
                 className="text-teal-500 hover:text-teal-600"
               >
                 Homi

@@ -184,7 +184,7 @@ function Focus() {
             support usually reserved for those with brokers.
           </div>
           <a
-            href="https://www.homi.so"
+            href="https://homi.so"
             className="mt-6 inline-block rounded-full bg-[#1F4D3C] px-6 py-3 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
           >
             Visit homi.so →
@@ -290,7 +290,7 @@ const projects = [
     accent: "text-[#1F4D3C]",
     image: "/images/projects/homi-homepage.png",
     desc: "AI home search with memory. A collaborative workspace for finding places that actually fit the life people are trying to build.",
-    href: "https://www.homi.so",
+    href: "https://homi.so",
   },
   {
     name: "Hydra",
