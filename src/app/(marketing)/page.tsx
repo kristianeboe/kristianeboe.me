@@ -6,8 +6,6 @@ import { Newsreader } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { getTravelPosts } from "@/lib/travel-nav";
 
-import { HomeHeader } from "./HomeHeader";
-
 const newsreader = Newsreader({
   subsets: ["latin"],
   style: ["normal", "italic"],
@@ -98,7 +96,6 @@ function Hero() {
     <section className="bg-[#F3EFE5] px-4 py-4 sm:px-6 sm:py-6">
       <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[24px] bg-[#F3EFE5] pb-5 sm:pb-6">
         <TopographicLines />
-        <HomeHeader />
         <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 gap-7 px-6 pt-7 pb-3 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-10 lg:pt-10">
           <div
             className={cn(
@@ -219,7 +216,7 @@ function Focus() {
       <div
         className={cn(
           glassSolid,
-          "mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.2fr_1fr] lg:gap-14",
+          "mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.2fr_1fr] lg:gap-14",
         )}
       >
         <div>
@@ -276,7 +273,7 @@ function Travel() {
 
   return (
     <section className="overflow-hidden bg-[#FAF6EE] px-6 pt-2 pb-16 sm:pb-22 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1080px]">
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3">
           <h2 className={cn(serif, "text-4xl text-[#15110C] sm:text-5xl")}>
             Also, I travel. <em className="text-[#B0573F] italic">A lot.</em>
@@ -402,7 +399,7 @@ const projects = [
 function Projects() {
   return (
     <section className="bg-linear-to-b from-[#FAF6EE] to-[#F0E9DA] px-6 pt-2 pb-16 sm:pb-22 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1080px]">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
           <h2
             className={cn(
@@ -537,7 +534,7 @@ const themes = [
 function Themes() {
   return (
     <section className="bg-[#F0E9DA] px-6 py-16 sm:py-22 lg:px-8">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
+      <div className="mx-auto grid max-w-[1080px] grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
         <div>
           <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>
             What I keep returning to
@@ -618,7 +615,9 @@ const speakingEngagements = [
 function Speaking() {
   return (
     <section className="bg-linear-to-b from-[#F0E9DA] to-[#3F4A4A] px-6 py-16 sm:py-22 lg:px-8">
-      <div className={cn(glassDark, "mx-auto max-w-7xl p-7 sm:p-10 lg:p-12")}>
+      <div
+        className={cn(glassDark, "mx-auto max-w-[1080px] p-7 sm:p-10 lg:p-12")}
+      >
         <div className="mb-9 max-w-3xl">
           <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>On stage</div>
           <h2 className={cn(serif, "text-4xl leading-[0.98] sm:text-6xl")}>
@@ -768,14 +767,7 @@ function About() {
 
 export default function HomePage() {
   return (
-    <div className={cn(newsreader.variable, "-mt-[84px] bg-[#FAF6EE]")}>
-      {/* The homepage gets its own contained pill nav instead of the site's
-          edge-to-edge header — hide the layout's <Header /> in favor of it. */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `header:not(.hero-header) { display: none !important; }`,
-        }}
-      />
+    <div className={cn(newsreader.variable, "bg-[#FAF6EE]")}>
       <Hero />
       <Focus />
       <Travel />

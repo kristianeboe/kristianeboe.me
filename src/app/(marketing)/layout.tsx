@@ -6,8 +6,7 @@ import Header from "./Header";
 export const metadata: Metadata = {
   title: {
     template: "%s | Kristian Elset Bø",
-    default:
-      "Kristian Elset Bø — Software for freedom, outcomes, and stories",
+    default: "Kristian Elset Bø — Software for freedom, outcomes, and stories",
   },
   description:
     "Norwegian founder and engineer in Oslo. Building Homi, SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
@@ -32,7 +31,7 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="bg-background">
-      <Header container />
+      <Header />
       <main className="isolate pt-[84px]">{children}</main>
       <Footer />
     </div>

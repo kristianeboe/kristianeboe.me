@@ -15,7 +15,7 @@ export function BrandLogo({
   className,
   markClassName,
   textClassName,
-  label = "kristianeboe.me",
+  label = "Kristian Elset Bø",
   onClick,
 }: BrandLogoProps) {
   return (
@@ -29,10 +29,14 @@ export function BrandLogo({
         alt=""
         width={32}
         height={32}
-        className={cn("size-8 flex-none rounded-[7px]", markClassName)}
+        className={cn("size-7 flex-none rounded-[6px]", markClassName)}
         aria-hidden="true"
       />
-      <span className={cn("text-xl font-bold", textClassName)}>{label}</span>
+      <span
+        className={cn("text-sm font-semibold whitespace-nowrap", textClassName)}
+      >
+        {label}
+      </span>
     </Link>
   );
 }
