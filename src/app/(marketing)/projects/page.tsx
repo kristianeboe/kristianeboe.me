@@ -34,7 +34,7 @@ const projects = [
     name: 'Homi',
     description:
       'AI-powered home search that matches buyers with properties based on lifestyle fit, not just filters. Built to solve the problem I first tackled in my NTNU thesis.',
-    link: { href: 'https://homi.ai', label: 'homi.ai' },
+    link: { href: 'https://www.homi.so', label: 'homi.so' },
     stats: [
       { value: '250+', label: 'Organic signups' },
       { value: '2024', label: 'Broker pilots' },

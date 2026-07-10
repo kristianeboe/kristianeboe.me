@@ -184,19 +184,19 @@ function Focus() {
             support usually reserved for those with brokers.
           </div>
           <a
-            href="https://homi.ai"
+            href="https://www.homi.so"
             className="mt-6 inline-block rounded-full bg-[#1F4D3C] px-6 py-3 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
           >
-            Visit homi.ai →
+            Visit homi.so →
           </a>
         </div>
         <div className="relative aspect-[4/5] overflow-hidden rounded-[14px]">
           <Image
-            src="/images/home/coding.jpg"
-            alt="Building Homi"
+            src="/images/projects/homi-homepage.png"
+            alt="Homi homepage screenshot"
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
         </div>
       </div>
