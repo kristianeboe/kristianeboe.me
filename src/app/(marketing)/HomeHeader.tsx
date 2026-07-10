@@ -4,37 +4,30 @@ import { getTravelNavigation } from "@/lib/travel-nav";
 import { BrandLogo } from "./BrandLogo";
 import HeaderClient from "./HeaderClient";
 
-// Homepage-only nav: a contained floating pill instead of the site's
-// edge-to-edge bar, matching the "Card Tower" design direction. Fixed
-// (not absolute-in-hero) so it stays reachable while scrolling the rest
-// of the page — everywhere else still uses the standard <Header />.
+// Homepage-only nav, contained within the hero rather than using the site's
+// edge-to-edge header.
 export function HomeHeader() {
   const navigation = {
     travel: getTravelNavigation(),
     callsToAction: [],
     simple: [
-      { name: "About", href: "/about" },
       { name: "Projects", href: "/projects" },
-      { name: "Speaking", href: "/speaking" },
-      { name: "Uses", href: "/uses" },
       { name: "Blog", href: "/blog" },
-      { name: "Resume", href: "/resume" },
     ],
   };
 
   return (
-    <header className="hero-header fixed inset-x-5 top-5 z-30 sm:inset-x-7 sm:top-6">
+    <header className="hero-header relative z-10 px-6 pt-5 sm:px-8 sm:pt-6">
       <nav
         aria-label="Global"
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full px-5 py-2.5",
-          "border border-white/55 bg-[#FAF6EE]/80 shadow-[0_16px_40px_rgba(21,17,12,0.16),inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-lg",
+          "mx-auto flex max-w-[1080px] items-center justify-between gap-4 py-2.5",
         )}
       >
         <BrandLogo
           label="Kristian Elset Bø"
           markClassName="size-7 rounded-[6px]"
-          textClassName="text-sm font-semibold text-[#15110C]"
+          textClassName="whitespace-nowrap text-sm font-semibold text-[#15110C]"
         />
 
         <div className="flex items-center gap-2">

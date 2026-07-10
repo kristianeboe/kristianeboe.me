@@ -25,7 +25,6 @@ export default function Header({
       },
     ],
     simple: [
-      { name: "About", href: "/about" },
       { name: "Projects", href: "/projects" },
       { name: "Speaking", href: "/speaking" },
       { name: "Uses", href: "/uses" },

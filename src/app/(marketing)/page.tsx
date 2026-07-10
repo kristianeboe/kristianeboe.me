@@ -16,14 +16,11 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title:
-    "Kristian Elset Bø — Software for freedom, outcomes, and stories",
+  title: "Kristian Elset Bø — Software for freedom, outcomes, and stories",
   description:
     "Norwegian founder and engineer in Oslo. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
 };
 
-// Direction E — "Card Tower" from the claude.ai/design kristianeboe.me project.
-// Frosted-glass cards floating on a dawn-over-fjord gradient.
 const serif = "font-[family-name:var(--font-newsreader)] tracking-[-0.015em]";
 const monoLabel = "font-mono text-[11px] uppercase tracking-[0.08em]";
 
@@ -34,25 +31,63 @@ const glassSolid =
 const glassDark =
   "rounded-[20px] border border-white/10 bg-[#15110C]/65 text-[#FAF6EE] shadow-[0_24px_60px_rgba(0,0,0,0.4)] backdrop-blur-lg";
 
-const heroGradient = `
-  radial-gradient(ellipse 90% 60% at 70% 0%, #F4D9B6 0%, transparent 55%),
-  radial-gradient(ellipse 70% 50% at 30% 20%, #E8B486 0%, transparent 60%),
-  radial-gradient(ellipse 80% 60% at 80% 60%, #A56B4A 0%, transparent 55%),
-  radial-gradient(ellipse 100% 60% at 20% 100%, #1B2A2E 0%, transparent 60%),
-  linear-gradient(180deg, #3F4A4A 0%, #1B2A2E 100%)
-`;
-
-function Grain() {
+function TopographicLines() {
   return (
-    <div
+    <svg
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 mix-blend-overlay"
-      style={{
-        backgroundImage:
-          "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
-        backgroundSize: "3px 3px",
-      }}
-    />
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 1280 660"
+      preserveAspectRatio="none"
+    >
+      <g fill="none" stroke="#1F4D3C" strokeWidth="1">
+        <path
+          opacity="0.1"
+          d="M-20,600 C200,540 340,620 560,560 S940,600 1300,520"
+        />
+        <path
+          opacity="0.12"
+          d="M-20,560 C220,490 380,580 620,510 S980,560 1300,470"
+        />
+        <path
+          opacity="0.14"
+          d="M-20,515 C240,445 420,540 680,462 S1020,520 1300,420"
+        />
+        <path
+          opacity="0.16"
+          d="M-20,470 C260,400 460,500 730,415 S1060,478 1300,372"
+        />
+        <path
+          opacity="0.17"
+          d="M-20,425 C280,358 500,458 775,370 S1090,436 1300,326"
+        />
+        <path
+          opacity="0.16"
+          d="M-20,380 C300,318 540,414 815,326 S1115,392 1300,282"
+        />
+        <path
+          opacity="0.14"
+          d="M-20,335 C320,280 575,370 850,284 S1140,348 1300,240"
+        />
+        <path
+          opacity="0.12"
+          d="M-20,290 C340,244 608,326 882,244 S1160,304 1300,200"
+        />
+        <path
+          opacity="0.1"
+          d="M-20,246 C360,210 638,282 910,206 S1178,260 1300,162"
+        />
+      </g>
+      <circle cx="1064" cy="212" r="4" fill="#1F4D3C" opacity="0.55" />
+      <circle
+        cx="1064"
+        cy="212"
+        r="10"
+        fill="none"
+        stroke="#1F4D3C"
+        strokeWidth="1"
+        opacity="0.3"
+      />
+    </svg>
   );
 }
 
@@ -60,61 +95,61 @@ function Hero() {
   const featuredTravel = getTravelPosts()[0];
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: heroGradient }}
-    >
-      <Grain />
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-7 px-6 pt-28 pb-14 sm:pt-32 sm:pb-20 lg:grid-cols-[1.5fr_1fr] lg:px-8">
-        <div
-          className={cn(
-            glass,
-            "flex flex-col justify-between p-8 text-[#15110C] sm:p-11",
-          )}
-        >
-          <div>
-            <div className={cn(monoLabel, "mb-5 text-[#C9923D]")}>
-              Norwegian digital nomad
+    <section className="bg-[#F3EFE5] px-4 py-4 sm:px-6 sm:py-6">
+      <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[24px] bg-[#F3EFE5] pb-5 sm:pb-6">
+        <TopographicLines />
+        <HomeHeader />
+        <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 gap-7 px-6 pt-7 pb-3 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-10 lg:pt-10">
+          <div
+            className={cn(
+              glass,
+              "flex flex-col justify-between p-8 text-[#15110C] sm:p-10 lg:p-11",
+            )}
+          >
+            <div>
+              <div className={cn(monoLabel, "mb-4 text-[#1F4D3C]")}>
+                Norwegian digital nomad
+              </div>
+              <h1
+                className={cn(
+                  serif,
+                  "text-5xl leading-[1.02] sm:text-6xl lg:text-[58px]",
+                )}
+              >
+                Software for more freedom, better outcomes, and{" "}
+                <em className="text-[#1F4D3C] italic">stories worth telling</em>
+                .
+              </h1>
+              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
+                I&apos;m Kristian Elset Bø — I build products like{" "}
+                <strong className="font-semibold text-[#15110C]">Homi</strong>{" "}
+                and{" "}
+                <strong className="font-semibold text-[#15110C]">
+                  SwipeStats
+                </strong>
+                , write about travel and nomad life, and follow the experiments
+                that make work feel lighter, choices feel clearer, and life a
+                bit more fun.
+              </p>
             </div>
-            <h1
-              className={cn(
-                serif,
-                "text-5xl leading-[0.98] sm:text-6xl lg:text-7xl xl:text-[84px]",
-              )}
-            >
-              Software for more freedom, better outcomes, and{" "}
-              <em className="text-[#1F4D3C] italic">stories worth telling</em>.
-            </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
-              I&apos;m Kristian Elset Bø — I build products like{" "}
-              <strong className="font-semibold text-[#15110C]">Homi</strong> and{" "}
-              <strong className="font-semibold text-[#15110C]">
-                SwipeStats
-              </strong>
-              , write about travel and nomad life, and follow the experiments
-              that make work feel lighter, choices feel clearer, and life a bit
-              more fun.
-            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/projects"
+                className="rounded-full bg-[#15110C] px-6 py-3 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#15110C]/85"
+              >
+                See the work →
+              </Link>
+              <Link
+                href="/blog"
+                className="rounded-full border border-[#15110C]/16 px-6 py-3 text-sm font-semibold text-[#15110C] transition hover:bg-[#15110C]/5"
+              >
+                Read the journal
+              </Link>
+            </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/projects"
-              className="rounded-full bg-[#15110C] px-6 py-3 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#15110C]/85"
-            >
-              See the work →
-            </Link>
-            <Link
-              href="/blog"
-              className="rounded-full border border-[#15110C]/16 px-6 py-3 text-sm font-semibold text-[#15110C] transition hover:bg-[#15110C]/5"
-            >
-              Read the journal
-            </Link>
-          </div>
-        </div>
 
-        <div className="flex flex-col gap-7">
-          <div className={cn(glass, "flex-1 p-2")}>
-            <div className="relative h-full min-h-60 overflow-hidden rounded-[14px]">
+          <div className={cn(glass, "flex min-h-[470px] flex-col p-2")}>
+            <div className="relative min-h-64 flex-1 overflow-hidden rounded-[14px] bg-[#1F1B14]">
               <Image
                 src="/images/home/profile.jpg"
                 alt="Kristian Elset Bø"
@@ -123,30 +158,31 @@ function Hero() {
                 className="object-cover"
                 priority
               />
+              <span
+                className={cn(
+                  monoLabel,
+                  "absolute inset-x-0 bottom-0 bg-linear-to-t from-black/55 to-transparent px-3 pt-8 pb-2.5 text-[9px] text-[#FAF6EE]/80",
+                )}
+              >
+                Portrait · Golden Gate
+              </span>
             </div>
-          </div>
-          <div className={cn(glassDark, "p-6")}>
-            <div className={cn(monoLabel, "mb-3 text-[10px] text-[#C9923D]")}>
-              Worth a look
-            </div>
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-[#15110C]/10 px-3 pt-3 pb-1">
               <a
                 href="https://www.homi.so"
-                className="group block py-3 first:pt-0 last:pb-0"
+                className="group block py-2 first:pt-0 last:pb-0"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <span
-                    className={cn(monoLabel, "text-[10px] text-[#FAF6EE]/55")}
-                  >
-                    Featured project
-                  </span>
-                  <span className="text-[#C9923D] transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-                <div className={cn(serif, "mt-1 text-[25px] leading-tight")}>
+                <span className={cn(monoLabel, "text-[9px] text-[#1F4D3C]")}>
+                  Featured project
+                </span>
+                <div
+                  className={cn(
+                    serif,
+                    "mt-0.5 text-[16px] leading-snug text-[#15110C]",
+                  )}
+                >
                   Homi{" "}
-                  <em className="text-[#C9923D] italic">
+                  <em className="text-[#1F4D3C] italic">
                     — home search for the life you want to build.
                   </em>
                 </div>
@@ -154,26 +190,19 @@ function Hero() {
               {featuredTravel && (
                 <Link
                   href={`/blog/${featuredTravel.slug}`}
-                  className="group block py-3 first:pt-0 last:pb-0"
+                  className="group block py-2 first:pt-0 last:pb-0"
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <span
-                      className={cn(monoLabel, "text-[10px] text-[#FAF6EE]/55")}
-                    >
-                      Featured travel guide
-                    </span>
-                    <span className="text-[#C9923D] transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
+                  <span className={cn(monoLabel, "text-[9px] text-[#1F4D3C]")}>
+                    Featured travel guide
+                  </span>
+                  <div
+                    className={cn(
+                      serif,
+                      "mt-0.5 text-[16px] leading-snug text-[#15110C]",
+                    )}
+                  >
+                    {featuredTravel.h1} — {featuredTravel.h1Subtitle}
                   </div>
-                  <div className={cn(serif, "mt-1 text-[25px] leading-tight")}>
-                    {featuredTravel.h1}
-                  </div>
-                  {featuredTravel.h1Subtitle && (
-                    <p className="mt-1 text-[13px] leading-relaxed text-[#FAF6EE]/65">
-                      {featuredTravel.h1Subtitle}
-                    </p>
-                  )}
                 </Link>
               )}
             </div>
@@ -194,7 +223,7 @@ function Focus() {
         )}
       >
         <div>
-          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>
+          <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>
             The main bet
           </div>
           <h2
@@ -250,7 +279,7 @@ function Travel() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3">
           <h2 className={cn(serif, "text-4xl text-[#15110C] sm:text-5xl")}>
-            Also, I travel. <em className="text-[#C9923D] italic">A lot.</em>
+            Also, I travel. <em className="text-[#B0573F] italic">A lot.</em>
           </h2>
           <Link
             href="/blog"
@@ -291,7 +320,7 @@ function Travel() {
                   </h3>
                   {trip.readingTime && (
                     <span
-                      className={cn(monoLabel, "text-[10px] text-[#C9923D]")}
+                      className={cn(monoLabel, "text-[10px] text-[#B0573F]")}
                     >
                       {trip.readingTime} min
                     </span>
@@ -334,7 +363,7 @@ const projects = [
     name: "Hydra",
     status: "Prototype",
     year: "2026–",
-    accent: "text-[#C9923D]",
+    accent: "text-[#B0573F]",
     image: "/images/projects/hydra.png",
     desc: "A local browser-session bridge for reading conversations across Slack, iMessage, LinkedIn, and more without platform APIs.",
     href: "https://hydra-eta-three.vercel.app/",
@@ -343,7 +372,7 @@ const projects = [
     name: "Promad.life",
     status: "Experiment",
     year: "2024–",
-    accent: "text-[#C9923D]",
+    accent: "text-[#B0573F]",
     image: "/images/projects/promad-life.png",
     desc: "A community for professional digital nomads earning meaningful income while designing flexible lives.",
     href: "https://promad.life",
@@ -361,7 +390,7 @@ const projects = [
     name: "What's next?",
     status: "Get in touch",
     year: "Email",
-    accent: "text-[#C9923D]",
+    accent: "text-[#B0573F]",
     image: "/favicon.svg",
     desc: "Working on something around homes, agents, growth, data, freedom, or better outcomes? Send a note.",
     href: "mailto:kristian.e.boe@gmail.com",
@@ -510,7 +539,7 @@ function Themes() {
     <section className="bg-[#F0E9DA] px-6 py-16 sm:py-22 lg:px-8">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
         <div>
-          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>
+          <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>
             What I keep returning to
           </div>
           <h2
@@ -591,7 +620,7 @@ function Speaking() {
     <section className="bg-linear-to-b from-[#F0E9DA] to-[#3F4A4A] px-6 py-16 sm:py-22 lg:px-8">
       <div className={cn(glassDark, "mx-auto max-w-7xl p-7 sm:p-10 lg:p-12")}>
         <div className="mb-9 max-w-3xl">
-          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>On stage</div>
+          <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>On stage</div>
           <h2 className={cn(serif, "text-4xl leading-[0.98] sm:text-6xl")}>
             Talking about the work behind the work.
           </h2>
@@ -626,7 +655,7 @@ function Speaking() {
                   <span
                     className={cn(
                       monoLabel,
-                      "pt-0.5 text-[10px] text-[#C9923D]",
+                      "pt-0.5 text-[10px] text-[#B0573F]",
                     )}
                   >
                     {engagement.year}
@@ -640,7 +669,7 @@ function Speaking() {
                     )}
                     <span
                       aria-hidden="true"
-                      className="absolute top-1.5 -left-[5px] h-2.5 w-2.5 rounded-full bg-[#C9923D] ring-4 ring-[#15110C]"
+                      className="absolute top-1.5 -left-[5px] h-2.5 w-2.5 rounded-full bg-[#B0573F] ring-4 ring-[#15110C]"
                     />
                     <h3 className={cn(serif, "text-[24px] leading-tight")}>
                       {engagement.event}
@@ -676,10 +705,61 @@ function Quote() {
         >
           &ldquo;The most important step a man can take is not the first step,
           neither the last step. It&apos;s the{" "}
-          <span className="text-[#C9923D]">next step</span>.&rdquo;
+          <span className="text-[#B0573F]">next step</span>.&rdquo;
         </div>
         <div className={cn(monoLabel, "mt-3.5 text-[#FAF6EE]/70")}>
           — Brandon Sanderson
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="bg-[#FAF6EE] px-6 py-16 sm:py-22 lg:px-8">
+      <div
+        className={cn(
+          glassSolid,
+          "mx-auto grid max-w-5xl grid-cols-1 gap-9 p-8 sm:p-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14",
+        )}
+      >
+        <div>
+          <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>About</div>
+          <h2
+            className={cn(
+              serif,
+              "text-4xl leading-[0.98] text-[#15110C] sm:text-6xl",
+            )}
+          >
+            Still trying to help people find the right thing.
+          </h2>
+        </div>
+        <div className="text-[17px] leading-relaxed text-[#15110C]/68">
+          <p>
+            I studied Computer Science at NTNU, where an AI-based apartment
+            matching thesis gave me a problem I&apos;ve never really stopped
+            thinking about.
+          </p>
+          <p className="mt-5">
+            After years of consulting and building across Norway and Europe, the
+            through-line is still the same: use technology to connect people
+            with the right things at the right time.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/resume"
+              className="rounded-full bg-[#1F4D3C] px-5 py-2.5 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
+            >
+              Full career history →
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border border-[#15110C]/16 px-5 py-2.5 text-sm font-semibold text-[#15110C] transition hover:bg-[#15110C]/5"
+            >
+              Get in touch
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -696,7 +776,6 @@ export default function HomePage() {
           __html: `header:not(.hero-header) { display: none !important; }`,
         }}
       />
-      <HomeHeader />
       <Hero />
       <Focus />
       <Travel />
@@ -704,6 +783,7 @@ export default function HomePage() {
       <Themes />
       <Speaking />
       <Quote />
+      <About />
     </div>
   );
 }

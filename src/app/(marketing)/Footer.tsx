@@ -3,7 +3,6 @@ import Link from "next/link";
 
 const footerNavigation = {
   main: [
-    { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
     { name: "Speaking", href: "/speaking" },
     { name: "Uses", href: "/uses" },
