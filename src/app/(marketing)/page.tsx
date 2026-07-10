@@ -190,7 +190,7 @@ function Focus() {
             Visit homi.so →
           </a>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[14px]">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-[#15110C]/10 bg-[#FAF6EE] shadow-[0_24px_70px_rgba(21,17,12,0.18)] ring-1 ring-white/75">
           <Image
             src="/images/projects/homi-homepage.png"
             alt="Homi homepage screenshot"
@@ -198,6 +198,7 @@ function Focus() {
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover object-top"
           />
+          <div className="pointer-events-none absolute inset-0 rounded-[28px] shadow-[inset_0_1px_0_rgba(255,255,255,0.85),inset_0_-24px_60px_rgba(21,17,12,0.04)]" />
         </div>
       </div>
     </section>
