@@ -17,7 +17,8 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Kristian Elset Bø — Software, stories, and the messy parts of modern life",
+  title:
+    "Kristian Elset Bø — Software, stories, and the messy parts of modern life",
   description:
     "Norwegian founder and engineer in Oslo. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
 };
@@ -67,7 +68,7 @@ function Hero() {
         <div
           className={cn(
             glass,
-            "flex flex-col justify-between p-8 sm:p-11 text-[#15110C]",
+            "flex flex-col justify-between p-8 text-[#15110C] sm:p-11",
           )}
         >
           <div>
@@ -82,18 +83,17 @@ function Hero() {
               )}
             >
               Software, stories, and the{" "}
-              <em className="italic text-[#1F4D3C]">messy</em> parts of{" "}
+              <em className="text-[#1F4D3C] italic">messy</em> parts of{" "}
               <em className="italic">modern life</em>.
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
               I&apos;m Kristian Elset Bø — I build products like{" "}
-              <strong className="font-semibold text-[#15110C]">Homi</strong>{" "}
-              and{" "}
+              <strong className="font-semibold text-[#15110C]">Homi</strong> and{" "}
               <strong className="font-semibold text-[#15110C]">
                 SwipeStats
               </strong>
-              , write about travel and nomad life, and document the
-              experiments that shape how I work, move, and think.
+              , write about travel and nomad life, and document the experiments
+              that shape how I work, move, and think.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -130,14 +130,12 @@ function Hero() {
               Now playing
             </div>
             <div className={cn(serif, "text-[26px] leading-tight")}>
-              Building <em className="italic text-[#C9923D]">Homi</em>.
+              Building <em className="text-[#C9923D] italic">Homi</em>.
             </div>
             <div className="mt-1.5 text-[13px] text-[#FAF6EE]/70">
               AI home search · pre-seed · year one.
             </div>
-            <div
-              className={cn(monoLabel, "mt-4 flex gap-3 text-[10px]")}
-            >
+            <div className={cn(monoLabel, "mt-4 flex gap-3 text-[10px]")}>
               <span className="text-[#FAF6EE]/70">Oslo</span>
               <span className="text-[#C9923D]">—</span>
               <span className="text-[#FAF6EE]/70">since Sep &apos;25</span>
@@ -179,11 +177,11 @@ function Focus() {
           <div
             className={cn(
               serif,
-              "mt-6 rounded-[14px] bg-[#1F4D3C]/8 px-5 py-4 text-[22px] italic leading-snug text-[#1F4D3C]",
+              "mt-6 rounded-[14px] bg-[#1F4D3C]/8 px-5 py-4 text-[22px] leading-snug text-[#1F4D3C] italic",
             )}
           >
-            Privilege expansion — giving regular people the kind of
-            home-search support usually reserved for those with brokers.
+            Privilege expansion — giving regular people the kind of home-search
+            support usually reserved for those with brokers.
           </div>
           <a
             href="https://homi.ai"
@@ -206,8 +204,6 @@ function Focus() {
   );
 }
 
-const TRIP_TILT = [-1.4, 1, -0.7];
-
 function Travel() {
   const trips = getTravelPosts();
 
@@ -216,7 +212,7 @@ function Travel() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3">
           <h2 className={cn(serif, "text-4xl text-[#15110C] sm:text-5xl")}>
-            Also, I travel. <em className="italic text-[#C9923D]">A lot.</em>
+            Also, I travel. <em className="text-[#C9923D] italic">A lot.</em>
           </h2>
           <Link
             href="/blog"
@@ -226,20 +222,18 @@ function Travel() {
           </Link>
         </div>
         <p className="mb-9 max-w-xl text-base text-[#15110C]/62">
-          Working guides from places I&apos;ve actually lived and worked —
-          real costs, real itineraries, zero &ldquo;hidden gem&rdquo;
-          listicles.
+          Working guides from places I&apos;ve actually lived and worked — real
+          costs, real itineraries, zero &ldquo;hidden gem&rdquo; listicles.
         </p>
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-3">
-          {trips.map((trip, i) => (
+          {trips.map((trip) => (
             <Link
               key={trip.slug}
               href={`/blog/${trip.slug}`}
               className={cn(
                 glassSolid,
-                "block p-3.5 transition-transform hover:-translate-y-1 hover:rotate-0",
+                "block p-3.5 transition-transform hover:-translate-y-1",
               )}
-              style={{ transform: `rotate(${TRIP_TILT[i % TRIP_TILT.length]}deg)` }}
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-[12px]">
                 {trip.thumbnail && (
@@ -285,7 +279,7 @@ const projects = [
     status: "Long-running",
     year: "2017–",
     accent: "text-[#1F4D3C]",
-    tile: "from-[#E8B486] to-[#A56B4A]",
+    image: "/images/projects/swipestats.png",
     desc: "Dating-app analytics. Tinder/Hinge data exports turned into real benchmarks — making opaque platform behavior measurable.",
     href: "https://swipestats.io",
   },
@@ -294,7 +288,7 @@ const projects = [
     status: "Experiment",
     year: "2024–",
     accent: "text-[#C9923D]",
-    tile: "from-[#9DBBA6] to-[#1F4D3C]",
+    image: "/images/projects/promad-life.png",
     desc: "A community for professional digital nomads earning meaningful income while designing flexible lives.",
     href: "https://promad.life",
   },
@@ -303,7 +297,7 @@ const projects = [
     status: "Holding co",
     year: "Since 2021",
     accent: "text-[#1F4D3C]",
-    tile: "from-[#3F4A4A] to-[#15110C]",
+    image: "/images/projects/boe-ventures.png",
     desc: "The product holding company. Where experiments and side bets live before they grow up.",
     href: "https://boe.ventures",
   },
@@ -327,21 +321,22 @@ function Projects() {
               key={project.name}
               className={cn(glassSolid, "flex flex-col gap-3.5 p-6")}
             >
-              <div
-                className={cn(
-                  "flex aspect-[4/3] items-end rounded-[14px] bg-linear-to-br p-4",
-                  project.tile,
-                )}
-              >
-                <span className={cn(monoLabel, "text-[10px] text-white/80")}>
-                  {project.name}
-                </span>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#15110C]">
+                <Image
+                  src={project.image}
+                  alt={`${project.name} website screenshot`}
+                  fill
+                  sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 100vw"
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#15110C]/70 to-transparent p-4">
+                  <span className={cn(monoLabel, "text-[10px] text-white/85")}>
+                    {project.name}
+                  </span>
+                </div>
               </div>
               <div
-                className={cn(
-                  monoLabel,
-                  "flex justify-between text-[10px]",
-                )}
+                className={cn(monoLabel, "flex justify-between text-[10px]")}
               >
                 <span className={cn("font-semibold", project.accent)}>
                   {project.status}
@@ -374,22 +369,33 @@ function Projects() {
             "mt-6 grid grid-cols-1 items-center gap-7 p-6 lg:grid-cols-[1fr_2fr_200px]",
           )}
         >
-          <div className="flex aspect-[4/3] items-end rounded-[14px] bg-linear-to-br from-[#AFC3C9] to-[#3F4A4A] p-4">
-            <span className={cn(monoLabel, "text-[10px] text-white/80")}>
-              Wander
-            </span>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#15110C]">
+            <Image
+              src="/images/projects/wander.png"
+              alt="Wander website screenshot"
+              fill
+              sizes="(min-width: 1024px) 28vw, 100vw"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#15110C]/70 to-transparent p-4">
+              <span className={cn(monoLabel, "text-[10px] text-white/85")}>
+                Wander
+              </span>
+            </div>
           </div>
           <div>
-            <div className={cn(monoLabel, "mb-2 text-[10px] text-[#15110C]/62")}>
+            <div
+              className={cn(monoLabel, "mb-2 text-[10px] text-[#15110C]/62")}
+            >
               Day job · current
             </div>
             <h3 className={cn(serif, "text-3xl text-[#15110C] sm:text-4xl")}>
               Wander · Lead Growth Engineer
             </h3>
             <p className="mt-2.5 max-w-xl text-sm leading-relaxed text-[#15110C]/62">
-              Series B vacation-rentals company. Travel, growth systems, and
-              the unglamorous work that compounds — connects back to the
-              broader theme of mobility and matching.
+              Series B vacation-rentals company. Travel, growth systems, and the
+              unglamorous work that compounds — connects back to the broader
+              theme of mobility and matching.
             </p>
           </div>
           <a
@@ -434,9 +440,7 @@ function Themes() {
               <div className={cn(monoLabel, "text-[10px] text-[#15110C]/62")}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <h3
-                className={cn(serif, "mt-1.5 mb-2 text-3xl text-[#15110C]")}
-              >
+              <h3 className={cn(serif, "mt-1.5 mb-2 text-3xl text-[#15110C]")}>
                 {title}
               </h3>
               <p className="text-sm leading-relaxed text-[#15110C]/62">
@@ -499,9 +503,7 @@ function WritingSpeaking() {
           </ul>
         </div>
         <div className={cn(glassDark, "flex flex-col p-7 sm:p-9")}>
-          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>
-            On stage
-          </div>
+          <div className={cn(monoLabel, "mb-3.5 text-[#C9923D]")}>On stage</div>
           <h2 className={cn(serif, "mb-4 text-4xl")}>
             Talks on AI, startups &amp; the unglamorous work.
           </h2>
@@ -540,10 +542,7 @@ function Quote() {
         className={cn(glassDark, "mx-auto max-w-4xl p-10 text-center sm:p-14")}
       >
         <div
-          className={cn(
-            serif,
-            "text-3xl italic leading-[1.25] sm:text-[44px]",
-          )}
+          className={cn(serif, "text-3xl leading-[1.25] italic sm:text-[44px]")}
         >
           &ldquo;The most important step a man can take is not the first step,
           neither the last step. It&apos;s the{" "}
