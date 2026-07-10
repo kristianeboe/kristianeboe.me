@@ -327,7 +327,7 @@ const projects = [
     accent: "text-[#C9923D]",
     image: "/favicon.svg",
     desc: "Working on something around homes, agents, growth, data, or the messy bits in between? Send a note.",
-    href: "mailto:kristian@kristianeboe.me",
+    href: "mailto:kristian.e.boe@gmail.com",
     cta: "Get in touch →",
     logoCard: true,
   },
