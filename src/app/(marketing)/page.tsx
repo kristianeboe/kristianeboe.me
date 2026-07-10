@@ -93,10 +93,13 @@ function Hero() {
   const featuredTravel = getTravelPosts()[0];
 
   return (
-    <section className="bg-[#F3EFE5] px-4 py-4 sm:px-6 sm:py-6">
-      <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[24px] bg-[#F3EFE5] pb-5 sm:pb-6">
+    <section className="bg-[#F3EFE5] px-6 py-4 sm:py-6">
+      <div className="relative mx-auto max-w-[1280px] rounded-[24px] bg-[#F3EFE5] pb-10 sm:pb-12">
         <TopographicLines />
-        <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 gap-7 px-6 pt-7 pb-3 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-10 lg:pt-10">
+        <div
+          data-layout-container="hero"
+          className="relative mx-auto grid max-w-[1080px] grid-cols-1 gap-7 pt-7 lg:grid-cols-[1.35fr_1fr] lg:gap-10 lg:pt-10"
+        >
           <div
             className={cn(
               glass,
@@ -214,6 +217,7 @@ function Focus() {
   return (
     <section className="bg-[#FAF6EE] px-6 py-16 sm:py-22 lg:px-8">
       <div
+        data-layout-container="focus"
         className={cn(
           glassSolid,
           "mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.2fr_1fr] lg:gap-14",
@@ -696,70 +700,105 @@ function Speaking() {
 function Quote() {
   return (
     <section className="bg-linear-to-b from-[#3F4A4A] to-[#1B2A2E] px-6 py-16 sm:py-22 lg:px-8">
-      <div
-        className={cn(glassDark, "mx-auto max-w-4xl p-10 text-center sm:p-14")}
-      >
-        <div
-          className={cn(serif, "text-3xl leading-[1.25] italic sm:text-[44px]")}
-        >
-          &ldquo;The most important step a man can take is not the first step,
-          neither the last step. It&apos;s the{" "}
-          <span className="text-[#B0573F]">next step</span>.&rdquo;
+      <div className="relative mx-auto grid max-w-[1080px] overflow-hidden rounded-[20px] border border-white/10 bg-[#15110C]/72 shadow-[0_24px_60px_rgba(0,0,0,0.36)] backdrop-blur-lg lg:grid-cols-[0.34fr_1.66fr]">
+        <div className="flex flex-col justify-between border-b border-white/10 p-7 sm:p-10 lg:border-r lg:border-b-0">
+          <div className={cn(monoLabel, "text-[#B0573F]")}>
+            A note for the road
+          </div>
+          <div className={cn(monoLabel, "mt-16 text-[#FAF6EE]/45 lg:mt-0")}>
+            08 / Keep moving
+          </div>
         </div>
-        <div className={cn(monoLabel, "mt-3.5 text-[#FAF6EE]/70")}>
-          — Brandon Sanderson
-        </div>
+        <blockquote className="p-7 sm:p-10 lg:p-14">
+          <p
+            className={cn(
+              serif,
+              "max-w-4xl text-3xl leading-[1.16] text-[#FAF6EE] italic sm:text-[46px]",
+            )}
+          >
+            &ldquo;The most important step a man can take is not the first step,
+            neither the last step. It&apos;s the{" "}
+            <span className="text-[#B0573F]">next step</span>.&rdquo;
+          </p>
+          <footer className={cn(monoLabel, "mt-7 text-[#FAF6EE]/55")}>
+            Brandon Sanderson
+          </footer>
+        </blockquote>
       </div>
     </section>
   );
 }
 
+const aboutDetails = [
+  { label: "Foundation", value: "Computer Science · NTNU" },
+  { label: "Home base", value: "Oslo · Norway" },
+  { label: "Selected work", value: "Homi · SwipeStats" },
+];
+
 function About() {
   return (
-    <section id="about" className="bg-[#FAF6EE] px-6 py-16 sm:py-22 lg:px-8">
-      <div
-        className={cn(
-          glassSolid,
-          "mx-auto grid max-w-5xl grid-cols-1 gap-9 p-8 sm:p-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14",
-        )}
-      >
-        <div>
-          <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>About</div>
+    <section
+      id="about"
+      className="bg-linear-to-b from-[#FAF6EE] to-[#F0E9DA] px-6 py-16 sm:py-22 lg:px-8"
+    >
+      <div className={cn(glassSolid, "mx-auto max-w-[1080px] overflow-hidden")}>
+        <div className="flex items-center justify-between border-b border-[#15110C]/10 px-8 py-5 sm:px-12">
+          <div className={cn(monoLabel, "text-[#B0573F]")}>About</div>
+          <div className={cn(monoLabel, "text-[#15110C]/40")}>
+            The through-line
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-9 p-8 sm:p-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
           <h2
             className={cn(
               serif,
-              "text-4xl leading-[0.98] text-[#15110C] sm:text-6xl",
+              "max-w-xl text-4xl leading-[0.98] text-[#15110C] sm:text-6xl",
             )}
           >
             Still trying to help people find the right thing.
           </h2>
-        </div>
-        <div className="text-[17px] leading-relaxed text-[#15110C]/68">
-          <p>
-            I studied Computer Science at NTNU, where an AI-based apartment
-            matching thesis gave me a problem I&apos;ve never really stopped
-            thinking about.
-          </p>
-          <p className="mt-5">
-            After years of consulting and building across Norway and Europe, the
-            through-line is still the same: use technology to connect people
-            with the right things at the right time.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href="/resume"
-              className="rounded-full bg-[#1F4D3C] px-5 py-2.5 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
-            >
-              Full career history →
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-full border border-[#15110C]/16 px-5 py-2.5 text-sm font-semibold text-[#15110C] transition hover:bg-[#15110C]/5"
-            >
-              Get in touch
-            </Link>
+          <div className="text-[17px] leading-relaxed text-[#15110C]/68">
+            <p>
+              I studied Computer Science at NTNU, where an AI-based apartment
+              matching thesis gave me a problem I&apos;ve never really stopped
+              thinking about.
+            </p>
+            <p className="mt-5">
+              After years of consulting and building across Norway and Europe,
+              the through-line is still the same: use technology to connect
+              people with the right things at the right time.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/resume"
+                className="rounded-full bg-[#1F4D3C] px-5 py-2.5 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
+              >
+                Full career history →
+              </Link>
+              <Link
+                href="/contact"
+                className="rounded-full border border-[#15110C]/16 px-5 py-2.5 text-sm font-semibold text-[#15110C] transition hover:bg-[#15110C]/5"
+              >
+                Get in touch
+              </Link>
+            </div>
           </div>
         </div>
+        <dl className="grid grid-cols-1 border-t border-[#15110C]/10 sm:grid-cols-3">
+          {aboutDetails.map((detail) => (
+            <div
+              key={detail.label}
+              className="border-b border-[#15110C]/10 px-8 py-6 last:border-b-0 sm:border-r sm:border-b-0 sm:px-7 sm:last:border-r-0"
+            >
+              <dt className={cn(monoLabel, "text-[#B0573F]")}>
+                {detail.label}
+              </dt>
+              <dd className={cn(serif, "mt-2 text-[21px] text-[#15110C]")}>
+                {detail.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

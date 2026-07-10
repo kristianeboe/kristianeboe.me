@@ -2,11 +2,12 @@ import type { JSX, SVGProps } from "react";
 import Link from "next/link";
 
 const footerNavigation = {
-  main: [
+  site: [
     { name: "Projects", href: "/projects" },
     { name: "Speaking", href: "/speaking" },
     { name: "Uses", href: "/uses" },
     { name: "Blog", href: "/blog" },
+    { name: "Resume", href: "/resume" },
     { name: "Contact", href: "/contact" },
   ],
   social: [
@@ -59,39 +60,92 @@ const footerNavigation = {
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="mx-auto max-w-[1080px] overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-        <nav
-          aria-label="Footer"
-          className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6"
-        >
-          {footerNavigation.main.map((item) => (
+    <footer className="sticky bottom-0 z-0 overflow-hidden bg-[#101816] px-6 pt-16 text-[#FAF6EE] sm:pt-20 lg:px-8">
+      <div className="mx-auto max-w-[1080px]">
+        <div className="grid grid-cols-1 gap-12 border-b border-white/12 pb-12 sm:pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+          <div>
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.1em] text-[#C88468] uppercase">
+              <span className="grid size-8 place-items-center rounded-[7px] bg-[#FAF6EE] font-serif text-sm font-semibold tracking-normal text-[#101816] lowercase">
+                kb
+              </span>
+              Kristian Elset Bø · Oslo, Norway
+            </div>
+            <p className="mt-7 max-w-xl text-3xl leading-[1.08] font-medium tracking-[-0.035em] text-[#FAF6EE] sm:text-5xl">
+              Building useful software, then going somewhere worth writing
+              about.
+            </p>
             <Link
-              key={item.name}
-              href={item.href}
-              className="text-gray-600 hover:text-gray-900"
+              href="/contact"
+              className="mt-8 inline-flex rounded-full bg-[#C88468] px-5 py-2.5 text-sm font-semibold text-[#101816] transition hover:bg-[#D79578]"
             >
-              {item.name}
+              Start a conversation →
             </Link>
-          ))}
-        </nav>
-        <div className="mt-16 flex justify-center gap-x-10">
-          {footerNavigation.social.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-gray-600 hover:text-gray-800"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="sr-only">{item.name}</span>
-              <item.icon aria-hidden="true" className="size-6" />
-            </a>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-2 gap-8 sm:gap-12">
+            <nav aria-label="Footer">
+              <div className="font-mono text-[10px] tracking-[0.1em] text-[#C88468] uppercase">
+                Explore
+              </div>
+              <ul className="mt-5 space-y-3">
+                {footerNavigation.site.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-[#FAF6EE]/68 transition hover:text-[#FAF6EE]"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div>
+              <div className="font-mono text-[10px] tracking-[0.1em] text-[#C88468] uppercase">
+                Elsewhere
+              </div>
+              <ul className="mt-5 space-y-3">
+                {footerNavigation.social.map((item) => (
+                  <li key={item.name}>
+                    <a
+                      href={item.href}
+                      className="group inline-flex items-center gap-2.5 text-sm text-[#FAF6EE]/68 transition hover:text-[#FAF6EE]"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <item.icon
+                        aria-hidden="true"
+                        className="size-4 text-[#FAF6EE]/45 transition group-hover:text-[#C88468]"
+                      />
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <p className="mt-10 text-center text-sm/6 text-gray-600">
-          &copy; {new Date().getFullYear()} Kristian Elset Bø
-        </p>
+
+        <div className="flex flex-col gap-3 py-6 font-mono text-[9px] tracking-[0.08em] text-[#FAF6EE]/38 uppercase sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} Kristian Elset Bø</p>
+          <div className="flex gap-5">
+            <Link href="/privacy" className="transition hover:text-[#FAF6EE]">
+              Privacy
+            </Link>
+            <Link href="/terms" className="transition hover:text-[#FAF6EE]">
+              Terms
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none -mx-2 mt-7 translate-y-[0.1em] overflow-hidden text-center text-[clamp(3.4rem,12vw,13rem)] leading-[0.7] font-semibold tracking-[-0.085em] whitespace-nowrap select-none sm:mt-10"
+      >
+        <span className="bg-linear-to-b from-[#FAF6EE] via-[#BFC3B9] to-[#41504C] bg-clip-text text-transparent">
+          kristianeboe
+        </span>
       </div>
     </footer>
   );

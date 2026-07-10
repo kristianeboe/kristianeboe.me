@@ -28,8 +28,9 @@ export function SiteHeaderContent({
   return (
     <nav
       aria-label="Global"
+      data-layout-container="header"
       className={cn(
-        "mx-auto flex w-full max-w-[1080px] items-center justify-between gap-4 px-6 py-5 lg:px-8",
+        "mx-auto flex w-full max-w-[1080px] items-center justify-between gap-4 py-5",
         className,
       )}
     >
