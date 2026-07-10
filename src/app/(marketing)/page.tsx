@@ -184,10 +184,10 @@ function Focus() {
             support usually reserved for those with brokers.
           </div>
           <a
-            href="https://homi.so"
+            href="https://www.homi.so"
             className="mt-6 inline-block rounded-full bg-[#1F4D3C] px-6 py-3 text-sm font-semibold text-[#FAF6EE] transition hover:bg-[#1F4D3C]/90"
           >
-            Visit homi.so →
+            Visit www.homi.so →
           </a>
         </div>
         <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-[#15110C]/10 bg-[#FAF6EE] shadow-[0_24px_70px_rgba(21,17,12,0.18)] ring-1 ring-white/75">
@@ -291,7 +291,7 @@ const projects = [
     accent: "text-[#1F4D3C]",
     image: "/images/projects/homi-homepage.png",
     desc: "AI home search with memory. A collaborative workspace for finding places that actually fit the life people are trying to build.",
-    href: "https://homi.so",
+    href: "https://www.homi.so",
   },
   {
     name: "Hydra",
