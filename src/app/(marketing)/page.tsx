@@ -284,6 +284,24 @@ const projects = [
     href: "https://swipestats.io",
   },
   {
+    name: "Homi",
+    status: "Main bet",
+    year: "2024–",
+    accent: "text-[#1F4D3C]",
+    image: "/images/projects/homi-homepage.png",
+    desc: "AI home search with memory. A collaborative workspace for finding places that actually fit the life people are trying to build.",
+    href: "https://www.homi.so",
+  },
+  {
+    name: "Hydra",
+    status: "Prototype",
+    year: "2026–",
+    accent: "text-[#C9923D]",
+    image: "/images/projects/hydra.png",
+    desc: "A local browser-session bridge for reading conversations across Slack, iMessage, LinkedIn, and more without platform APIs.",
+    href: "https://hydra-eta-three.vercel.app/",
+  },
+  {
     name: "Promad.life",
     status: "Experiment",
     year: "2024–",
@@ -307,9 +325,14 @@ function Projects() {
   return (
     <section className="bg-linear-to-b from-[#FAF6EE] to-[#F0E9DA] px-6 pt-2 pb-16 sm:pb-22 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-7 flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className={cn(serif, "text-4xl text-[#15110C] sm:text-5xl")}>
-            Selected work
+        <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
+          <h2
+            className={cn(
+              serif,
+              "text-4xl leading-[0.95] text-[#15110C] sm:text-5xl",
+            )}
+          >
+            Selected <span className="block">work</span>
           </h2>
           <span className={cn(monoLabel, "text-[#15110C]/62")}>
             Bets, long runs &amp; experiments
