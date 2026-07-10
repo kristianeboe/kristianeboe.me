@@ -102,7 +102,7 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  const { content, ...meta } = post!;
+  const { content, ...meta } = post;
   const showStickyCTA = meta.showStickyCTA;
 
   // Fixed to the bottom rather than the top — both layout branches have
@@ -117,12 +117,19 @@ export default async function BlogPostPage({
   // Simple layout without sticky CTA
   if (!showStickyCTA) {
     return (
-      <div className={cn("bg-white", meta.heroImage && "-mt-[84px]")} lang={meta.language}>
+      <div
+        className={cn("bg-white", meta.heroImage && "-mt-[84px]")}
+        lang={meta.language}
+      >
         {draftBanner}
         {/* Hide the layout header and show transparent one for hero pages */}
         {meta.heroImage && (
           <>
-            <style dangerouslySetInnerHTML={{ __html: `header:not(.hero-header) { display: none !important; }` }} />
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `header:not(.hero-header) { display: none !important; }`,
+              }}
+            />
             <TransparentHeader />
           </>
         )}

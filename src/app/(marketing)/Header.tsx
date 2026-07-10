@@ -14,7 +14,6 @@ interface HeaderProps {
 export default function Header({
   container = false,
   showBanner = false,
-  transparent = false,
 }: HeaderProps) {
   // Navigation structure for the header
   const navigation = {

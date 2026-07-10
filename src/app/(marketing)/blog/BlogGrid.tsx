@@ -85,7 +85,6 @@ function AuthorInfo({
 }
 
 // Blog Card Component with Image (unused, keeping for future use)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function BlogCard({
   post,
   basePath = "/blog",
@@ -122,7 +121,7 @@ function BlogCard({
             </time>
           )}
           {post.category && (
-            <span className="relative z-10 rounded-full bg-primary/10 px-3 py-1.5 font-semibold text-primary">
+            <span className="bg-primary/10 text-primary relative z-10 rounded-full px-3 py-1.5 font-semibold">
               {post.category}
             </span>
           )}
@@ -221,7 +220,7 @@ export function BlogGrid({
                       )}
                     </time>
                     {featuredPosts[0].category && (
-                      <span className="relative z-10 cursor-pointer rounded-full bg-primary/80 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-primary">
+                      <span className="bg-primary/80 hover:bg-primary relative z-10 cursor-pointer rounded-full px-3 py-1.5 font-semibold text-white transition-colors">
                         {featuredPosts[0].category}
                       </span>
                     )}
