@@ -25,6 +25,8 @@ import { ButtonLink } from "@/components/ui/button";
 
 import { authClient } from "@/server/better-auth/client";
 
+import { BrandLogo } from "./BrandLogo";
+
 // Icon mapping for dynamic icon rendering
 const iconMap = {
   ChartPieIcon,
@@ -51,7 +53,10 @@ interface HeaderClientProps {
   transparent?: boolean;
 }
 
-export default function HeaderClient({ navigation, transparent = false }: HeaderClientProps) {
+export default function HeaderClient({
+  navigation,
+  transparent = false,
+}: HeaderClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession();
 
@@ -101,7 +106,10 @@ export default function HeaderClient({ navigation, transparent = false }: Header
                   )}
                 >
                   Travel
-                  <ChevronDownIcon aria-hidden="true" className="size-5 flex-none" />
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="size-5 flex-none"
+                  />
                 </PopoverButton>
 
                 <PopoverPanel
@@ -140,7 +148,7 @@ export default function HeaderClient({ navigation, transparent = false }: Header
             className={cn(
               "rounded-full px-3 py-1.5 text-sm/6 font-semibold transition-all",
               transparent
-                ? "text-white/90 hover:text-white hover:bg-white/10"
+                ? "text-white/90 hover:bg-white/10 hover:text-white"
                 : "text-foreground hover:text-primary hover:bg-muted/50",
             )}
           >
@@ -173,13 +181,7 @@ export default function HeaderClient({ navigation, transparent = false }: Header
         <DialogPanel className="fixed inset-y-0 right-0 z-50 flex w-full flex-col justify-between overflow-y-auto bg-white/95 backdrop-blur-sm sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="p-6">
             <div className="flex items-center justify-between">
-              <Link
-                href="/"
-                className="flex items-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="text-xl font-bold">kristianeboe.me</span>
-              </Link>
+              <BrandLogo onClick={() => setMobileMenuOpen(false)} />
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}

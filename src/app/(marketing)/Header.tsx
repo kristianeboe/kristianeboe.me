@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import { cn } from "@/components/ui";
 import { getTravelNavigation } from "@/lib/travel-nav";
 
+import { BrandLogo } from "./BrandLogo";
 import HeaderClient from "./HeaderClient";
 
 interface HeaderProps {
@@ -52,9 +51,7 @@ export default function Header({
       >
         {/* Logo Section */}
         <div className="flex lg:flex-1">
-          <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold">kristianeboe.me</span>
-          </Link>
+          <BrandLogo />
         </div>
 
         <HeaderClient navigation={navigation} />

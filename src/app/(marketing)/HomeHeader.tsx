@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import { cn } from "@/components/ui";
 import { getTravelNavigation } from "@/lib/travel-nav";
 
+import { BrandLogo } from "./BrandLogo";
 import HeaderClient from "./HeaderClient";
 
 // Homepage-only nav: a contained floating pill instead of the site's
@@ -32,18 +31,15 @@ export function HomeHeader() {
           "border border-white/55 bg-[#FAF6EE]/80 shadow-[0_16px_40px_rgba(21,17,12,0.16),inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-lg",
         )}
       >
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="font-[family-name:var(--font-newsreader)] flex size-7 flex-none items-center justify-center rounded-full bg-[#15110C] text-[15px] text-[#FAF6EE] italic">
-            k
-          </span>
-          <span className="text-sm font-semibold text-[#15110C]">
-            Kristian Elset Bø
-          </span>
-        </Link>
+        <BrandLogo
+          label="Kristian Elset Bø"
+          markClassName="size-7 rounded-[6px]"
+          textClassName="text-sm font-semibold text-[#15110C]"
+        />
 
         <div className="flex items-center gap-2">
           <HeaderClient navigation={navigation} />
-          <span className="font-mono hidden rounded-full bg-[#15110C] px-3 py-1.5 text-[10px] tracking-[0.08em] text-[#FAF6EE] uppercase sm:inline-block">
+          <span className="hidden rounded-full bg-[#15110C] px-3 py-1.5 font-mono text-[10px] tracking-[0.08em] text-[#FAF6EE] uppercase sm:inline-block">
             ● Oslo, Norway
           </span>
         </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 import { cn } from "@/components/ui";
 import { getTravelNavigation } from "@/lib/travel-nav";
 
+import { BrandLogo } from "./BrandLogo";
 import HeaderClient from "./HeaderClient";
 
 const navigation = {
@@ -46,16 +46,12 @@ export function TransparentHeader() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="flex items-center">
-            <span
-              className={cn(
-                "text-xl font-bold transition-colors duration-300",
-                scrolled ? "text-foreground" : "text-white",
-              )}
-            >
-              kristianeboe.me
-            </span>
-          </Link>
+          <BrandLogo
+            textClassName={cn(
+              "transition-colors duration-300",
+              scrolled ? "text-foreground" : "text-white",
+            )}
+          />
         </div>
 
         <HeaderClient navigation={navigation} transparent={!scrolled} />
