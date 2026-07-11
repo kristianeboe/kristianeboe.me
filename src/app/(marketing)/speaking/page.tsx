@@ -33,12 +33,12 @@ const talks = [
 
 const appearances = [
   {
-    href: "https://open.spotify.com/episode/1VjynVyWaDJRuk90owi0vg",
-    title: "Å jobbe i AI-hypens sentrum i den heteste YC-startupen",
-    event: "Støttehjulet · Feb 2025",
+    href: "https://www.youtube.com/watch?v=t-piD6TR6vY",
+    title: "Homi AI home hunting",
+    event: "AI Julekalender, day 4 · Dec 2025",
     description:
-      "An hour and forty minutes on the road from NTNU to San Francisco: being a founding engineer at Wordware (YC S24) while the AI wave crested, Silicon Valley culture, and what I'd tell aspiring founders.",
-    cta: "Listen on Spotify",
+      "The first live demo of Homi's new AI engine — natural conversation, profile building, and digging through the housing market — for Daniel Westervik's Norwegian AI advent calendar.",
+    cta: "Watch on YouTube",
   },
   {
     href: "https://www.youtube.com/watch?v=0UQWfFZLZWU",
@@ -49,12 +49,20 @@ const appearances = [
     cta: "Watch on YouTube",
   },
   {
-    href: "https://www.youtube.com/watch?v=t-piD6TR6vY",
-    title: "Homi AI home hunting",
-    event: "AI Julekalender, day 4 · Dec 2025",
+    href: "https://open.spotify.com/episode/1M0lfg3mYW61wIVFlgRFLm",
+    title: "The death of SaaS, Twitter virality, and the Beijing 996",
+    event: "Venture Capital in Scandinavia · Mar 2025",
     description:
-      "The first live demo of Homi's new AI engine — natural conversation, profile building, and digging through the housing market — for Daniel Westervik's Norwegian AI advent calendar.",
-    cta: "Watch on YouTube",
+      "An inside look at Wordware's blockbuster $30M seed round as employee number five: YC demo day, US versus Scandinavian working and fundraising culture, and whether Norway is ambitious enough.",
+    cta: "Listen on Spotify",
+  },
+  {
+    href: "https://open.spotify.com/episode/1VjynVyWaDJRuk90owi0vg",
+    title: "Å jobbe i AI-hypens sentrum i den heteste YC-startupen",
+    event: "Støttehjulet · Feb 2025",
+    description:
+      "An hour and forty minutes on the road from NTNU to San Francisco: being a founding engineer at Wordware (YC S24) while the AI wave crested, Silicon Valley culture, and what I'd tell aspiring founders.",
+    cta: "Listen on Spotify",
   },
 ];
 
