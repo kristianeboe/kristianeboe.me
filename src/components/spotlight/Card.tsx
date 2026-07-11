@@ -54,16 +54,28 @@ Card.Link = function CardLink({
 Card.Title = function CardTitle<T extends React.ElementType = "h2">({
   as,
   href,
+  target,
   children,
 }: Omit<React.ComponentPropsWithoutRef<T>, "as" | "href"> & {
   as?: T;
   href?: string;
+  target?: string;
 }) {
   const Component = as ?? "h2";
 
   return (
     <Component className="font-[family-name:var(--font-newsreader)] text-[27px] leading-tight tracking-[-0.015em] text-[#1F1B14]">
-      {href ? <Card.Link href={href}>{children}</Card.Link> : children}
+      {href ? (
+        <Card.Link
+          href={href}
+          target={target}
+          rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        >
+          {children}
+        </Card.Link>
+      ) : (
+        children
+      )}
     </Component>
   );
 };
