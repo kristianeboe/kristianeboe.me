@@ -143,7 +143,9 @@ export default function Footer() {
         aria-hidden="true"
         className="pointer-events-none -mx-2 mt-7 text-center text-[clamp(3.4rem,12vw,13rem)] leading-[0.82] font-semibold tracking-[-0.085em] whitespace-nowrap select-none sm:mt-10"
       >
-        <span className="bg-linear-to-b from-[#FAF6EE] via-[#BFC3B9] to-[#41504C] bg-clip-text text-transparent">
+        {/* px extends the background-paint box so the negative tracking
+            doesn't leave the last glyph's ink outside it (bg-clip-text) */}
+        <span className="bg-linear-to-b from-[#FAF6EE] via-[#BFC3B9] to-[#41504C] bg-clip-text px-[0.1em] text-transparent">
           kristianeboe
         </span>
       </div>

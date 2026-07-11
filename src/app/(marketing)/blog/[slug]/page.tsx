@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { cn } from "@/components/ui";
 import { AUTHORS } from "@/lib/blog-authors";
 import { env } from "@/env";
 
@@ -118,7 +117,7 @@ export default async function BlogPostPage({
   if (!showStickyCTA) {
     return (
       <div
-        className={cn("bg-white", meta.heroImage && "-mt-[84px]")}
+        className="bg-white"
         lang={meta.language}
       >
         {draftBanner}
