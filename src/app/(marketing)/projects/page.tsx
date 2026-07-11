@@ -53,6 +53,16 @@ const projects = [
     caseStudy: "https://boe.ventures/work/swipestats",
   },
   {
+    name: "Towers Club",
+    description:
+      "A curated collection of the residential towers actually worth living in, city by city — rankings, guides, and a growing index for people who like a view. A Homi side project.",
+    link: { href: "https://www.towers.club", label: "towers.club" },
+    stats: [
+      { value: "21", label: "Towers indexed" },
+      { value: "9", label: "Cities" },
+    ],
+  },
+  {
     name: "Boe Ventures",
     description:
       "My product holding company. Where ideas become products, and products find their market. Home to Homi, SwipeStats, and whatever comes next.",
