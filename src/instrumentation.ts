@@ -5,14 +5,16 @@
  * See: https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation
  */
 
+import type { Instrumentation } from "next";
+
 export function register() {
   // No-op for initialization
 }
 
-export const onRequestError = async (
-  err: Error,
-  request: Request,
-  _context: { routerKind?: "Pages Router" | "App Router" },
+export const onRequestError: Instrumentation.onRequestError = async (
+  err,
+  request,
+  _context,
 ) => {
   // Only run in Node.js runtime (not Edge)
   if (process.env.NEXT_RUNTIME === "nodejs") {
@@ -23,8 +25,12 @@ export const onRequestError = async (
       // Extract distinct_id from PostHog cookie
       let distinctId: string | undefined;
 
-      if (request.headers.get("cookie")) {
-        const cookieString = request.headers.get("cookie")!;
+      const cookieHeader = request.headers.cookie;
+      const cookieString = Array.isArray(cookieHeader)
+        ? cookieHeader.join("; ")
+        : cookieHeader;
+
+      if (cookieString) {
         const postHogCookieMatch = /ph_phc_.*?_posthog=([^;]+)/.exec(
           cookieString,
         );
@@ -43,7 +49,10 @@ export const onRequestError = async (
       }
 
       // Capture the exception (will throw if PostHog not configured)
-      await captureException(err, distinctId);
+      await captureException(
+        err instanceof Error ? err : new Error(String(err)),
+        distinctId,
+      );
     } catch (captureError) {
       // Silently fail - error tracking should never break the app
       console.error(
