@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 
 import { Card } from "@/components/spotlight/Card";
 import { Section } from "@/components/spotlight/Section";
@@ -28,6 +29,31 @@ const talks = [
     description:
       "A ten-minute lightning talk on nine very different ways to see the world — the early version of an obsession that never went away.",
     cta: "View event",
+  },
+];
+
+const archiveTalks = [
+  {
+    title: "Lean Startup, a primer",
+    event: "Norwegian talk · 2016",
+    description:
+      "A practical introduction to turning assumptions into hypotheses, testing the riskiest ones first, and using an MVP to learn rather than merely ship less.",
+    takeaway:
+      "Product development should feel more like driving a car and making small corrections than launching a spaceship.",
+    image: "/images/speaking/lean-startup-spaceship-car.png",
+    imageAlt:
+      "Editorial illustration contrasting a rocket launch with a car making small adjustments",
+  },
+  {
+    title: "The Startup Way at Klarna",
+    event: "ProductPreach #5 · 2018",
+    description:
+      "A talk from my Netlight years about applying Lean Startup inside a large product organization: leap-of-faith assumptions, useful experiments, and the decision to pivot or persevere.",
+    takeaway:
+      "An MVP is the easiest thing you can show a customer that gives you the most valuable learning.",
+    image: "/images/speaking/mvp-learning-instrument.png",
+    imageAlt:
+      "Editorial illustration contrasting an unfinished large cake with a small complete cake used for learning",
   },
 ];
 
@@ -91,14 +117,16 @@ const press = [
   {
     href: "https://www.shifter.no/nyheter/norske-grndere-med-nokkelroller-i-en-av-y-combinators-heteste-startups/364281",
     outlet: "Shifter · Nov 2024",
-    title: "Norske gründere med nøkkelroller i en av Y Combinators heteste startups",
+    title:
+      "Norske gründere med nøkkelroller i en av Y Combinators heteste startups",
     description:
       "On being one of two Norwegians with key roles at Wordware after one of YC's largest seed rounds ever.",
   },
   {
     href: "https://www.shifter.no/nyheter/mesh-tar-over-startupen-til-utvist-grnder-na-far-han-bli-i-norge/247849",
     outlet: "Shifter · May 2022",
-    title: "Mesh tar over startupen til utvist gründer — nå får han bli i Norge",
+    title:
+      "Mesh tar over startupen til utvist gründer — nå får han bli i Norge",
     description:
       "When Mesh took over Scales — my technical baby — and my co-founder got to stay in Norway.",
   },
@@ -168,13 +196,7 @@ function AppearanceGrid({
   );
 }
 
-function MediaList({
-  title,
-  items,
-}: {
-  title: string;
-  items: typeof press;
-}) {
+function MediaList({ title, items }: { title: string; items: typeof press }) {
   return (
     <Section title={title}>
       <ul className="divide-y divide-[#1F1B14]/10">
@@ -203,6 +225,45 @@ function MediaList({
   );
 }
 
+function ArchiveGrid() {
+  return (
+    <Section title="From the archive">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        {archiveTalks.map((talk) => (
+          <article
+            key={talk.title}
+            className="overflow-hidden rounded-[14px] border border-[#1F1B14]/10 bg-white/45"
+          >
+            <div className="relative aspect-[3/2] overflow-hidden border-b border-[#1F1B14]/10 bg-[#F1EBDD]">
+              <Image
+                src={talk.image}
+                alt={talk.imageAlt}
+                fill
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="p-6">
+              <p className="font-mono text-[10px] tracking-[0.08em] text-[#B0573F] uppercase">
+                {talk.event}
+              </p>
+              <h3 className="mt-2 font-[family-name:var(--font-newsreader)] text-[26px] leading-tight tracking-[-0.015em] text-[#1F1B14]">
+                {talk.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#1F1B14]/62">
+                {talk.description}
+              </p>
+              <blockquote className="mt-5 border-l-2 border-[#B0573F] pl-4 font-[family-name:var(--font-newsreader)] text-lg leading-snug text-[#1F1B14]/85 italic">
+                “{talk.takeaway}”
+              </blockquote>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Speaking & media",
   description:
@@ -218,6 +279,7 @@ export default function Speaking() {
     >
       <div className="space-y-16">
         <AppearanceGrid title="Talks" items={talks} />
+        <ArchiveGrid />
         <AppearanceGrid title="Podcasts & video" items={appearances} />
         <MediaList title="In the media" items={press} />
         <MediaList title="Writing & elsewhere" items={writingAndElsewhere} />
