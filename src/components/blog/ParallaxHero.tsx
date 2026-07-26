@@ -19,15 +19,13 @@ export function ParallaxHero({
   return (
     <div
       className={cn(
-        "not-prose relative left-1/2 -ml-[50vw] flex w-screen items-center justify-center",
-        size === "full" ? "min-h-screen" : "min-h-[70vh] sm:min-h-[80vh]",
+        "not-prose relative left-1/2 -ml-[50vw] flex w-screen items-center justify-center bg-scroll bg-cover bg-center bg-no-repeat md:bg-fixed",
+        size === "full"
+          ? "min-h-[78svh] md:min-h-screen"
+          : "min-h-[44svh] sm:min-h-[56vh] md:min-h-[70vh] lg:min-h-[80vh]",
       )}
       style={{
         backgroundImage: `url(${image})`,
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="absolute inset-0 bg-black/50" />

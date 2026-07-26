@@ -102,9 +102,14 @@ function GalleryBlock({
 
   if (count === 2) {
     return (
-      <div className="grid h-[280px] grid-cols-2 gap-2 sm:h-[340px]">
+      <div className="grid grid-cols-1 gap-2 sm:h-[340px] sm:grid-cols-2">
         {images.map((image, i) => (
-          <Tile key={i} image={image} onClick={() => onSelect(offset + i)} />
+          <Tile
+            key={i}
+            image={image}
+            onClick={() => onSelect(offset + i)}
+            className="aspect-[4/3] sm:aspect-auto"
+          />
         ))}
       </div>
     );
@@ -112,21 +117,36 @@ function GalleryBlock({
 
   if (count === 3) {
     return (
-      <div className="grid h-[320px] grid-cols-2 gap-2 sm:h-[380px]">
-        <Tile image={images[0]!} onClick={() => onSelect(offset)} />
-        <div className="grid grid-rows-2 gap-2">
-          <Tile image={images[1]!} onClick={() => onSelect(offset + 1)} />
-          <Tile image={images[2]!} onClick={() => onSelect(offset + 2)} />
-        </div>
+      <div className="grid grid-cols-2 gap-2 sm:h-[380px] sm:grid-rows-2">
+        <Tile
+          image={images[0]!}
+          onClick={() => onSelect(offset)}
+          className="col-span-2 aspect-[4/3] sm:col-span-1 sm:row-span-2 sm:aspect-auto"
+        />
+        <Tile
+          image={images[1]!}
+          onClick={() => onSelect(offset + 1)}
+          className="aspect-square sm:aspect-auto"
+        />
+        <Tile
+          image={images[2]!}
+          onClick={() => onSelect(offset + 2)}
+          className="aspect-square sm:aspect-auto"
+        />
       </div>
     );
   }
 
   if (count === 4) {
     return (
-      <div className="grid h-[320px] grid-cols-2 grid-rows-2 gap-2 sm:h-[420px]">
+      <div className="grid grid-cols-2 gap-2 sm:h-[420px] sm:grid-rows-2">
         {images.map((image, i) => (
-          <Tile key={i} image={image} onClick={() => onSelect(offset + i)} />
+          <Tile
+            key={i}
+            image={image}
+            onClick={() => onSelect(offset + i)}
+            className="aspect-square sm:aspect-auto"
+          />
         ))}
       </div>
     );
@@ -135,14 +155,19 @@ function GalleryBlock({
   // count === 5: hero (2x2) + 4 tiles fill the row exactly, no leftovers.
   const tiles = images.slice(1);
   return (
-    <div className="grid h-[320px] grid-cols-4 grid-rows-2 gap-2 sm:h-[420px]">
+    <div className="grid grid-cols-2 gap-2 sm:h-[420px] sm:grid-cols-4 sm:grid-rows-2">
       <Tile
         image={images[0]!}
         onClick={() => onSelect(offset)}
-        className="col-span-2 row-span-2"
+        className="col-span-2 aspect-[4/3] sm:row-span-2 sm:aspect-auto"
       />
       {tiles.map((image, i) => (
-        <Tile key={i} image={image} onClick={() => onSelect(offset + i + 1)} />
+        <Tile
+          key={i}
+          image={image}
+          onClick={() => onSelect(offset + i + 1)}
+          className="aspect-square sm:aspect-auto"
+        />
       ))}
     </div>
   );
