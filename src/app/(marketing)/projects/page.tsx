@@ -1,4 +1,6 @@
 import { type Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 import { CareerTimeline } from "@/components/CareerTimeline";
 import { Card } from "@/components/spotlight/Card";
@@ -136,6 +138,44 @@ export default function Projects() {
           </Card>
         ))}
       </ul>
+
+      <section className="mt-24 overflow-hidden rounded-[28px] border border-zinc-200 bg-[#F3EFE5] shadow-sm sm:mt-32 dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex flex-col justify-center p-7 sm:p-10">
+            <p className="font-mono text-[11px] tracking-[0.08em] text-teal-600 uppercase dark:text-teal-400">
+              A product idea I keep returning to
+            </p>
+            <h2 className="font-display mt-4 text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-100">
+              Product Atlas
+            </h2>
+            <p className="mt-5 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+              I have mapped products with user stories, database schemas, and
+              page inventories for years. Product Atlas connects those views and
+              lets a coding agent help keep the map honest.
+            </p>
+            <p className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+              The idea came back while looking at Avion and an old Homi page
+              map. I wrote down what still feels useful and where I want the
+              boundary to stay.
+            </p>
+            <Link
+              href="/blog/product-atlas"
+              className="mt-7 inline-flex w-fit items-center rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+            >
+              Read the origin story →
+            </Link>
+          </div>
+          <div className="relative min-h-72 overflow-hidden border-t border-zinc-200 bg-white lg:border-t-0 lg:border-l dark:border-zinc-800">
+            <Image
+              src="/images/blog/thumbnails/product-atlas.png"
+              alt="The original Homi collection board that informed Product Atlas"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-left-top"
+            />
+          </div>
+        </div>
+      </section>
 
       <div className="mt-24 sm:mt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">

@@ -1,0 +1,111 @@
+---
+h1: "I have been trying to draw products before building them for years"
+h1Subtitle: "Product Atlas is the latest version of an old habit."
+metaTitle: "Product Atlas and how I map software"
+metaDescription: "The old Homi page map, an Avion déjà vu, and a new way to connect user jobs to the screens and code that support them."
+publishedAt: "2026-07-20"
+author: "default"
+category: "Features"
+tags: ["product-atlas", "product-development", "bifrost", "homi"]
+language: "en-US"
+showStickyCTA: false
+enableAutoCtAs: false
+readingTime: 6
+heroImage: "/images/blog/thumbnails/product-atlas.png"
+---
+
+A few days ago I opened Avion again and had one of those strange moments where
+an old obsession suddenly makes sense in the present.
+
+I used to love user story maps. I wanted a complete picture of a product where
+you could start with the job a person was trying to do, follow every step, and
+see the stories underneath. Most product tools flatten that picture into a
+backlog. Useful for delivery, terrible for understanding the product as a
+whole.
+
+The funny part is that I had already built a rough version of what I wanted.
+
+## The old Homi page map
+
+When I was working on the first version of Homi, I kept three things next to
+each other:
+
+1. The user stories.
+2. The database schema and seed data.
+3. A map of the pages that would turn those stories into a product.
+
+The page map had separate records for the home page, discovery, a property
+page, contact, and the application and marketing headers. Inside each record I
+kept screenshots, copy, implementation notes, and links back to the relevant
+stories.
+
+<img
+  src="/images/blog/product-atlas/homi-home-2024.png"
+  alt="The full 2024 Homi marketing page, preserved in the original page map"
+/>
+
+It was clumsy. It was also more useful than most roadmaps I have worked with.
+The page map made gaps obvious. A story without a screen was probably still an
+idea. A screen without a clear job was probably decoration. A field missing
+from the schema usually meant I had not followed the story far enough.
+
+## The view I still want
+
+Avion maps journeys, steps, and stories. I want that map, but I also want to
+turn it sideways.
+
+Put the job steps down the left. Put the product's screens across the top. A
+cell tells you which view supports which part of the job. Open the cell and you
+see the story, the route, the component, the API call, the database entities,
+and the latest evidence that the experience still works.
+
+For Homi, one journey could be:
+
+| Step     | The question it answers                   |
+| -------- | ----------------------------------------- |
+| Collect  | How do I save a listing before I lose it? |
+| Organize | How do we keep the shortlist useful?      |
+| Compare  | What are the real tradeoffs?              |
+| Choose   | How do we make the decision together?     |
+
+Those steps are more stable than the interface. Homi can move from a web
+dashboard to an iPhone share sheet or an AI conversation and the underlying job
+still makes sense.
+
+This is where coding agents change the economics. An agent can walk a route
+tree, open the live product, inspect native navigation, follow API calls, and
+build a first draft of the map. It can show its evidence and mark its
+inferences. A human still decides whether the map describes a product worth
+building.
+
+## Product Atlas
+
+I am calling this Product Atlas.
+
+The name fits because the map is descriptive. It tells you where things are,
+how they connect, and which areas are still blank. It does not assign the
+sprint, estimate the work, or replace Linear. I have no interest in rebuilding
+another backlog tool.
+
+Product Atlas belongs inside Bifrost because Bifrost already knows how a brand
+presents itself across websites, social channels, newsletters, ads, and app
+store listings. The missing link is the product those claims describe.
+
+The existing website sitemap is a useful source. It gives Bifrost a verified
+inventory of public marketing pages. Logged-in screens need their own lighter
+registry because they are not in the sitemap and do not always have URLs.
+Those two inventories can inform each other without pretending they are the
+same thing.
+
+That boundary matters:
+
+- Bifrost records the product, its surfaces, and the evidence.
+- Product Atlas offers several ways to inspect that record.
+- Linear or Avion can still own delivery planning.
+
+The first version can stay small. One product, a handful of jobs, a screen
+atlas, and a matrix connecting stories to views. No elaborate release
+management. No attempt to turn every component into a ticket.
+
+That is enough to recover the thing I liked about those early maps: being able
+to look at a product and understand what it is trying to help someone do.
