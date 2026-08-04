@@ -117,7 +117,7 @@ export default async function BlogPostPage({
   if (!showStickyCTA) {
     return (
       <div
-        className="bg-white"
+        className="overflow-x-clip bg-white"
         lang={meta.language}
       >
         {draftBanner}
