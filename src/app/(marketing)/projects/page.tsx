@@ -71,12 +71,12 @@ const projects = [
     link: { href: "https://boe.ventures", label: "boe.ventures" },
   },
   {
-    name: "Jetpack",
+    name: "Draupnir",
     description:
-      "A production-ready Next.js SaaS starter with auth, database, payments, email, and AI built in. The template I wish I had when starting every new project.",
+      "The production-ready Next.js foundation behind Homi, SwipeStats, and Capient. Accounts, organizations, billing, data, email, AI, and deployment already work together.",
     link: {
-      href: "https://github.com/kristianeboe/jetpack",
-      label: "github.com",
+      href: "https://usedraupnir.vercel.app",
+      label: "usedraupnir.vercel.app",
     },
   },
   {
