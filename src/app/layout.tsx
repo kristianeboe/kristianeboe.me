@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Analytics } from "@vercel/analytics/next";
 
 import { cn } from "@/components/ui/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme";
@@ -59,6 +60,7 @@ export default function RootLayout({
           </ThemeProvider>
         </TRPCReactProvider>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
