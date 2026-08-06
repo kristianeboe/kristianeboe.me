@@ -48,8 +48,9 @@ export async function generateMetadata({
     return {};
   }
 
-  // Generate OG image using new route
-  const ogImageUrl = `${env.NEXT_PUBLIC_BASE_URL}/api/og/blog?title=${encodeURIComponent(post.metaTitle)}&description=${encodeURIComponent(post.metaDescription || "")}`;
+  const ogImageUrl = post.socialImage
+    ? new URL(post.socialImage, env.NEXT_PUBLIC_BASE_URL).toString()
+    : `${env.NEXT_PUBLIC_BASE_URL}/api/og/blog?title=${encodeURIComponent(post.metaTitle)}&description=${encodeURIComponent(post.metaDescription || "")}`;
 
   return {
     title: post.metaTitle,

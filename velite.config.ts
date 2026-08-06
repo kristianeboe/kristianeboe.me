@@ -37,6 +37,9 @@ const posts = defineCollection({
       // Hero image (renders as full-bleed ParallaxHero instead of default title)
       heroImage: s.string().optional(),
 
+      // Social sharing image (falls back to the generated blog card)
+      socialImage: s.string().optional(),
+
       // SEO metadata (for <head>)
       metaTitle: s.string().max(60),
       metaDescription: s.string().max(160),
