@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kristianeboe.me"),
   title: {
     template: "%s | Kristian Elset Bø",
     default: "Kristian Elset Bø | Software for freedom, outcomes, and stories",

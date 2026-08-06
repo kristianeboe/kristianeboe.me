@@ -5,7 +5,7 @@ import { env } from "@/env";
 import { posts as allPosts } from ".velite";
 import { BlogPageContent } from "./BlogPageContent";
 
-const ogImageUrl = `${env.NEXT_PUBLIC_BASE_URL}/api/og/blog?title=${encodeURIComponent("Writing")}&description=${encodeURIComponent("Notes and travel guides from Kristian Elset Bø")}`;
+const ogImageUrl = `/api/og/blog?title=${encodeURIComponent("Writing")}&description=${encodeURIComponent("Notes and travel guides from Kristian Elset Bø")}`;
 
 export const metadata = {
   title: "Writing",

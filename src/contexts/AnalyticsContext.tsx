@@ -64,6 +64,9 @@ const AnalyticsContext = createContext<AnalyticsContextType | undefined>(
   undefined,
 );
 
+// Personal site: keep consent handling available, but suppress the banner.
+const COOKIE_BANNER_ENABLED = false;
+
 export const useAnalytics = () => {
   const context = useContext(AnalyticsContext);
   if (context === undefined) {
@@ -380,7 +383,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
     >
       {children}
       <CookieBanner
-        isOpen={showBanner}
+        isOpen={COOKIE_BANNER_ENABLED && showBanner}
         onAccept={handleAccept}
         onDecline={handleDecline}
       />
