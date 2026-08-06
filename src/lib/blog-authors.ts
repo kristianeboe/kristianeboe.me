@@ -19,9 +19,9 @@ export type Author = {
 // `satisfies` ensures the object keys match AuthorKey at compile time
 export const AUTHORS = {
   default: {
-    name: "Admin",
-    image: "/placeholder.svg", // "/images/blog/authors/default.png",
-    description: "Content creator",
-    email: "hello@example.com",
+    name: "Kristian Elset Bø",
+    image: "/images/home/profile.jpg",
+    description: "Founder and engineer",
+    email: "kristian.e.boe@gmail.com",
   },
 } as const satisfies Record<AuthorKey, Author>;

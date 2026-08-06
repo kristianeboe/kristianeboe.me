@@ -90,8 +90,6 @@ function TopographicLines() {
 }
 
 function Hero() {
-  const featuredTravel = getTravelPosts()[0];
-
   return (
     <section className="bg-[#F3EFE5] px-6 py-4 sm:py-6">
       <div className="relative mx-auto max-w-[1280px] rounded-[24px] bg-[#F3EFE5] pb-10 sm:pb-12">
@@ -158,14 +156,6 @@ function Hero() {
                 className="object-cover"
                 priority
               />
-              <span
-                className={cn(
-                  monoLabel,
-                  "absolute inset-x-0 bottom-0 bg-linear-to-t from-black/55 to-transparent px-3 pt-8 pb-2.5 text-[9px] text-[#FAF6EE]/80",
-                )}
-              >
-                Portrait · Golden Gate
-              </span>
             </div>
             <div className="divide-y divide-[#15110C]/10 px-3 pt-3 pb-1">
               <a
@@ -173,7 +163,7 @@ function Hero() {
                 className="group block py-2 first:pt-0 last:pb-0"
               >
                 <span className={cn(monoLabel, "text-[9px] text-[#1F4D3C]")}>
-                  Featured project
+                  Building
                 </span>
                 <div
                   className={cn(
@@ -187,24 +177,22 @@ function Hero() {
                   </em>
                 </div>
               </a>
-              {featuredTravel && (
-                <Link
-                  href={`/blog/${featuredTravel.slug}`}
-                  className="group block py-2 first:pt-0 last:pb-0"
+              <Link
+                href="/blog/the-phoenix-project-rises-again"
+                className="group block py-2 first:pt-0 last:pb-0"
+              >
+                <span className={cn(monoLabel, "text-[9px] text-[#1F4D3C]")}>
+                  Latest writing
+                </span>
+                <div
+                  className={cn(
+                    serif,
+                    "mt-0.5 text-[16px] leading-snug text-[#15110C]",
+                  )}
                 >
-                  <span className={cn(monoLabel, "text-[9px] text-[#1F4D3C]")}>
-                    Featured travel guide
-                  </span>
-                  <div
-                    className={cn(
-                      serif,
-                      "mt-0.5 text-[16px] leading-snug text-[#15110C]",
-                    )}
-                  >
-                    {featuredTravel.h1}, {featuredTravel.h1Subtitle}
-                  </div>
-                </Link>
-              )}
+                  The Phoenix Project Rises Again
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -225,7 +213,7 @@ function Focus() {
       >
         <div>
           <div className={cn(monoLabel, "mb-3.5 text-[#B0573F]")}>
-            The main bet
+            Building now
           </div>
           <h2
             className={cn(
@@ -354,7 +342,7 @@ const projects = [
   },
   {
     name: "Homi",
-    status: "Main bet",
+    status: "Active",
     year: "Since 2024",
     accent: "text-[#1F4D3C]",
     image: "/images/projects/homi-homepage.png",
@@ -415,7 +403,7 @@ function Projects() {
             Things in <em className="block text-[#1F4D3C] italic">motion.</em>
           </h2>
           <span className={cn(monoLabel, "text-[#15110C]/62")}>
-            Bets, long runs &amp; experiments
+            Projects, long runs &amp; experiments
           </span>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -506,7 +494,7 @@ function Projects() {
             <div
               className={cn(monoLabel, "mb-2 text-[10px] text-[#15110C]/62")}
             >
-              Day job · current
+              Current role
             </div>
             <h3 className={cn(serif, "text-3xl text-[#15110C] sm:text-4xl")}>
               Wander · Lead Growth Engineer
@@ -733,7 +721,7 @@ function Quote() {
 const aboutDetails = [
   { label: "Foundation", value: "Computer Science · NTNU" },
   { label: "Home base", value: "Oslo · Norway" },
-  { label: "Current work", value: "Homi · SwipeStats" },
+  { label: "Independent work", value: "Homi · SwipeStats" },
 ];
 
 function About() {
