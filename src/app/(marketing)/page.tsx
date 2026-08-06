@@ -14,7 +14,7 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Kristian Elset Bø — Software for freedom, outcomes, and stories",
+  title: "Kristian Elset Bø | Software for freedom, outcomes, and stories",
   description:
     "Norwegian founder and engineer in Oslo. Building Homi (AI home search), SwipeStats, and other tools for deciding where to live, who to meet, and how to move.",
 };
@@ -121,7 +121,7 @@ function Hero() {
                 .
               </h1>
               <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[#15110C]/62">
-                I&apos;m Kristian Elset Bø — I build products like{" "}
+                I&apos;m Kristian Elset Bø. I build products like{" "}
                 <strong className="font-semibold text-[#15110C]">Homi</strong>{" "}
                 and{" "}
                 <strong className="font-semibold text-[#15110C]">
@@ -183,7 +183,7 @@ function Hero() {
                 >
                   Homi{" "}
                   <em className="text-[#1F4D3C] italic">
-                    — home search for the life you want to build.
+                    : home search for the life you want to build.
                   </em>
                 </div>
               </a>
@@ -201,7 +201,7 @@ function Hero() {
                       "mt-0.5 text-[16px] leading-snug text-[#15110C]",
                     )}
                   >
-                    {featuredTravel.h1} — {featuredTravel.h1Subtitle}
+                    {featuredTravel.h1}, {featuredTravel.h1Subtitle}
                   </div>
                 </Link>
               )}
@@ -233,7 +233,7 @@ function Focus() {
               "text-4xl leading-[0.98] text-[#15110C] sm:text-6xl lg:text-7xl",
             )}
           >
-            Homi — find a place that fits the life you want.
+            Homi: find a place that fits the life you want.
           </h2>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-[#15110C]">
             A home search should start with the life you&apos;re trying to
@@ -290,8 +290,9 @@ function Travel() {
           </Link>
         </div>
         <p className="mb-9 max-w-xl text-base text-[#15110C]/62">
-          Working guides from places I&apos;ve actually lived and worked — real
-          costs, real itineraries, zero &ldquo;hidden gem&rdquo; listicles.
+          Working guides from places I&apos;ve actually lived and worked, with
+          real costs, real itineraries, and zero &ldquo;hidden gem&rdquo;
+          listicles.
         </p>
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-3">
           {trips.map((trip) => (
@@ -345,16 +346,16 @@ const projects = [
   {
     name: "SwipeStats",
     status: "Long-running",
-    year: "2017–",
+    year: "Since 2017",
     accent: "text-[#1F4D3C]",
     image: "/images/projects/swipestats.png",
-    desc: "Dating-app analytics. Tinder/Hinge data exports turned into real benchmarks — making opaque platform behavior measurable.",
+    desc: "Dating-app analytics. Tinder/Hinge data exports turned into real benchmarks, making opaque platform behavior measurable.",
     href: "https://swipestats.io",
   },
   {
     name: "Homi",
     status: "Main bet",
-    year: "2024–",
+    year: "Since 2024",
     accent: "text-[#1F4D3C]",
     image: "/images/projects/homi-homepage.png",
     desc: "AI home search with memory. A collaborative workspace for finding places that actually fit the life people are trying to build.",
@@ -363,7 +364,7 @@ const projects = [
   {
     name: "Hydra",
     status: "Prototype",
-    year: "2026–",
+    year: "Since 2026",
     accent: "text-[#B0573F]",
     image: "/images/projects/hydra.png",
     desc: "A local browser-session bridge for reading conversations across Slack, iMessage, LinkedIn, and more without platform APIs.",
@@ -372,7 +373,7 @@ const projects = [
   {
     name: "Promad.life",
     status: "Experiment",
-    year: "2024–",
+    year: "Since 2024",
     accent: "text-[#B0573F]",
     image: "/images/projects/promad-life.png",
     desc: "A community for professional digital nomads earning meaningful income while designing flexible lives.",
@@ -512,7 +513,7 @@ function Projects() {
             </h3>
             <p className="mt-2.5 max-w-xl text-sm leading-relaxed text-[#15110C]/62">
               Series B vacation-rentals company. Travel, growth systems, and the
-              unglamorous work that compounds — connects back to the broader
+              unglamorous work that compounds. It connects back to the broader
               theme of mobility and matching.
             </p>
           </div>
@@ -590,7 +591,7 @@ const speakingEngagements = [
     topic: "Google Search Engine Optimization.",
   },
   {
-    year: "2020–21",
+    year: "2020 to 2021",
     event: "Lunsj / Scales",
     topic: "Founder talks on building startups in public.",
   },
@@ -605,7 +606,7 @@ const speakingEngagements = [
     topic: "A night with the local builder community.",
   },
   {
-    year: "2025–26",
+    year: "2025 to 2026",
     event: "Techfolk consulting & Bouvet",
     topic: "Agentic development for working teams.",
   },

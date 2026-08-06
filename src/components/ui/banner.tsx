@@ -11,7 +11,7 @@ interface BannerProps {
 
 export function Banner({
   title = "GeneriCon 2023",
-  message = "Join us in Denver from June 7 – 9 to see what's coming next.",
+  message = "Join us in Denver from June 7 to 9 to see what's coming next.",
   onDismiss,
   showDismiss = false,
   ctaText,

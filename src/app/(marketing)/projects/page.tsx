@@ -57,7 +57,7 @@ const projects = [
   {
     name: "Towers Club",
     description:
-      "A curated collection of the residential towers actually worth living in, city by city — rankings, guides, and a growing index for people who like a view. A Homi side project.",
+      "A curated collection of the residential towers actually worth living in, city by city. It includes rankings, guides, and a growing index for people who like a view. A Homi side project.",
     link: { href: "https://www.towers.club", label: "towers.club" },
     stats: [
       { value: "21", label: "Towers indexed" },
@@ -89,7 +89,7 @@ const projects = [
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Things I've built — from AI home search to dating analytics.",
+  description: "Things I've built, from AI home search to dating analytics.",
 };
 
 export default function Projects() {
@@ -191,7 +191,7 @@ export default function Projects() {
           </a>
         </div>
         <p className="mt-4 max-w-2xl text-base text-zinc-600 dark:text-zinc-400">
-          The long version — consulting, startups, an acquisition, and the jobs
+          The long version: consulting, startups, an acquisition, and the jobs
           that got me here.
         </p>
         <div className="mt-10">

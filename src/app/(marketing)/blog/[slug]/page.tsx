@@ -104,22 +104,19 @@ export default async function BlogPostPage({
   const { content, ...meta } = post;
   const showStickyCTA = meta.showStickyCTA;
 
-  // Fixed to the bottom rather than the top — both layout branches have
+  // Fixed to the bottom rather than the top because both layout branches have
   // their own fixed/transparent header at top-0, and a top banner here
   // would fight them for the same space depending on which one is active.
   const draftBanner = !meta.isPublished && (
     <div className="fixed inset-x-0 bottom-0 z-50 bg-amber-400 py-2 text-center text-sm font-semibold text-amber-950">
-      Draft — not published. Only visible locally.
+      Draft: not published. Only visible locally.
     </div>
   );
 
   // Simple layout without sticky CTA
   if (!showStickyCTA) {
     return (
-      <div
-        className="overflow-x-clip bg-white"
-        lang={meta.language}
-      >
+      <div className="overflow-x-clip bg-white" lang={meta.language}>
         {draftBanner}
         {/* Hide the layout header and show transparent one for hero pages */}
         {meta.heroImage && (

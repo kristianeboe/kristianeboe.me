@@ -48,7 +48,7 @@ export default function Uses() {
       eyebrow="Uses"
       title="Software I use, gear I rely on, and tools I actually recommend."
       intro={
-        "People ask what I use to build and stay productive. Here's the honest answer — the stuff that's actually on my desk and in my dock, not a sponsored list."
+        "People ask what I use to build and stay productive. Here's the honest answer: the stuff that's actually on my desk and in my dock, not a sponsored list."
       }
     >
       <div className="space-y-20">
@@ -77,7 +77,7 @@ export default function Uses() {
         <ToolsSection title="Development">
           <Tool title="Cursor" href="https://cursor.sh">
             AI-first code editor built on VS Code. The tab completion and inline
-            chat are genuinely magical — it&apos;s the first tool that made me
+            chat are genuinely magical. It&apos;s the first tool that made me
             feel like AI is actually augmenting my thinking rather than just
             autocompleting boilerplate.
           </Tool>
@@ -91,7 +91,7 @@ export default function Uses() {
             me.
           </Tool>
           <Tool title="TablePlus" href="https://tableplus.com">
-            The best database GUI. Works with Postgres, MySQL, SQLite, Redis —
+            The best database GUI. Works with Postgres, MySQL, SQLite, Redis,
             whatever you&apos;re running. Has saved me from building a thousand
             admin interfaces over the years.
           </Tool>

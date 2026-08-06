@@ -11,7 +11,7 @@ const talks = [
     title: "From prompt to product",
     event: "Tekna Lunch & Learn · Jan 2026",
     description:
-      "How to build AI products that actually work in production — structured output with the AI SDK, long-running processes in the UI, browser agents, and combining email with AI. Everything I learned shipping Homi.",
+      "How to build AI products that actually work in production: structured output with the AI SDK, long-running processes in the UI, browser agents, and combining email with AI. Everything I learned shipping Homi.",
     cta: "View event",
   },
   {
@@ -27,7 +27,7 @@ const talks = [
     title: "9 ways to travel",
     event: "Lightning Talks, Abakus · NTNU, 2017",
     description:
-      "A ten-minute lightning talk on nine very different ways to see the world — the early version of an obsession that never went away.",
+      "A ten-minute lightning talk on nine very different ways to see the world. It was the early version of an obsession that never went away.",
     cta: "View event",
   },
 ];
@@ -63,7 +63,7 @@ const appearances = [
     title: "Homi AI home hunting",
     event: "AI Julekalender, day 4 · Dec 2025",
     description:
-      "The first live demo of Homi's new AI engine — natural conversation, profile building, and digging through the housing market — for Daniel Westervik's Norwegian AI advent calendar.",
+      "The first live demo of Homi's new AI engine for Daniel Westervik's Norwegian AI advent calendar, covering natural conversation, profile building, and a search through the housing market.",
     cta: "Watch on YouTube",
   },
   {
@@ -105,7 +105,7 @@ const press = [
     outlet: "Shifter · Nov 2025",
     title: "Disse skal på Europas største startup-event i år",
     description:
-      "On heading to Slush when half my network suddenly was going — and the invitation to pitch Homi on stage that sealed it.",
+      "On heading to Slush when half my network suddenly was going, plus the invitation to pitch Homi on stage that sealed it.",
   },
   {
     href: "https://www.shifter.no/nyheter/hopper-av-milliardeventyr-i-usa-og-satser-alt-pa-egen-startup/428085",
@@ -125,10 +125,9 @@ const press = [
   {
     href: "https://www.shifter.no/nyheter/mesh-tar-over-startupen-til-utvist-grnder-na-far-han-bli-i-norge/247849",
     outlet: "Shifter · May 2022",
-    title:
-      "Mesh tar over startupen til utvist gründer — nå får han bli i Norge",
+    title: "Mesh tar over startupen til utvist gründer. Nå får han bli i Norge",
     description:
-      "When Mesh took over Scales — my technical baby — and my co-founder got to stay in Norway.",
+      "When Mesh took over Scales, my technical baby, while my co-founder got to stay in Norway.",
   },
   {
     href: "https://www.shifter.no/kristian-elset-bo-alt-for-mange-darlige-ideer-blir-investert-i-av-folk-uten-peiling-pa-teknologi/216527",
@@ -267,7 +266,7 @@ function ArchiveGrid() {
 export const metadata: Metadata = {
   title: "Speaking & media",
   description:
-    "Talks, podcasts, and press coverage — building products with AI, life at a YC startup in Silicon Valley, and the honest parts of running Homi as a solo founder.",
+    "Talks, podcasts, and press coverage about building products with AI, life at a YC startup in Silicon Valley, and the honest parts of running Homi as a solo founder.",
 };
 
 export default function Speaking() {
@@ -275,7 +274,7 @@ export default function Speaking() {
     <SimpleLayout
       eyebrow="Speaking & media"
       title="I talk about building, shipping, and the unglamorous parts of startups."
-      intro="On stage, on podcasts, and in the Norwegian tech press — mostly about building AI products that survive contact with production, and the honest parts that get cut from the polished version. If you'd like me to speak at your event, reach out."
+      intro="On stage, on podcasts, and in the Norwegian tech press. I mostly talk about building AI products that survive contact with production, and the honest parts that get cut from the polished version. If you'd like me to speak at your event, reach out."
     >
       <div className="space-y-16">
         <AppearanceGrid title="Talks" items={talks} />
