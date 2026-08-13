@@ -63,7 +63,7 @@ export type OrganizationPlan = (typeof organizationPlanEnum.enumValues)[number];
 export const userTable = pgTable("user", (t) => ({
   id: t.text().primaryKey(),
   name: t.text(),
-  email: t.text(),
+  email: t.text().notNull().unique(),
   emailVerified: t.boolean().default(false).notNull(),
   image: t.text(),
   // Username plugin fields
