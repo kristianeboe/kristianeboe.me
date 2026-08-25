@@ -15,6 +15,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
         disallow: [
           "/app/*", // Block authenticated app pages
+          "/preview/*", // Unpublished blog previews
           "/api/*", // Block API routes
           "/demo", // Block demo page
           "/signin", // Block auth pages

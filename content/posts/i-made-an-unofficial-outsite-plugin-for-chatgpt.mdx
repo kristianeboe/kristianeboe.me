@@ -1,0 +1,94 @@
+---
+h1: "I made an unofficial Outsite plugin for ChatGPT"
+h1Subtitle: "A small read-only MCP for comparing public room dates and rates"
+socialImage: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/social-thumbnail.webp"
+metaTitle: "An unofficial Outsite plugin for ChatGPT"
+metaDescription: "Install a read-only MCP app that lets ChatGPT search public Outsite locations, rates, and individual room calendars."
+publishedAt: "2099-12-31"
+author: "default"
+category: "Tutorials"
+tags: ["chatgpt", "mcp", "travel-tools", "outsite"]
+language: "en-US"
+showStickyCTA: false
+enableAutoCtAs: false
+readingTime: 5
+thumbnail: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/social-thumbnail.webp"
+---
+
+I was planning how to get from Mexico to Austin and kept repeating the same Outsite search.
+
+The main date search answers the obvious question: what can I book between these two dates? My dates were still moving. I wanted to know whether I could leave La Paz on a Tuesday, stay in Austin for a week, and get a room I liked. That answer often sat one layer down, inside the calendar for a particular room.
+
+So I made a small MCP server for it. ChatGPT can use it to search public Outsite locations, quote exact dates, and inspect an individual room calendar across a wider window.
+
+This is an unofficial, read-only project. It reads anonymous data from Outsite's public booking site. The server has no Outsite login, and its tools cannot book a room or make a payment.
+
+## What it does
+
+The server handles the searches I kept doing by hand:
+
+- Find an Outsite house from a city, neighborhood, country, or house name.
+- Check the public room and rate combinations quoted for exact dates.
+- Inspect one room type across a wider calendar and find contiguous open periods.
+
+Every result includes its source URL and the time it was fetched.
+
+## Install it in ChatGPT
+
+ChatGPT calls this a custom app in the current UI. I still think of it as a plugin.
+
+1. Open **Settings**, then **Apps**.
+2. Enable **Developer mode**. Its location varies a little by plan and workspace role.
+3. Choose **Create app**.
+4. Name it **Outsite Research (Unofficial)**.
+5. Set the server URL to `https://outsite-mcp.kristianeboe.me/mcp`.
+6. Choose **No Auth**.
+7. Review the tools and connect the app.
+
+Open a new chat, select the app from the tools menu, and ask it to check a stay.
+
+OpenAI documents the current flow in [Developer mode and MCP apps in ChatGPT](https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt). ChatGPT will warn you that this is an unreviewed server. That warning makes sense. You can [inspect the source](https://github.com/kristianeboe/outsite-mcp) or run your own copy if you prefer to control the endpoint.
+
+<InfoBox title="What the hosted server can access">
+  It makes anonymous, read-only requests to Outsite's public GraphQL API. It
+  does not receive your Outsite cookies, account token, or payment details.
+</InfoBox>
+
+## A test from my Austin search
+
+I used this prompt:
+
+> Use Outsite Research (Unofficial) to find public availability and quoted rates at Austin Travis Heights for September 12 to 19, 2026. Return room names, rate types, and totals.
+
+When I ran it on August 25, 2026, the app found Woodland at $554.98 and Monroe at $582.60 on the public member weekly rate. It returned guest rates for the same rooms too. Both rooms showed one available for the full week.
+
+<ImageGallery
+  images={[
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/outsite-travis-heights.webp",
+      alt: "The Outsite Austin Travis Heights room page for September 12 to 19, 2026, showing Woodland and Monroe",
+      caption: "The same dates on Outsite's public room page.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/chatgpt-outsite-rates.webp",
+      alt: "ChatGPT using the unofficial Outsite app to compare Woodland and Monroe rates",
+      caption: "ChatGPT returned member and guest quotes from the MCP.",
+    },
+  ]}
+/>
+
+The prompt I care about more is:
+
+> Check each room calendar at Austin Travis Heights and show me contiguous stays of four to seven nights during the first two weeks of September.
+
+That is closer to how I plan a trip. The room window becomes an input to the flight search, instead of a constraint I discover after choosing a flight.
+
+## What it cannot promise
+
+Rates and availability can change after a result is fetched. A rate labeled "member" on the public site does not prove that your account can book it. The server does not check membership eligibility.
+
+Outsite's GraphQL API is undocumented. I added response validation, short caching, timestamps, and clear errors, but an upstream change can still break the tool.
+
+Outsite has not endorsed the project. If they publish a supported API, I would rather use that.
+
+The code is available under the MIT license at [kristianeboe/outsite-mcp](https://github.com/kristianeboe/outsite-mcp). The hosted server is convenient for testing. The repository is there if you want to inspect it, run it yourself, or improve it.
