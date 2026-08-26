@@ -1,6 +1,6 @@
 ---
 h1: "I made an unofficial Outsite plugin for ChatGPT"
-h1Subtitle: "How a flexible trip from Cabo to Austin turned into a small travel tool"
+h1Subtitle: "I was trying to leave Cabo at the right time. Somehow this became an MCP server."
 socialImage: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/editorial-thumbnail-v1.webp"
 metaTitle: "An unofficial Outsite plugin for ChatGPT"
 metaDescription: "How a flexible trip from Cabo to Austin became a read-only MCP app for comparing Outsite room dates, rates, and calendars in ChatGPT."
@@ -15,11 +15,11 @@ readingTime: 6
 thumbnail: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/editorial-thumbnail-v1.webp"
 ---
 
-I was planning how to get from Cabo to Austin and kept repeating the same Outsite search.
+I was trying to work out when to leave Cabo for Austin. Somewhere around the sixth identical Outsite search, I started wondering why I was still doing it by hand.
 
-My dates were still moving. A few more days in Mexico would change the flight, which would change the Austin dates, which would change the available rooms. I wanted to know whether I could leave Cabo on a Tuesday, stay in Austin for a week, and get a room I liked.
+My dates were still moving, which sounds harmless until every extra day changes the flight and every flight moves the Austin stay. Then a different set of rooms opens up. I wanted to know whether I could leave Cabo on a Tuesday, stay in Austin for a week, and get a room I liked.
 
-I had spent time around Cabo before, riding along the Pacific and taking a boat past El Arco at sunset. Those memories were part of why I wanted to keep the dates loose. I was planning a trip first. The software came later.
+I had spent time around Cabo before, riding along the Pacific and taking a boat past El Arco at sunset. Cabo is also a very easy place to lose a few days. That was part of why I wanted to keep the dates loose. I was planning a trip. Somehow I ended up building software.
 
 <ImageGallery
   images={[
@@ -42,15 +42,15 @@ I had spent time around Cabo before, riding along the Pacific and taking a boat 
   ]}
 />
 
-Outsite's main date search answers the obvious question: what can I book between these two dates? The answer I needed often sat one layer down, inside the calendar for a particular room.
+Outsite's main date search starts with fixed dates. Mine kept moving, and the answer I wanted often sat one layer down, inside the calendar for a particular room.
 
-So I made a small MCP server for it. ChatGPT can use it to search public Outsite locations, quote exact dates, and inspect an individual room calendar across a wider window.
+So I did what I apparently do when a travel site makes me repeat myself: I made a small MCP server. ChatGPT can use it to search public Outsite locations, quote exact dates, and inspect an individual room calendar across a wider window.
 
 This is an unofficial, read-only project. It reads anonymous data from Outsite's public booking site. The server has no Outsite login, and its tools cannot book a room or make a payment.
 
 ## What it does
 
-The server handles the searches I kept doing by hand:
+It does a few specific things, all based on searches I kept doing by hand:
 
 - Find an Outsite house from a city, neighborhood, country, or house name.
 - Check the public room and rate combinations quoted for exact dates.
@@ -68,7 +68,7 @@ Every result includes its source URL and the time it was fetched.
 
 ## Install it in ChatGPT
 
-ChatGPT calls this a custom app in the current UI. I still think of it as a plugin.
+ChatGPT calls this a custom app in the current UI. I still think plugin is the better name.
 
 1. Open **Settings**, then **Apps**.
 2. Enable **Developer mode**. Its location varies a little by plan and workspace role.
@@ -114,7 +114,7 @@ The prompt I care about more is:
 
 > Check each room calendar at Austin Travis Heights and show me contiguous stays of four to seven nights during the first two weeks of September.
 
-That is closer to how I plan a trip. The room window becomes an input to the flight search, instead of a constraint I discover after choosing a flight.
+This is the part I built it for. The room window becomes an input to the flight search, instead of a constraint I discover after choosing a flight.
 
 I can also follow up with:
 
@@ -128,6 +128,6 @@ Rates and availability can change after a result is fetched. A rate labeled "mem
 
 Outsite's GraphQL API is undocumented. I added response validation, short caching, timestamps, and clear errors, but an upstream change can still break the tool.
 
-Outsite has not endorsed the project. If they publish a supported API, I would rather use that.
+The code is available under the MIT license at [kristianeboe/outsite-mcp](https://github.com/kristianeboe/outsite-mcp). The hosted server is the easiest way to try it. If you would rather not trust a random travel tool I built while planning my own trip, run your own copy. That is fair.
 
-The code is available under the MIT license at [kristianeboe/outsite-mcp](https://github.com/kristianeboe/outsite-mcp). The hosted server is convenient for testing. The repository is there if you want to inspect it, run it yourself, or improve it.
+At some point I should probably stop turning travel planning into software projects and book the trip. I am not promising that will happen.
