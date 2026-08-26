@@ -1,9 +1,9 @@
 ---
 h1: "I made an unofficial Outsite plugin for ChatGPT"
-h1Subtitle: "A small read-only MCP for comparing public room dates and rates"
+h1Subtitle: "How a flexible trip from Cabo to Austin turned into a small travel tool"
 socialImage: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/editorial-thumbnail-v1.webp"
 metaTitle: "An unofficial Outsite plugin for ChatGPT"
-metaDescription: "Install a read-only MCP app that lets ChatGPT search public Outsite locations, rates, and individual room calendars."
+metaDescription: "How a flexible trip from Cabo to Austin became a read-only MCP app for comparing Outsite room dates, rates, and calendars in ChatGPT."
 publishedAt: "2099-12-31"
 author: "default"
 category: "Tutorials"
@@ -11,13 +11,38 @@ tags: ["chatgpt", "mcp", "travel-tools", "outsite"]
 language: "en-US"
 showStickyCTA: false
 enableAutoCtAs: false
-readingTime: 5
+readingTime: 6
 thumbnail: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/editorial-thumbnail-v1.webp"
 ---
 
-I was planning how to get from Mexico to Austin and kept repeating the same Outsite search.
+I was planning how to get from Cabo to Austin and kept repeating the same Outsite search.
 
-The main date search answers the obvious question: what can I book between these two dates? My dates were still moving. I wanted to know whether I could leave La Paz on a Tuesday, stay in Austin for a week, and get a room I liked. That answer often sat one layer down, inside the calendar for a particular room.
+My dates were still moving. A few more days in Mexico would change the flight, which would change the Austin dates, which would change the available rooms. I wanted to know whether I could leave Cabo on a Tuesday, stay in Austin for a week, and get a room I liked.
+
+I had spent time around Cabo before, riding along the Pacific and taking a boat past El Arco at sunset. Those memories were part of why I wanted to keep the dates loose. I was planning a trip first. The software came later.
+
+<ImageGallery
+  images={[
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/cabo-el-arco-sunset.webp",
+      alt: "A group on a boat near El Arco in Cabo at sunset",
+      caption: "Sunset by El Arco during an earlier Cabo trip.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/cabo-horseback-pacific.webp",
+      alt: "Kristian riding a horse along a Pacific beach near Cabo",
+      caption:
+        "Horseback by the Pacific, which made the departure date easy to postpone.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/cabo-afternoon.webp",
+      alt: "A beer and sunglasses on a table overlooking the water near Cabo",
+      caption: "An afternoon in Cabo while the Austin dates were still moving.",
+    },
+  ]}
+/>
+
+Outsite's main date search answers the obvious question: what can I book between these two dates? The answer I needed often sat one layer down, inside the calendar for a particular room.
 
 So I made a small MCP server for it. ChatGPT can use it to search public Outsite locations, quote exact dates, and inspect an individual room calendar across a wider window.
 
@@ -29,9 +54,17 @@ The server handles the searches I kept doing by hand:
 
 - Find an Outsite house from a city, neighborhood, country, or house name.
 - Check the public room and rate combinations quoted for exact dates.
+- Read the room description, bed type, size, and occupancy attached to each public quote.
 - Inspect one room type across a wider calendar and find contiguous open periods.
 
 Every result includes its source URL and the time it was fetched.
+
+<InfoBox title="How room photos work">
+  The MCP returns room descriptions and public source links. It does not
+  currently return or analyze image files. An agent with web or browser access
+  can follow those links, fetch the room photos, and compare the images with the
+  written description.
+</InfoBox>
 
 ## Install it in ChatGPT
 
@@ -82,6 +115,12 @@ The prompt I care about more is:
 > Check each room calendar at Austin Travis Heights and show me contiguous stays of four to seven nights during the first two weeks of September.
 
 That is closer to how I plan a trip. The room window becomes an input to the flight search, instead of a constraint I discover after choosing a flight.
+
+I can also follow up with:
+
+> Open the public source pages for these rooms. Compare the photos and descriptions, then note the bed layout, desk, natural light, and bathroom setup.
+
+That second step uses the agent's web or browser access. The MCP supplies the room data and the source page.
 
 ## What it cannot promise
 
