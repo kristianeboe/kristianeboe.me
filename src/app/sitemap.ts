@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       !(env.NODE_ENV === "production" && post.slug === "showcase"),
   );
 
-  const baseUrl = "https://example.com";
+  const baseUrl = "https://kristianeboe.me";
 
   return [
     // Main pages

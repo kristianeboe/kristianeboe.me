@@ -25,6 +25,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: "https://example.com/sitemap.xml",
+    sitemap: "https://kristianeboe.me/sitemap.xml",
   };
 }
