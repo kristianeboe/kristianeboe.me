@@ -4,11 +4,7 @@
  * Defines the available newsletter topics in Resend.
  * These keys provide type-safe access to Resend topics throughout the codebase.
  */
-export const NEWSLETTER_TOPICS = [
-  "newsletter-general",
-  "newsletter-tips",
-  "newsletter-product-updates",
-] as const;
+export const NEWSLETTER_TOPICS = ["newsletter-general"] as const;
 
 /**
  * Type-safe topic keys for newsletter subscriptions

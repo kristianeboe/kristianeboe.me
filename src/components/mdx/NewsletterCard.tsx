@@ -11,6 +11,7 @@ interface NewsletterCardProps {
   title?: string;
   description?: string;
   buttonText?: string;
+  finePrint?: string;
   features?: Array<{
     label: string;
     description?: string;
@@ -18,9 +19,10 @@ interface NewsletterCardProps {
 }
 
 export function NewsletterCard({
-  title = "Stay in the loop with dating insights",
-  description = "Get the latest dating tips, stats, and insights delivered to your inbox. No spam, just valuable content.",
-  buttonText = "Subscribe",
+  title = "More is coming",
+  description = "I write about the things I build, the places they take me, and whatever rabbit hole comes next.",
+  buttonText = "Keep me posted",
+  finePrint = "Occasional emails. Unsubscribe whenever you want.",
   features,
 }: NewsletterCardProps) {
   const [justSubscribed, setJustSubscribed] = useState(false);
@@ -63,22 +65,7 @@ export function NewsletterCard({
     }
   }, [subscribedEmail, form]);
 
-  const defaultFeatures = [
-    {
-      label: "Dating tips & tricks",
-      description: "Improve your profile and conversation game",
-    },
-    {
-      label: "Latest statistics",
-      description: "Stay updated with dating trends and insights",
-    },
-    {
-      label: "Exclusive content",
-      description: "Get access to premium guides and resources",
-    },
-  ];
-
-  const displayFeatures = features || defaultFeatures;
+  const displayFeatures = features ?? [];
 
   const onSubmit = form.handleSubmit(async (data) => {
     setIsSubscribing(true);
@@ -113,12 +100,11 @@ export function NewsletterCard({
             <div className="flex-1">
               <h3 className="text-xl font-bold text-gray-900">
                 {wasSubscribedOnMount && !justSubscribed
-                  ? "You're already subscribed! 🎉"
-                  : "Thank you for subscribing! 🎉"}
+                  ? "You're already on the list"
+                  : "You're on the list"}
               </h3>
               <p className="mt-2 text-gray-700">
-                You&apos;ve successfully been added to our mailing list. Keep an
-                eye on your inbox for great content!
+                I&apos;ll email you when there is something worth sending.
                 {subscribedEmail && (
                   <>
                     <br />
@@ -215,6 +201,7 @@ export function NewsletterCard({
             </div>
           )}
           {error && <p className="text-destructive mt-2 text-sm">{error}</p>}
+          <p className="mt-3 text-sm text-gray-500">{finePrint}</p>
         </form>
       </div>
 

@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import {
@@ -30,14 +31,6 @@ export const newsletterRouter = createTRPCRouter({
       }
 
       try {
-        // Create contact in Resend (idempotent)
-        const contactResult = await createContact({ email });
-
-        if (!contactResult.success) {
-          throw new Error(contactResult.error || "Failed to create contact");
-        }
-
-        // Subscribe to topic if specified
         if (topic) {
           const topicResult = await subscribeToTopics({
             email,
@@ -45,17 +38,23 @@ export const newsletterRouter = createTRPCRouter({
           });
 
           if (!topicResult.success) {
-            console.warn(
-              `Failed to subscribe to topic ${topic}:`,
-              topicResult.error,
-            );
-            // Don't fail the whole operation if topic subscription fails
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: topicResult.error || "Subscription failed",
+            });
+          }
+        } else {
+          const contactResult = await createContact({ email });
+
+          if (!contactResult.success) {
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: contactResult.error || "Subscription failed",
+            });
           }
         }
 
-        // Log for analytics
-        console.log("Newsletter subscription:", {
-          email,
+        console.log("Newsletter subscription recorded", {
           path,
           topic,
           timestamp: new Date().toISOString(),
@@ -66,12 +65,15 @@ export const newsletterRouter = createTRPCRouter({
           message: "Successfully subscribed!",
         };
       } catch (error) {
+        if (error instanceof TRPCError) {
+          throw error;
+        }
+
         console.error("Newsletter subscription error:", error);
-        return {
-          success: false,
-          message:
-            error instanceof Error ? error.message : "Subscription failed",
-        };
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Subscription failed",
+        });
       }
     }),
 

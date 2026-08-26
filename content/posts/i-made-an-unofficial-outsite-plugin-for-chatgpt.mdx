@@ -18,14 +18,14 @@ thumbnail: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/editorial-thum
 
 I was trying to work out when to leave Cabo for Austin. Somewhere around the sixth identical Outsite search, I started wondering why I was still doing it by hand.
 
-I had spent time around Cabo before, riding along the Pacific and taking a boat past El Arco at sunset. Cabo is also a very easy place to lose a few days. That was part of why I wanted to keep the dates loose. I was planning a trip. Somehow I ended up building software.
+This is my first trip to Cabo. I rode along the Pacific, took a boat past El Arco at sunset, and kept finding good reasons to leave a few days later. That was part of why I wanted to keep the dates loose. I was planning a trip. Somehow I ended up building software.
 
 <ImageGallery
   images={[
     {
       src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/cabo-el-arco-sunset.webp",
       alt: "A group on a boat near El Arco in Cabo at sunset",
-      caption: "Sunset by El Arco during an earlier Cabo trip.",
+      caption: "Sunset by El Arco on my first trip to Cabo.",
     },
     {
       src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/cabo-horseback-pacific.webp",
@@ -54,6 +54,38 @@ I had spent time around Cabo before, riding along the Pacific and taking a boat 
 My dates were still moving, which sounds harmless until every extra day changes the flight and every flight moves the Austin stay. Then a different set of rooms opens up. I wanted to know whether I could leave Cabo on a Tuesday, stay in Austin for a week, and get a room I liked.
 
 Outsite's main date search starts with fixed dates. Mine kept moving, and the answer I wanted often sat one layer down, inside the calendar for a particular room.
+
+These were the two places at either end of the search. Todos Santos looked like somewhere I could happily stay put. Travis Heights had the desk, daylight, and Austin location I was trying to line up.
+
+<ImageGallery
+  images={[
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/outsite-todos-santos-pool.webp",
+      alt: "A small pool at Outsite Todos Santos",
+      caption: "The pool at Outsite Todos Santos. Photo: Outsite.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/outsite-todos-santos-courtyard.webp",
+      alt: "Guests sitting in a shaded courtyard at Outsite Todos Santos",
+      caption:
+        "One of the outdoor spaces at Outsite Todos Santos. Photo: Outsite.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/outsite-travis-heights-dining.webp",
+      alt: "The shared dining room at Outsite Austin Travis Heights",
+      caption:
+        "The shared dining room at Austin Travis Heights. Photo: Outsite.",
+    },
+    {
+      src: "/blog/i-made-an-unofficial-outsite-plugin-for-chatgpt/outsite-travis-heights-workspace.webp",
+      alt: "A desk in front of bright bay windows at Outsite Austin Travis Heights",
+      caption:
+        "A desk by the bay windows at Austin Travis Heights. Photo: Outsite.",
+    },
+  ]}
+/>
+
+Property photos from [Outsite Todos Santos](https://www.outsite.co/locations/todos-santos) and [Outsite Austin Travis Heights](https://www.outsite.co/locations/austin-travis-heights).
 
 So I did what I apparently do when a travel site makes me repeat myself: I made a small MCP server. ChatGPT can use it to search public Outsite locations, quote exact dates, and inspect an individual room calendar across a wider window.
 
@@ -142,3 +174,10 @@ Outsite's GraphQL API is undocumented. I added response validation, short cachin
 The code is available under the MIT license at [kristianeboe/outsite-mcp](https://github.com/kristianeboe/outsite-mcp). The hosted server is the easiest way to try it. If you would rather not trust a random travel tool I built while planning my own trip, run your own copy. That is fair.
 
 At some point I should probably stop turning travel planning into software projects and book the trip. I am not promising that will happen.
+
+<NewsletterCard
+  title="More is coming"
+  description="The Outsite MCP is the top of the iceberg. I write about the things I build, the places they take me, and whatever rabbit hole comes next."
+  buttonText="Keep me posted"
+  features={[]}
+/>

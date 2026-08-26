@@ -12,11 +12,7 @@ import { env } from "@/env";
  * Defines the available newsletter topics in Resend.
  * These keys provide type-safe access to Resend topics throughout the codebase.
  */
-export const NEWSLETTER_TOPICS = [
-  "newsletter-general",
-  "newsletter-tips",
-  "newsletter-product-updates",
-] as const;
+export const NEWSLETTER_TOPICS = ["newsletter-general"] as const;
 
 /**
  * Type-safe topic keys for newsletter subscriptions
@@ -36,12 +32,10 @@ export type TopicKey = (typeof NEWSLETTER_TOPICS)[number];
  * IMPORTANT: These IDs are tied to your Resend account.
  * If you recreate topics, update these IDs.
  *
- * TODO: Update these with your actual Resend topic IDs
+ * The topic lives in the Boe Ventures Resend account.
  */
 const TOPIC_ID_MAP: Record<TopicKey, string> = {
-  "newsletter-general": "YOUR_GENERAL_TOPIC_ID",
-  "newsletter-tips": "YOUR_TIPS_TOPIC_ID",
-  "newsletter-product-updates": "YOUR_PRODUCT_UPDATES_TOPIC_ID",
+  "newsletter-general": "eeacc98a-0768-4105-98b7-1f3ead25f2ea",
 } as const;
 
 /**
@@ -225,17 +219,22 @@ export async function createContact(params: {
       unsubscribed: params.unsubscribed ?? false,
     });
 
-    return { success: true, data: response };
-  } catch (error) {
-    // Resend returns 400 if contact already exists - handle gracefully
-    if (error instanceof Error && error.message.includes("already exists")) {
-      console.log(`Contact ${params.email} already exists`);
-      return { success: true, alreadyExists: true };
+    if (response.error) {
+      if (response.error.message.toLowerCase().includes("already exists")) {
+        return { success: true as const, alreadyExists: true as const };
+      }
+
+      return { success: false as const, error: response.error.message };
     }
 
-    console.error("Failed to create contact:", error);
+    return { success: true as const, data: response.data };
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("already exists")) {
+      return { success: true as const, alreadyExists: true as const };
+    }
+
     return {
-      success: false,
+      success: false as const,
       error: error instanceof Error ? error.message : "Unknown error",
     };
   }
@@ -255,12 +254,8 @@ async function getContactTopics(params: { email: string }) {
       return { success: false as const, error: error.message };
     }
 
-    console.log(
-      `📋 Retrieved ${data?.data?.length || 0} topics for ${params.email}`,
-    );
     return { success: true as const, data };
   } catch (error) {
-    console.error("❌ Failed to get contact topics:", error);
     return {
       success: false as const,
       error: error instanceof Error ? error.message : "Unknown error",
@@ -277,22 +272,17 @@ async function updateContactTopics(params: {
   topics: Array<{ id: string; subscription: "opt_in" | "opt_out" }>;
 }) {
   try {
-    console.log(
-      `📝 Updating ${params.topics.length} topic(s) for ${params.email}:`,
-      params.topics
-        .map((t) => `${t.id.slice(0, 8)}...:${t.subscription}`)
-        .join(", "),
-    );
-
     const response = await resend.contacts.topics.update({
       email: params.email,
       topics: params.topics,
     });
 
-    console.log(`✅ Updated topics for ${params.email}`);
-    return { success: true as const, data: response };
+    if (response.error) {
+      return { success: false as const, error: response.error.message };
+    }
+
+    return { success: true as const, data: response.data };
   } catch (error) {
-    console.error("❌ Failed to update topics:", error);
     return {
       success: false as const,
       error: error instanceof Error ? error.message : "Unknown error",
@@ -324,12 +314,12 @@ export async function subscribeToTopics(params: {
     // Ensure contact exists
     const contactResult = await createContact({ email: params.email });
 
-    // If contact was just created, wait for Resend to populate default topics
+    if (!contactResult.success) {
+      return contactResult;
+    }
+
     if (!contactResult.alreadyExists) {
-      console.log(
-        "⏳ New contact, waiting 500ms for Resend to populate topics...",
-      );
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 350));
     }
 
     // Get current topics to preserve other subscriptions
@@ -359,7 +349,6 @@ export async function subscribeToTopics(params: {
     // Update all topics
     return await updateContactTopics({ email: params.email, topics });
   } catch (error) {
-    console.error("❌ Failed to subscribe to topics:", error);
     return {
       success: false as const,
       error: error instanceof Error ? error.message : "Unknown error",
