@@ -12,7 +12,7 @@ import {
   ImageUpload,
   type ImageUploadResult,
 } from "@/components/ui/upload/ImageUpload";
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 
 interface OrganizationLogoUploadProps {
   organizationId: string;
@@ -29,10 +29,10 @@ export function OrganizationLogoUpload({
 }: OrganizationLogoUploadProps) {
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
-  const trpc = useTRPC();
+  const domain = useDomain();
 
   const updateOrgMutation = useMutation(
-    trpc.org.update.mutationOptions({
+    domain.org.update.mutationOptions({
       onSuccess: () => {
         toast.success("Organization logo updated successfully");
         router.refresh();

@@ -40,7 +40,7 @@ This is a T3 Stack Next.js 16 SaaS application using the App Router with a moder
 
 - **Framework**: Next.js 16 with App Router and React 19
 - **Database**: PostgreSQL (Neon) with Drizzle ORM (snake_case convention)
-- **API Layer**: tRPC v11 for type-safe APIs with SuperJSON transformer
+- **API Layer**: oRPC domain routers with TanStack Query; SuperJSON for query hydration
 - **Auth**: Better Auth with organization/team support
 - **Styling**: Tailwind CSS 4 with Radix UI components
 - **Content**: Velite for MDX blog posts
@@ -60,14 +60,14 @@ src/
 │   │   ├── app/onboarding/     # User onboarding flow
 │   │   └── app/demos/          # Demo pages for features
 │   └── api/                      # API routes
-│       ├── trpc/[trpc]/         # tRPC endpoint
+│       ├── domain/[[...path]]/         # oRPC endpoint
 │       ├── auth/[...all]/       # Better Auth endpoints
 │       └── blob/                # File upload endpoints
 ├── server/                        # Backend code
-│   ├── api/                      # tRPC routers and setup
-│   │   ├── root.ts              # Main tRPC router (add new routers here)
-│   │   ├── trpc.ts              # tRPC context, procedures (publicProcedure, protectedProcedure, adminProcedure)
-│   │   └── routers/             # Feature routers (user, org, post, blob, newsletter)
+│   ├── domains/                  # oRPC routers and setup
+│   │   ├── router.ts            # Compose domain routers
+│   │   ├── procedure.ts         # Authenticated procedure middleware
+│   │   └── <domain>/router.ts   # Feature routers (user, org, post, blob, newsletter)
 │   ├── db/                       # Database layer
 │   │   ├── schema.ts            # Main schema (imports auth-schema)
 │   │   ├── auth-schema.ts       # Better Auth tables + organizations/teams
@@ -86,9 +86,9 @@ src/
 │   ├── validators/               # Zod schemas for validation
 │   ├── utils/                    # Helper functions
 │   └── auth-utils.ts            # Auth helper functions
-├── trpc/                         # tRPC client setup
-│   ├── react.tsx                # Client-side tRPC provider
-│   └── server.tsx               # Server-side tRPC caller
+├── lib/                          # Shared utilities and oRPC clients
+│   ├── domain-react.tsx         # Browser provider
+│   └── domain-server.tsx        # Server caller
 └── env.ts                        # Environment variables schema (using @t3-oss/env-nextjs)
 
 emails/                            # React Email templates
@@ -138,35 +138,27 @@ Better Auth is configured with these plugins:
 - `protectedProcedure` - Requires authenticated user
 - `adminProcedure` - Requires admin in production, unrestricted in development
 
-**Session Context**: The tRPC context includes `session`, `db`, and `authApi` (Better Auth API for server actions).
+**Session Context**: The oRPC context includes `session`, `db`, and `authApi` (Better Auth API for server actions).
 
-### tRPC Patterns
+### oRPC Patterns
 
-**Adding New Routers**:
-1. Create router in `src/server/api/routers/yourRouter.ts`
-2. Export it from `src/server/api/root.ts` in the `appRouter`
-3. Use `protectedProcedure` for auth-required endpoints
+Add procedures under `src/server/domains/<domain>/router.ts` and compose them
+in `src/server/domains/router.ts`. Use `protectedProcedure` for authenticated
+operations. Business errors use `DomainError`; the transport maps them to oRPC.
 
-**Client Usage**:
 ```tsx
-// In Client Components
-'use client';
-import { useTRPC } from '@/trpc/react';
+import { useQuery } from "@tanstack/react-query";
+import { useDomain } from "@/lib/domain-react";
 
-const MyComponent = () => {
-  const { data } = useTRPC.user.me.useQuery();
-  const updateMutation = useTRPC.user.update.useMutation();
-};
-
-// In Server Components
-import { createCaller } from '@/server/api/root';
-import { createTRPCContext } from '@/server/api/trpc';
-
-const trpc = createCaller(await createTRPCContext({ headers: headers() }));
-const data = await trpc.user.me();
+function Profile() {
+  const domain = useDomain();
+  const { data } = useQuery(domain.user.me.queryOptions());
+  return <p>{data?.name}</p>;
+}
 ```
 
-**Timing Middleware**: All procedures have artificial 100-400ms delay in development to catch waterfalls.
+Server components call `const api = await domainApi()` from
+`@/lib/domain-server`, then `await api.user.me()`.
 
 ### File Upload Pattern
 
@@ -324,7 +316,7 @@ Use `envSelect({ prod: X, test: Y })` helper for environment-aware values (match
 **Multi-Tenancy**: Organizations are stored in session (`session.activeOrganizationId`) and used for data scoping.
 
 **Type Safety**:
-- Use `RouterInputs` and `RouterOutputs` types from `@/trpc/react` for tRPC type inference
+- Use `RouterInputs` and `RouterOutputs` types from `@/lib/domain-react` for oRPC type inference
 - Database types: `User`, `Organization`, `Post`, etc. exported from schema files
 - Zod validators in `src/lib/validators/` shared between frontend and backend
 
@@ -337,6 +329,6 @@ Use `envSelect({ prod: X, test: Y })` helper for environment-aware values (match
 - **Never run `npm` or `yarn`** - this project uses Bun as the package manager
 - **Database migrations**: Use `db:push` for development, `db:generate` + `db:migrate` for production
 - **Auth routes**: All auth handled by Better Auth at `/api/auth/[...all]`
-- **tRPC endpoint**: Single endpoint at `/api/trpc/[trpc]` handles all tRPC calls
+- **oRPC endpoint**: Single endpoint at `/api/domain/[[...path]]` handles all oRPC calls
 - **Image optimization**: Configure remote patterns in `next.config.ts` for external images
 - **Content builds**: Run `velite build` before `next build` (automated in build script)

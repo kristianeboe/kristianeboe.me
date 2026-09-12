@@ -1,6 +1,6 @@
-import { TRPCError } from "@trpc/server";
+import { DomainError } from "@/server/domains/error";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { publicProcedure } from "@/server/domains/procedure";
 import {
   createContact,
   subscribeToTopics,
@@ -10,7 +10,7 @@ import { topicKeySchema, emailSchema } from "@/lib/validators";
 
 const ANONYMOUS_EMAIL_DOMAIN = "@anonymous.example.com"; // Update to match your Better Auth anonymous domain
 
-export const newsletterRouter = createTRPCRouter({
+export const newsletterRouter = {
   subscribe: publicProcedure
     .input(
       z.object({
@@ -19,7 +19,7 @@ export const newsletterRouter = createTRPCRouter({
         topic: topicKeySchema.optional(), // Single topic
       }),
     )
-    .mutation(async ({ input }) => {
+    .handler(async ({ input }) => {
       const { email, path, topic } = input;
 
       // Skip anonymous emails
@@ -38,7 +38,7 @@ export const newsletterRouter = createTRPCRouter({
           });
 
           if (!topicResult.success) {
-            throw new TRPCError({
+            throw new DomainError({
               code: "INTERNAL_SERVER_ERROR",
               message: topicResult.error || "Subscription failed",
             });
@@ -47,7 +47,7 @@ export const newsletterRouter = createTRPCRouter({
           const contactResult = await createContact({ email });
 
           if (!contactResult.success) {
-            throw new TRPCError({
+            throw new DomainError({
               code: "INTERNAL_SERVER_ERROR",
               message: contactResult.error || "Subscription failed",
             });
@@ -65,12 +65,12 @@ export const newsletterRouter = createTRPCRouter({
           message: "Successfully subscribed!",
         };
       } catch (error) {
-        if (error instanceof TRPCError) {
+        if (error instanceof DomainError) {
           throw error;
         }
 
         console.error("Newsletter subscription error:", error);
-        throw new TRPCError({
+        throw new DomainError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Subscription failed",
         });
@@ -90,7 +90,7 @@ export const newsletterRouter = createTRPCRouter({
         })
         .optional(),
     )
-    .query(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Determine which email to use:
       // 1. If provided in input, use that (for anonymous users with localStorage email)
       // 2. Otherwise, use session email (for authenticated users)
@@ -147,7 +147,7 @@ export const newsletterRouter = createTRPCRouter({
         email: z.string().email().optional(), // Optional email for anonymous users
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Determine which email to use:
       // 1. If provided in input, use that (for anonymous users with localStorage email)
       // 2. Otherwise, use session email (for authenticated users)
@@ -183,4 +183,4 @@ export const newsletterRouter = createTRPCRouter({
         );
       }
     }),
-});
+};

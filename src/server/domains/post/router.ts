@@ -1,24 +1,23 @@
 import { z } from "zod";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 import {
-  createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-} from "@/server/api/trpc";
+} from "@/server/domains/procedure";
 import { postTable } from "@/server/db/schema";
 
-export const postRouter = createTRPCRouter({
+export const postRouter = {
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
+    .handler(({ input }) => {
       return {
         greeting: `Hello ${input.text}`,
       };
     }),
 
   // Get all posts (for demo purposes)
-  all: publicProcedure.query(async ({ ctx }) => {
+  all: publicProcedure.handler(async ({ context: ctx }) => {
     const posts = await ctx.db.query.postTable.findMany({
       orderBy: (posts, { desc }) => [desc(posts.createdAt)],
       limit: 50,
@@ -34,7 +33,7 @@ export const postRouter = createTRPCRouter({
         description: z.string().optional(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const [post] = await ctx.db
         .insert(postTable)
         .values({
@@ -49,13 +48,20 @@ export const postRouter = createTRPCRouter({
   // Delete a post
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db.delete(postTable).where(eq(postTable.id, input.id));
+    .handler(async ({ context: ctx, input }) => {
+      await ctx.db
+        .delete(postTable)
+        .where(
+          and(
+            eq(postTable.id, input.id),
+            eq(postTable.createdById, ctx.session.user.id),
+          ),
+        );
 
       return { success: true };
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
+  getLatest: protectedProcedure.handler(async ({ context: ctx }) => {
     const post = await ctx.db.query.postTable.findFirst({
       orderBy: (posts, { desc }) => [desc(posts.createdAt)],
     });
@@ -63,7 +69,7 @@ export const postRouter = createTRPCRouter({
     return post ?? null;
   }),
 
-  getSecretMessage: protectedProcedure.query(() => {
+  getSecretMessage: protectedProcedure.handler(() => {
     return "you can now see this secret message!";
   }),
-});
+};

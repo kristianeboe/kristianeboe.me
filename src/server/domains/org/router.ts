@@ -1,15 +1,15 @@
 import { z } from "zod";
-import { TRPCError } from "@trpc/server";
+import { DomainError } from "@/server/domains/error";
 import { eq } from "drizzle-orm";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { protectedProcedure, publicProcedure } from "../procedure";
 import * as schema from "@/server/db/schema";
 
-export const orgRouter = createTRPCRouter({
+export const orgRouter = {
   // Get invitation details (public - used by invite page)
   getOrgInvite: publicProcedure
     .input(z.object({ invitationId: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const invitation = await ctx.db.query.invitationTable.findFirst({
         where: eq(schema.invitationTable.id, input.invitationId),
         with: {
@@ -26,7 +26,7 @@ export const orgRouter = createTRPCRouter({
       });
 
       if (!invitation) {
-        throw new TRPCError({
+        throw new DomainError({
           code: "NOT_FOUND",
           message: "Invitation not found",
         });
@@ -34,7 +34,7 @@ export const orgRouter = createTRPCRouter({
 
       // Check if expired
       if (invitation.expiresAt && invitation.expiresAt < new Date()) {
-        throw new TRPCError({
+        throw new DomainError({
           code: "BAD_REQUEST",
           message: "Invitation expired",
         });
@@ -42,7 +42,7 @@ export const orgRouter = createTRPCRouter({
 
       // Check if already accepted
       if (invitation.status !== "pending") {
-        throw new TRPCError({
+        throw new DomainError({
           code: "BAD_REQUEST",
           message: "Invitation no longer valid",
         });
@@ -54,7 +54,7 @@ export const orgRouter = createTRPCRouter({
   // Accept invitation (protected)
   acceptInvitation: protectedProcedure
     .input(z.object({ invitationId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Delegate to Better Auth
       const result = await ctx.authApi.acceptInvitation({
         body: { invitationId: input.invitationId },
@@ -65,7 +65,7 @@ export const orgRouter = createTRPCRouter({
     }),
 
   // List user's organizations
-  list: protectedProcedure.query(async ({ ctx }) => {
+  list: protectedProcedure.handler(async ({ context: ctx }) => {
     const orgs = await ctx.authApi.listOrganizations({
       headers: ctx.headers,
     });
@@ -80,7 +80,7 @@ export const orgRouter = createTRPCRouter({
         slug: z.string().min(1).max(100),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const org = await ctx.authApi.createOrganization({
         body: {
           name: input.name,
@@ -94,7 +94,7 @@ export const orgRouter = createTRPCRouter({
   // Get organization by slug
   getBySlug: protectedProcedure
     .input(z.object({ slug: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const org = await ctx.db.query.organizationTable.findFirst({
         where: eq(schema.organizationTable.slug, input.slug),
         with: {
@@ -114,7 +114,7 @@ export const orgRouter = createTRPCRouter({
       });
 
       if (!org) {
-        throw new TRPCError({
+        throw new DomainError({
           code: "NOT_FOUND",
           message: "Organization not found",
         });
@@ -126,7 +126,7 @@ export const orgRouter = createTRPCRouter({
       );
 
       if (!isMember) {
-        throw new TRPCError({
+        throw new DomainError({
           code: "FORBIDDEN",
           message: "You are not a member of this organization",
         });
@@ -154,14 +154,14 @@ export const orgRouter = createTRPCRouter({
         logo: z.string().nullable().optional(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Check if user is an admin of the organization
       const membership = await ctx.db.query.memberTable.findFirst({
         where: eq(schema.memberTable.userId, ctx.session.user.id),
       });
 
       if (!membership || membership.role === "member") {
-        throw new TRPCError({
+        throw new DomainError({
           code: "FORBIDDEN",
           message: "Only admins can update organization settings",
         });
@@ -174,7 +174,7 @@ export const orgRouter = createTRPCRouter({
         });
 
         if (existing && existing.id !== input.organizationId) {
-          throw new TRPCError({
+          throw new DomainError({
             code: "CONFLICT",
             message: "This slug is already taken",
           });
@@ -197,14 +197,14 @@ export const orgRouter = createTRPCRouter({
   // Delete organization
   delete: protectedProcedure
     .input(z.object({ organizationId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Check if user is the owner
       const membership = await ctx.db.query.memberTable.findFirst({
         where: eq(schema.memberTable.userId, ctx.session.user.id),
       });
 
       if (membership?.role !== "owner") {
-        throw new TRPCError({
+        throw new DomainError({
           code: "FORBIDDEN",
           message: "Only the owner can delete the organization",
         });
@@ -226,7 +226,7 @@ export const orgRouter = createTRPCRouter({
         organizationId: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const invitation = await ctx.authApi.createInvitation({
         body: {
           email: input.email,
@@ -241,7 +241,7 @@ export const orgRouter = createTRPCRouter({
   // List pending invitations
   listInvitations: protectedProcedure
     .input(z.object({ organizationId: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const invitations = await ctx.db.query.invitationTable.findMany({
         where: eq(schema.invitationTable.organizationId, input.organizationId),
         with: {
@@ -262,7 +262,7 @@ export const orgRouter = createTRPCRouter({
   // Cancel invitation
   cancelInvitation: protectedProcedure
     .input(z.object({ invitationId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       await ctx.db
         .update(schema.invitationTable)
         .set({ status: "expired" }) // canceled is not a valid status so using expired instead
@@ -274,11 +274,11 @@ export const orgRouter = createTRPCRouter({
   // Remove member
   removeMember: protectedProcedure
     .input(z.object({ memberId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       await ctx.db
         .delete(schema.memberTable)
         .where(eq(schema.memberTable.id, input.memberId));
 
       return { success: true };
     }),
-});
+};

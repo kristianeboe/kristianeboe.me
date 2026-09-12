@@ -10,7 +10,7 @@ A comprehensive collection of production-ready patterns and best practices for b
 ├── server-components/          # Server Component patterns
 ├── client-components/          # Client Component patterns
 ├── forms/                      # Form handling with react-hook-form + zod
-├── data-fetching/             # tRPC patterns
+├── data-fetching/             # oRPC patterns
 ├── file-upload/               # File uploads with Vercel Blob
 ├── loading-states/            # Loading & error patterns
 └── auth-patterns/             # Authentication patterns
@@ -55,7 +55,7 @@ A comprehensive collection of production-ready patterns and best practices for b
 - Client + server validation patterns
 - Proper form state management
 
-### 4. Data Fetching - tRPC ([/app/demos/data-fetching](./data-fetching))
+### 4. Data Fetching - oRPC ([/app/demos/data-fetching](./data-fetching))
 - Type-safe API calls
 - Queries (useQuery)
 - Mutations (useMutation)
@@ -64,7 +64,7 @@ A comprehensive collection of production-ready patterns and best practices for b
 - Error handling
 
 **Key Learnings:**
-- End-to-end type safety with tRPC
+- End-to-end type safety with oRPC
 - When to use queries vs mutations
 - Optimistic UI patterns
 
@@ -98,7 +98,7 @@ A comprehensive collection of production-ready patterns and best practices for b
 - Server-side session checking
 - Protected routes
 - Role-based access control (RBAC)
-- tRPC auth middleware
+- oRPC auth middleware
 - Client-side auth checks
 
 **Key Learnings:**
@@ -113,7 +113,7 @@ These demos showcase:
 - **Next.js 16** - App Router, Server Components, Server Actions
 - **React 19** - useOptimistic, enhanced hooks
 - **TypeScript** - Full type safety
-- **tRPC** - End-to-end type-safe APIs
+- **oRPC** - End-to-end type-safe APIs
 - **Drizzle ORM** - Type-safe database queries
 - **Better Auth** - Modern authentication
 - **react-hook-form** - Performant form handling
@@ -158,7 +158,7 @@ These demos showcase:
 
 ### Data Fetching
 - **Server Components** - Fetch directly in components (no API routes needed)
-- **Client Components** - Use tRPC for type-safe API calls
+- **Client Components** - Use oRPC for type-safe API calls
 - **Caching** - Leverage React Query's automatic caching
 
 ### Forms
@@ -181,7 +181,7 @@ These demos showcase:
 
 - [Next.js Docs](https://nextjs.org/docs)
 - [React 19 Docs](https://react.dev)
-- [tRPC Docs](https://trpc.io/docs)
+- [oRPC Docs](https://orpc.dev)
 - [Drizzle ORM Docs](https://orm.drizzle.team)
 - [Better Auth Docs](https://better-auth.com)
 - [react-hook-form Docs](https://react-hook-form.com)

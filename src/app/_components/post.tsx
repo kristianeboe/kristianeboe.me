@@ -7,20 +7,22 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 
 export function LatestPost() {
-  const trpc = useTRPC();
+  const domain = useDomain();
   const queryClient = useQueryClient();
   const { data: latestPost } = useSuspenseQuery(
-    trpc.post.getLatest.queryOptions(),
+    domain.post.getLatest.queryOptions(),
   );
 
   const [name, setName] = useState("");
   const createPost = useMutation(
-    trpc.post.create.mutationOptions({
+    domain.post.create.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.post.getLatest.queryOptions());
+        await queryClient.invalidateQueries(
+          domain.post.getLatest.queryOptions(),
+        );
         setName("");
       },
     }),

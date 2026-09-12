@@ -10,7 +10,7 @@ import { ThemeProvider } from "@/components/ui/theme";
 import { Toaster } from "@/components/ui/toast";
 import { AnalyticsProvider } from "@/contexts/AnalyticsContext";
 
-import { TRPCReactProvider } from "@/trpc/react";
+import { DomainProvider } from "@/lib/domain-react";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -52,13 +52,13 @@ export default function RootLayout({
       className={cn(inter.variable, geistMono.variable)}
     >
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
-        <TRPCReactProvider>
+        <DomainProvider>
           <ThemeProvider>
             <AnalyticsProvider>
               <NuqsAdapter>{children}</NuqsAdapter>
             </AnalyticsProvider>
           </ThemeProvider>
-        </TRPCReactProvider>
+        </DomainProvider>
         <Toaster />
         <Analytics />
       </body>
