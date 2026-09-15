@@ -281,16 +281,7 @@ export function SignInForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="password">Password</Label>
-                      <button
-                        type="button"
-                        onClick={() => setIsForgotPasswordOpen(true)}
-                        className="cursor-pointer text-sm underline-offset-2 hover:underline"
-                      >
-                        Forgot your password?
-                      </button>
-                    </div>
+                    <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
                       type="password"
@@ -300,6 +291,15 @@ export function SignInForm() {
                       minLength={8}
                       disabled={isEmailLoading}
                     />
+                    <div className="text-right">
+                      <button
+                        type="button"
+                        onClick={() => setIsForgotPasswordOpen(true)}
+                        className="cursor-pointer text-sm underline-offset-2 hover:underline"
+                      >
+                        Forgot your password?
+                      </button>
+                    </div>
                   </div>
 
                   <Button
