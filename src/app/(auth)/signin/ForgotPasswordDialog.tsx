@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientAuthForm } from "../../../components/auth/ClientAuthForm";
 import { useEffect, useState } from "react";
 import { Mail, Loader2 } from "lucide-react";
 
@@ -126,7 +127,7 @@ export function ForgotPasswordDialog({
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <ClientAuthForm onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="reset-email">Email</Label>
               <Input
@@ -163,7 +164,7 @@ export function ForgotPasswordDialog({
                 )}
               </Button>
             </div>
-          </form>
+          </ClientAuthForm>
         )}
       </div>
     </SimpleDialog>
