@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientAuthForm } from "../../../components/auth/ClientAuthForm";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -266,7 +267,7 @@ export function SignInForm() {
                   </span>
                 </div>
 
-                <form onSubmit={handleSignIn} className="space-y-4">
+                <ClientAuthForm onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
@@ -316,7 +317,7 @@ export function SignInForm() {
                       "Sign in"
                     )}
                   </Button>
-                </form>
+                </ClientAuthForm>
 
                 <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}

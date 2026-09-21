@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientAuthForm } from "../../../components/auth/ClientAuthForm";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -241,7 +242,10 @@ export function ConversionModal({
 
           {/* Create Account Tab */}
           <TabsContent value="create" className="mt-4 space-y-4">
-            <form onSubmit={handleCreateAccount} className="space-y-4">
+            <ClientAuthForm
+              onSubmit={handleCreateAccount}
+              className="space-y-4"
+            >
               {/* Username field with availability indicator */}
               <div className="space-y-2">
                 <Label htmlFor="username" className="flex items-center gap-2">
@@ -371,12 +375,12 @@ export function ConversionModal({
                 <Mail className="mr-2 h-4 w-4" />
                 {isLoading ? "Creating..." : "Create Account"}
               </Button>
-            </form>
+            </ClientAuthForm>
           </TabsContent>
 
           {/* Sign In Tab */}
           <TabsContent value="signin" className="mt-4 space-y-4">
-            <form onSubmit={handleSignIn} className="space-y-4">
+            <ClientAuthForm onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="signin-username">Username</Label>
                 <Input
@@ -406,7 +410,7 @@ export function ConversionModal({
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
-            </form>
+            </ClientAuthForm>
           </TabsContent>
         </Tabs>
 
