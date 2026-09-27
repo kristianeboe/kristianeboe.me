@@ -12,7 +12,7 @@ import {
   ImageUpload,
   type ImageUploadResult,
 } from "@/components/ui/upload/ImageUpload";
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 
 /**
  * User profile image upload component.
@@ -21,12 +21,12 @@ import { useTRPC } from "@/trpc/react";
 export function UserProfileImageUpload() {
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
-  const trpc = useTRPC();
+  const domain = useDomain();
 
-  const { data: user } = useQuery(trpc.user.me.queryOptions());
+  const { data: user } = useQuery(domain.user.me.queryOptions());
 
   const updateProfileMutation = useMutation(
-    trpc.user.updateProfile.mutationOptions({
+    domain.user.updateProfile.mutationOptions({
       onSuccess: () => {
         toast.success("Profile image updated successfully");
         router.refresh();

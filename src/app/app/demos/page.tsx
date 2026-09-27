@@ -29,10 +29,10 @@ export default function DemosPage() {
       topics: ["react-hook-form", "zod", "Server Actions", "Validation"],
     },
     {
-      title: "Data Fetching (tRPC)",
+      title: "Data Fetching (oRPC)",
       description: "Type-safe API calls, mutations, optimistic updates",
       href: "/app/demos/data-fetching",
-      topics: ["tRPC", "useQuery", "useMutation", "Optimistic UI"],
+      topics: ["oRPC", "useQuery", "useMutation", "Optimistic UI"],
     },
     {
       title: "File Upload",
@@ -114,7 +114,7 @@ export default function DemosPage() {
           </p>
           <ul className="ml-4 list-inside list-disc space-y-2">
             <li>Server Components and Server Actions</li>
-            <li>Type-safe API calls with tRPC</li>
+            <li>Type-safe API calls with oRPC</li>
             <li>Form validation with zod and react-hook-form</li>
             <li>File uploads with Vercel Blob</li>
             <li>Authentication with Better Auth</li>

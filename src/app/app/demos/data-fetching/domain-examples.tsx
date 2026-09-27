@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,16 +10,16 @@ import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 
 /**
- * tRPC EXAMPLES
+ * oRPC EXAMPLES
  *
- * Demonstrates various tRPC patterns:
+ * Demonstrates various oRPC patterns:
  * - Queries (useQuery)
  * - Mutations (useMutation)
  * - Optimistic updates
  * - Cache invalidation
  */
 
-export function TRPCExamples() {
+export function DomainExamples() {
   return (
     <div className="space-y-8">
       <QueryExample />
@@ -34,13 +34,13 @@ export function TRPCExamples() {
 // ============================================================
 
 function QueryExample() {
-  const trpc = useTRPC();
+  const domain = useDomain();
   const {
     data: posts,
     isLoading,
     error,
     refetch,
-  } = useQuery(trpc.post.all.queryOptions());
+  } = useQuery(domain.post.all.queryOptions());
 
   return (
     <section>
@@ -95,7 +95,7 @@ function QueryExample() {
           <p className="text-muted-foreground mt-4 text-sm">
             Uses{" "}
             <code className="bg-muted rounded px-1 py-0.5 text-xs">
-              useQuery(trpc.post.all.queryOptions())
+              useQuery(domain.post.all.queryOptions())
             </code>{" "}
             to fetch data with automatic caching and refetching
           </p>
@@ -113,14 +113,14 @@ function MutationExample() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const trpc = useTRPC();
+  const domain = useDomain();
   const queryClient = useQueryClient();
 
   const createPost = useMutation(
-    trpc.post.create.mutationOptions({
+    domain.post.create.mutationOptions({
       onSuccess: () => {
         // Invalidate posts query to refetch
-        void queryClient.invalidateQueries(trpc.post.all.queryOptions());
+        void queryClient.invalidateQueries(domain.post.all.queryOptions());
         toast.success("Post created successfully!");
 
         // Clear form
@@ -197,7 +197,7 @@ function MutationExample() {
           <p className="text-muted-foreground mt-4 text-sm">
             Uses{" "}
             <code className="bg-muted rounded px-1 py-0.5 text-xs">
-              useMutation(trpc.post.create.mutationOptions())
+              useMutation(domain.post.create.mutationOptions())
             </code>{" "}
             with automatic query invalidation
           </p>
@@ -212,25 +212,25 @@ function MutationExample() {
 // ============================================================
 
 function OptimisticUpdateExample() {
-  const trpc = useTRPC();
+  const domain = useDomain();
   const queryClient = useQueryClient();
-  const { data: posts } = useQuery(trpc.post.all.queryOptions());
+  const { data: posts } = useQuery(domain.post.all.queryOptions());
 
   const deletePost = useMutation(
-    trpc.post.delete.mutationOptions({
+    domain.post.delete.mutationOptions({
       // Optimistic update - update UI immediately before server responds
       onMutate: async (variables) => {
         // Cancel outgoing refetches
-        await queryClient.cancelQueries(trpc.post.all.queryOptions());
+        await queryClient.cancelQueries(domain.post.all.queryOptions());
 
         // Snapshot the previous value
         const previousPosts = queryClient.getQueryData(
-          trpc.post.all.queryOptions().queryKey,
+          domain.post.all.queryOptions().queryKey,
         );
 
         // Optimistically update to the new value
         queryClient.setQueryData(
-          trpc.post.all.queryOptions().queryKey,
+          domain.post.all.queryOptions().queryKey,
           (old) => {
             if (!old) return old;
             return old.filter((p) => p.id !== variables.id);
@@ -245,7 +245,7 @@ function OptimisticUpdateExample() {
       onError: (_err, _variables, context) => {
         if (context?.previousPosts) {
           queryClient.setQueryData(
-            trpc.post.all.queryOptions().queryKey,
+            domain.post.all.queryOptions().queryKey,
             context.previousPosts,
           );
         }
@@ -254,7 +254,7 @@ function OptimisticUpdateExample() {
 
       // Always refetch after error or success
       onSettled: () => {
-        void queryClient.invalidateQueries(trpc.post.all.queryOptions());
+        void queryClient.invalidateQueries(domain.post.all.queryOptions());
       },
 
       onSuccess: () => {

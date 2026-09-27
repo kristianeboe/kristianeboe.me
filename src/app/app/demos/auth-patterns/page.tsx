@@ -240,59 +240,22 @@ export default async function AdminPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">
-                3. Protected tRPC Procedures
+                3. Protected oRPC Procedures
               </CardTitle>
             </CardHeader>
             <CardContent>
               <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-xs">
-                {`// server/api/trpc.ts
-import { auth } from "@/server/better-auth";
-import { TRPCError } from "@trpc/server";
+                {`import { os, ORPCError } from "@orpc/server";
+import type { DomainContext } from "@/server/domains/context";
 
-// Create protected procedure
-export const protectedProcedure = publicProcedure.use(
-  async ({ ctx, next }) => {
-    const session = await auth.api.getSession({
-      headers: ctx.headers,
-    });
+const protectedProcedure = os.$context<DomainContext>().use(({ context, next }) => {
+  if (!context.session?.user) throw new ORPCError("UNAUTHORIZED");
+  return next({ context: { session: context.session } });
+});
 
-    if (!session) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
-
-    return next({
-      ctx: {
-        ...ctx,
-        session,
-        user: session.user,
-      },
-    });
-  }
-);
-
-// Usage in router
-export const userRouter = createTRPCRouter({
-  // Public - anyone can call
-  getPublicInfo: publicProcedure.query(() => {
-    return { message: "Public data" };
-  }),
-
-  // Protected - requires auth
-  getProfile: protectedProcedure.query(({ ctx }) => {
-    // ctx.user is guaranteed to exist
-    return ctx.user;
-  }),
-
-  // Admin only
-  deleteUser: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .mutation(({ ctx, input }) => {
-      if (ctx.user.role !== "admin") {
-        throw new TRPCError({ code: "FORBIDDEN" });
-      }
-      // Delete user
-    }),
-});`}
+export const userRouter = {
+  me: protectedProcedure.handler(({ context }) => context.session.user),
+};`}
               </pre>
             </CardContent>
           </Card>

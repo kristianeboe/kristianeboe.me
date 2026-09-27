@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { and, eq, isNull } from "drizzle-orm";
 
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { protectedProcedure } from "@/server/domains/procedure";
 import { attachmentTable, RESOURCE_TYPES } from "@/server/db/schema";
 import { AttachmentService } from "@/server/services/attachment.service";
 
 const resourceTypeSchema = z.enum(RESOURCE_TYPES);
 
-export const blobRouter = createTRPCRouter({
+export const blobRouter = {
   // Server upload for small files (< 4.5MB)
   uploadFromBase64: protectedProcedure
     .input(
@@ -19,7 +19,7 @@ export const blobRouter = createTRPCRouter({
         resourceId: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       // Convert base64 to buffer
       const buffer = Buffer.from(input.base64Data, "base64");
 
@@ -58,7 +58,7 @@ export const blobRouter = createTRPCRouter({
         resourceId: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       console.log(
         `📎 Creating attachment record for ${input.resourceType}:${input.resourceId} from blob: ${input.url}`,
       );
@@ -102,14 +102,14 @@ export const blobRouter = createTRPCRouter({
         resourceId: z.string(),
       }),
     )
-    .query(async ({ input }) => {
+    .handler(async ({ input }) => {
       return AttachmentService.getAll(input.resourceType, input.resourceId);
     }),
 
   // Delete attachment
   deleteAttachment: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       return AttachmentService.delete(input.id, ctx.session.user.id);
     }),
 
@@ -121,7 +121,7 @@ export const blobRouter = createTRPCRouter({
         resourceType: resourceTypeSchema.optional(),
       }),
     )
-    .query(async ({ ctx, input }) => {
+    .handler(async ({ context: ctx, input }) => {
       const whereConditions = [
         eq(attachmentTable.uploadedBy, ctx.session.user.id),
         isNull(attachmentTable.deletedAt),
@@ -141,7 +141,7 @@ export const blobRouter = createTRPCRouter({
     }),
 
   // Get storage usage statistics
-  getStorageStats: protectedProcedure.query(async ({ ctx }) => {
+  getStorageStats: protectedProcedure.handler(async ({ context: ctx }) => {
     // Get user's upload statistics
     const userUploads = await ctx.db.query.attachmentTable.findMany({
       where: and(
@@ -198,4 +198,4 @@ export const blobRouter = createTRPCRouter({
         .slice(0, 5),
     };
   }),
-});
+};

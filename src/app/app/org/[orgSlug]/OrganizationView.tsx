@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 import { OrganizationInviteDialog } from "./OrganizationInviteDialog";
 
 interface OrganizationViewProps {
@@ -54,13 +54,13 @@ function getInitials(name: string | null | undefined): string {
 }
 
 export function OrganizationView({ orgSlug }: OrganizationViewProps) {
-  const trpc = useTRPC();
+  const domain = useDomain();
 
   const {
     data: orgData,
     isLoading,
     error,
-  } = useQuery(trpc.org.getBySlug.queryOptions({ slug: orgSlug }));
+  } = useQuery(domain.org.getBySlug.queryOptions({ input: { slug: orgSlug } }));
 
   if (isLoading) {
     return (

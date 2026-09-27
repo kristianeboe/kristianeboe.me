@@ -5,15 +5,20 @@ import { redirect } from "next/navigation";
 import { LatestPost } from "@/app/_components/post";
 import { auth } from "@/server/better-auth";
 import { getSession } from "@/server/better-auth/server";
-import { trpc, HydrateClient, prefetch, trpcApi } from "@/trpc/server";
+import {
+  domain,
+  HydrateClient,
+  prefetch,
+  domainApi,
+} from "@/lib/domain-server";
 
 export default async function Home() {
-  const caller = await trpcApi();
-  const hello = await caller.post.hello({ text: "from tRPC" });
+  const caller = await domainApi();
+  const hello = await caller.post.hello({ text: "from oRPC" });
   const session = await getSession();
 
   if (session) {
-    prefetch(trpc.post.getLatest.queryOptions());
+    void prefetch(domain.post.getLatest.queryOptions());
   }
 
   return (
@@ -52,7 +57,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
+              {hello ? hello.greeting : "Loading oRPC query..."}
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4">

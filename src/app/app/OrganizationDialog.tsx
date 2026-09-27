@@ -17,17 +17,17 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 
 interface OrganizationDialogProps {
   trigger?: React.ReactNode;
 }
 
 export function OrganizationDialog({ trigger }: OrganizationDialogProps) {
-  const trpc = useTRPC();
+  const domain = useDomain();
   const [open, setOpen] = useState(false);
   const { data: organizations, isLoading } = useQuery(
-    trpc.org.list.queryOptions(),
+    domain.org.list.queryOptions(),
   );
 
   const defaultTrigger = (

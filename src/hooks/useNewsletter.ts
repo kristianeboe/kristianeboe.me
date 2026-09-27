@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { authClient } from "@/server/better-auth/client";
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 import { useLocalStorage } from "@/components/ui/hooks/use-local-storage";
 import type { TopicKey } from "@/lib/validators";
 
@@ -68,8 +68,8 @@ export function useNewsletter(
 
   const isRealUser = userState === "real";
 
-  // Initialize tRPC
-  const trpc = useTRPC();
+  // Initialize oRPC
+  const domain = useDomain();
 
   // localStorage for anonymous/logged-out users (email pre-filling only)
   const [localData, setLocalData] = useLocalStorage<
@@ -92,16 +92,16 @@ export function useNewsletter(
   const shouldFetchFromAPI = autoFetch && (isRealUser || !!emailForQuery);
 
   const topicsQuery = useQuery({
-    ...trpc.newsletter.getMyTopics.queryOptions(
-      emailForQuery ? { email: emailForQuery } : undefined,
-    ),
+    ...domain.newsletter.getMyTopics.queryOptions({
+      input: emailForQuery ? { email: emailForQuery } : undefined,
+    }),
     enabled: shouldFetchFromAPI,
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
   });
 
   // Subscribe mutation - invalidates all getMyTopics queries globally
   const subscribeMutation = useMutation(
-    trpc.newsletter.subscribe.mutationOptions({
+    domain.newsletter.subscribe.mutationOptions({
       onSuccess: () => {
         void queryClient.invalidateQueries({
           queryKey: [["newsletter", "getMyTopics"]],
@@ -112,7 +112,7 @@ export function useNewsletter(
 
   // Update topics mutation - invalidates all getMyTopics queries globally
   const updateTopicsMutation = useMutation(
-    trpc.newsletter.updateMyTopics.mutationOptions({
+    domain.newsletter.updateMyTopics.mutationOptions({
       onSuccess: () => {
         void queryClient.invalidateQueries({
           queryKey: [["newsletter", "getMyTopics"]],

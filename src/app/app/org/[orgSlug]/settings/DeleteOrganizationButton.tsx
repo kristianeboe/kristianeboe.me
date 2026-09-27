@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
 
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 
 interface DeleteOrganizationButtonProps {
   orgSlug: string;
@@ -32,14 +32,14 @@ export function DeleteOrganizationButton({
   const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const router = useRouter();
-  const trpc = useTRPC();
+  const domain = useDomain();
 
   const { data: orgData } = useQuery(
-    trpc.org.getBySlug.queryOptions({ slug: orgSlug }),
+    domain.org.getBySlug.queryOptions({ input: { slug: orgSlug } }),
   );
 
   const deleteOrganizationMutation = useMutation(
-    trpc.org.delete.mutationOptions({
+    domain.org.delete.mutationOptions({
       onSuccess: () => {
         toast.success("Organization deleted successfully");
         setOpen(false);

@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useTRPC } from "@/trpc/react";
+import { useDomain } from "@/lib/domain-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function ProfileForm() {
-  const trpc = useTRPC();
+  const domain = useDomain();
   const queryClient = useQueryClient();
-  const { data: user } = useQuery(trpc.user.me.queryOptions());
+  const { data: user } = useQuery(domain.user.me.queryOptions());
 
   const [name, setName] = useState(user?.name ?? "");
   const [displayUsername, setDisplayUsername] = useState(
@@ -18,9 +18,9 @@ export function ProfileForm() {
   );
 
   const updateProfile = useMutation(
-    trpc.user.updateProfile.mutationOptions({
+    domain.user.updateProfile.mutationOptions({
       onSuccess: () => {
-        void queryClient.invalidateQueries(trpc.user.me.queryOptions());
+        void queryClient.invalidateQueries(domain.user.me.queryOptions());
       },
     }),
   );
