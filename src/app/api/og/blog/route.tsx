@@ -2,7 +2,6 @@
 import type { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
-import { AUTHORS } from "@/lib/blog-authors";
 import { posts } from ".velite";
 
 export const runtime = "nodejs";
@@ -21,7 +20,6 @@ export async function GET(request: NextRequest) {
     post?.h1 ||
     query.get("title")?.slice(0, 120) ||
     "Notes from Kristian";
-  const description = post?.ogDescription || post?.metaDescription || "";
   const source = post?.socialImage || post?.heroImage || post?.thumbnail;
   // Only authored local assets enter the renderer; queries cannot fetch images.
   let image: string | undefined;
@@ -155,26 +153,6 @@ export async function GET(request: NextRequest) {
             }}
           >
             {title}
-          </div>
-          <div
-            style={{
-              fontSize: square ? 30 : 24,
-              lineHeight: 1.35,
-              color: "#e5e7de",
-              marginTop: 22,
-            }}
-          >
-            {description}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              marginTop: 26,
-              fontSize: 20,
-              color: "#ead3b0",
-            }}
-          >
-            {post ? AUTHORS[post.author].description : "Founder and engineer"}
           </div>
         </div>
       </div>

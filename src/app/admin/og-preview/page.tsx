@@ -29,8 +29,8 @@ export default async function OgPreviewPage() {
         <h1 className="mt-8 text-4xl font-semibold">Sharing images</h1>
         <p className="mt-4 max-w-2xl text-sm leading-6">
           Every published article uses its landscape card when shared. Open an
-          image to save it. Set socialImage, ogTitle or ogDescription in the
-          article frontmatter to change its photo or sharing copy.
+          image to save it. Set socialImage or ogTitle in the article
+          frontmatter to change its photo or sharing copy.
         </p>
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           {articles.map((post) => (
