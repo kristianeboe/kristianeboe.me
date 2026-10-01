@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "el-patio",
+    "url": "https://www.google.com/maps/place/@9.645583,-85.168602,17z/data=!4m10!3m9!1s0x8f9f6e6007f53721:0xafdcb91de79f8419!5m2!4m1!1i2!8m2!3d9.645583!4d-85.168602!9m1!1b1",
+    "image": "https://maps.google.com/maps/api/staticmap?center=9.645583%2C-85.168602&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=z-9YJ2VJGP9xOx-DSmRwyhe3BUA",
+    "local": "maps-el-patio.png"
+  },
+  {
+    "slug": "eat-street",
+    "url": "https://www.google.com/maps/place/@9.641633,-85.165338,17z/data=!4m10!3m9!1s0x8f9f6fe860241787:0xb9d7ae5a7c5320dc!5m2!4m1!1i2!8m2!3d9.641633!4d-85.165338!9m1!1b1",
+    "image": "https://maps.google.com/maps/api/staticmap?center=9.641633%2C-85.165338&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=smDZ-chrnTiR_ZliwWMATGop_W8",
+    "local": "maps-eat-street.png"
+  },
+  {
+    "slug": "katana",
+    "url": "https://www.google.com/maps/place/@9.63182,-85.154015,17z/data=!4m10!3m9!1s0x8f9f6ee494e74b09:0x2d64f256484fad01!5m2!4m1!1i2!8m2!3d9.63182!4d-85.154015!9m1!1b1",
+    "image": "https://maps.google.com/maps/api/staticmap?center=9.63182%2C-85.154015&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=WP8bFAkdeC4-Fztg5MAVj042xww",
+    "local": "maps-katana.png"
+  },
+  {
+    "slug": "kooks",
+    "url": "https://www.google.com/maps/place/@9.634811,-85.158246,17z/data=!4m10!3m9!1s0x8f9f6f83d249db5d:0xe4352b25618a6f79!5m2!4m1!1i2!8m2!3d9.634811!4d-85.158246!9m1!1b1",
+    "image": "https://maps.google.com/maps/api/staticmap?center=9.634811%2C-85.158246&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=4kKnDV5Hy01sFvDTVyyFgVHIIDY",
+    "local": "maps-kooks.png"
+  },
+  {
+    "slug": "somos",
+    "url": "https://www.google.com/maps/place/Somos/@9.644183,-85.16784,15z/data=!4m9!3m8!1s0x8f9f6ef544dbc1a1:0x75ee6926d8529942!5m2!4m1!1i2!8m2!3d9.644183!4d-85.16784!16s%2Fg%2F11q3ch2phv",
+    "image": "https://maps.google.com/maps/api/staticmap?center=9.644183%2C-85.16784&zoom=15&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=ZBEnX-zKgYPuSXksT8FuztKhjgA",
+    "local": "maps-somos.png"
+  }
+]

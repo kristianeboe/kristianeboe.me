@@ -36,6 +36,8 @@ const posts = defineCollection({
 
       // Hero image (renders as full-bleed ParallaxHero instead of default title)
       heroImage: s.string().optional(),
+      heroVariant: s.enum(["bleed", "inset"]).default("bleed"),
+      heroPanorama: s.boolean().default(false),
 
       // Social sharing image (falls back to the generated blog card)
       socialImage: s.string().optional(),

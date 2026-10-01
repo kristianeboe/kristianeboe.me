@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "san-juan-del-sur",
+    "page": "https://www.outsite.co/locations/san-juan-del-sur",
+    "image": "https://cdn.outsite.co/cms/1_e1e9286a2b.jpg",
+    "local": "outsite-san-juan-del-sur.jpg"
+  },
+  {
+    "slug": "santa-teresa",
+    "page": "https://www.outsite.co/locations/santa-teresa",
+    "image": "https://cdn.outsite.co/cms/6_opt_955bec55d6.jpeg",
+    "local": "outsite-santa-teresa.jpeg"
+  },
+  {
+    "slug": "santa-teresa-playa",
+    "page": "https://www.outsite.co/locations/santa-teresa-playa",
+    "image": "https://cdn.outsite.co/cms/1_f2e5afe1d7.jpg",
+    "local": "outsite-santa-teresa-playa.jpg"
+  }
+]

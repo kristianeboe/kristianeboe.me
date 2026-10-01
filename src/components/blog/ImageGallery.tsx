@@ -8,32 +8,136 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { cn } from "@/components/ui";
+import { InlineVideo } from "./InlineVideo";
 
 interface GalleryImage {
   src: string;
   alt: string;
   caption?: string;
+  aspectRatio?: number;
+  videoSrc?: string;
 }
 
 interface ImageGalleryProps {
   images: GalleryImage[];
+  /** A smaller, centered gallery for quieter moments in the article. */
+  size?: "default" | "compact";
+  /** Optional caption for the whole gallery. Single images use their own caption. */
+  caption?: string;
+  layout?:
+    | "collage"
+    | "natural"
+    | "stacked-left"
+    | "stacked-right"
+    | "landscape-top";
 }
 
-export function ImageGallery({ images }: ImageGalleryProps) {
+export function ImageGallery({
+  images,
+  caption,
+  size = "default",
+  layout = "collage",
+}: ImageGalleryProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   if (images.length === 0) return null;
+  const visibleCaption =
+    caption ?? (images.length === 1 ? images[0]!.caption : undefined);
 
   return (
-    <div className="not-prose my-8">
-      <GalleryGrid images={images} onSelect={setOpenIndex} />
+    <figure
+      className={cn(
+        "not-prose my-8",
+        size === "compact" && "mx-auto w-[85%] sm:w-4/5",
+      )}
+    >
+      {images.length === 1 ? (
+        <GalleryGrid images={images} onSelect={setOpenIndex} />
+      ) : layout === "stacked-right" && images.length === 3 ? (
+        <div className="grid items-start gap-2 sm:grid-cols-[1.22fr_1fr]">
+          <Tile
+            image={images[0]!}
+            onClick={() => setOpenIndex(0)}
+            className="h-auto"
+          />
+          <div className="grid gap-2">
+            {images.slice(1).map((image, index) => (
+              <Tile
+                key={image.src}
+                image={image}
+                onClick={() => setOpenIndex(index + 1)}
+                className="h-auto"
+              />
+            ))}
+          </div>
+        </div>
+      ) : layout === "landscape-top" && images.length === 3 ? (
+        <div
+          className="grid items-start gap-2 sm:grid-cols-[var(--gallery-columns)]"
+          style={
+            {
+              "--gallery-columns": `${images[1]!.aspectRatio ?? 0.75}fr ${images[2]!.aspectRatio ?? 0.75}fr`,
+            } as React.CSSProperties
+          }
+        >
+          {images.map((image, index) => (
+            <Tile
+              key={image.src}
+              image={image}
+              onClick={() => setOpenIndex(index)}
+              className={cn("h-auto", index === 0 && "sm:col-span-2")}
+            />
+          ))}
+        </div>
+      ) : layout === "stacked-left" && images.length === 3 ? (
+        <div className="grid gap-2 sm:aspect-[17/12] sm:grid-cols-[1fr_1.125fr] sm:grid-rows-2">
+          {images.map((image, index) => (
+            <Tile
+              key={image.src}
+              image={image}
+              onClick={() => setOpenIndex(index)}
+              className={cn(
+                "h-auto sm:h-full",
+                index === 0 && "sm:col-start-1 sm:row-start-1",
+                index === 1 && "sm:col-start-1 sm:row-start-2",
+                index === 2 && "sm:col-start-2 sm:row-span-2 sm:row-start-1",
+              )}
+            />
+          ))}
+        </div>
+      ) : layout === "natural" ? (
+        <div
+          className={cn(
+            "grid items-start gap-2",
+            images.length === 2 || images.length === 4
+              ? "sm:grid-cols-2"
+              : "sm:grid-cols-3",
+          )}
+        >
+          {images.map((image, index) => (
+            <Tile
+              key={image.src}
+              image={image}
+              onClick={() => setOpenIndex(index)}
+              className="aspect-[3/4] h-auto"
+            />
+          ))}
+        </div>
+      ) : (
+        <GalleryGrid images={images} onSelect={setOpenIndex} />
+      )}
+      {visibleCaption && (
+        <figcaption className="text-muted-foreground mx-auto mt-4 max-w-xl px-4 text-center text-sm leading-relaxed italic sm:text-base">
+          {visibleCaption}
+        </figcaption>
+      )}
       <Lightbox
         images={images}
         index={openIndex}
         onIndexChange={setOpenIndex}
         onClose={() => setOpenIndex(null)}
       />
-    </div>
+    </figure>
   );
 }
 
@@ -48,6 +152,18 @@ function Tile({
   className?: string;
   children?: React.ReactNode;
 }) {
+  if (image.videoSrc) {
+    return (
+      <div className={cn("min-h-0 overflow-hidden rounded-xl", className)}>
+        <InlineVideo
+          src={image.videoSrc}
+          poster={image.src}
+          label={image.alt}
+          embedded
+        />
+      </div>
+    );
+  }
   return (
     <button
       type="button"
@@ -56,6 +172,7 @@ function Tile({
         "group bg-muted relative block h-full w-full overflow-hidden rounded-xl",
         className,
       )}
+      style={image.aspectRatio ? { aspectRatio: image.aspectRatio } : undefined}
     >
       <Image
         src={image.src}
@@ -85,17 +202,19 @@ function GalleryBlock({
 
   if (count === 1) {
     return (
-      <div className="flex flex-col gap-2">
+      <div
+        className={cn(
+          "flex flex-col gap-2",
+          images[0]!.aspectRatio &&
+            images[0]!.aspectRatio <= 1 &&
+            "mx-auto w-full max-w-md",
+        )}
+      >
         <Tile
           image={images[0]!}
           onClick={() => onSelect(offset)}
           className="aspect-video"
         />
-        {images[0]!.caption && (
-          <p className="text-muted-foreground text-center text-sm italic">
-            {images[0]!.caption}
-          </p>
-        )}
       </div>
     );
   }

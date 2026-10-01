@@ -16,7 +16,7 @@ export function InfoBox({ title, items, children }: InfoBoxProps) {
         </span>
         <div className="flex-1 pt-0.5">
           {title && (
-            <h4 className="text-foreground mb-2 text-sm font-semibold tracking-wide">
+            <h4 className="mb-2 text-sm font-semibold tracking-wide text-[#15110C]!">
               {title}
             </h4>
           )}
@@ -34,7 +34,7 @@ export function InfoBox({ title, items, children }: InfoBoxProps) {
             </ul>
           )}
           {children && (
-            <div className="prose prose-sm text-muted-foreground max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+            <div className="prose prose-sm max-w-none text-[#4b5563] [&_p]:text-[#4b5563]! [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
               {children}
             </div>
           )}

@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "katana",
+    "website": "https://www.katanaasiancuisine.com/",
+    "image": "https://static.wixstatic.com/media/6e9540_aca371c7f7ea4006a4a06dedcb58263c~mv2.jpg/v1/fill/w_2500,h_3745,al_c/6e9540_aca371c7f7ea4006a4a06dedcb58263c~mv2.jpg",
+    "sourceType": "og:image",
+    "local": "public/blog/nicaragua-costa-rica/venue-katana.jpg"
+  },
+  {
+    "slug": "kooks",
+    "website": "https://kookscr.com/",
+    "image": "https://kookscr.com/wp-content/uploads/2021/05/brisketntits-compressed-1024x640.jpeg",
+    "sourceType": "og:image",
+    "local": "public/blog/nicaragua-costa-rica/venue-kooks.jpg"
+  },
+  {
+    "slug": "somos",
+    "website": "https://houseofsomos.com/",
+    "image": "https://houseofsomos.com/img/new/home/homepage1.jpg",
+    "sourceType": "homepage video poster",
+    "local": "public/blog/nicaragua-costa-rica/venue-somos.jpg"
+  },
+  {
+    "slug": "eat-street",
+    "website": "https://eatstreetcostarica.com/",
+    "image": "https://eatstreetcostarica.com/wp-content/uploads/2026/04/@camimolinaph-9-1-1024x697.jpg",
+    "sourceType": "homepage image",
+    "local": "public/blog/nicaragua-costa-rica/venue-eat-street.jpg"
+  }
+]

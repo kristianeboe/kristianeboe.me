@@ -1,0 +1,32 @@
+[
+  {
+    "url": "https://maps.app.goo.gl/LfBrAwbxTESuL7UZ9",
+    "resolved": "https://www.google.com/maps/place/Dumplings+Aqui/@11.254431,-85.8720052,17.28z/data=!4m6!3m5!1s0x8f75b5767a045553:0x463a25986ab0da85!8m2!3d11.2548171!4d-85.8710871!16s%2Fg%2F11kr74szzd?authuser=1&entry=tts&g_ep=EgoyMDI2MDkyOC4wIPu8ASoASAFQAw%3D%3D&skid=4042731d-f47a-463c-8b36-c6bad671a5fa",
+    "images": [
+      "https://maps.google.com/maps/api/staticmap?center=11.254431%2C-85.8720052&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=jSSUZTL9_5VQbIuYNBgLEEPd_d0"
+    ],
+    "local": "venue-dumplings.png"
+  },
+  {
+    "url": "https://pachamamanicaragua.com/",
+    "resolved": "https://pachamamanicaragua.com/",
+    "images": [
+      "https://pachamamanicaragua.com/wp-content/uploads/2024/10/462545551_412009628446445_2213947176968867301_n.jpg"
+    ],
+    "local": "venue-pachamama.jpg"
+  },
+  {
+    "url": "https://dalepuessjds.com/",
+    "resolved": "https://dalepuessjds.com/",
+    "images": [
+      "https://i.vimeocdn.com/video/1695449276-ba3e3f33b71e9b94b0db35a8c2bb8948a35a42b747f35c0efc4247a16bfa0c26-d_1920x1080?r=pad",
+      "https://i.vimeocdn.com/video/1695449276-ba3e3f33b71e9b94b0db35a8c2bb8948a35a42b747f35c0efc4247a16bfa0c26-d_1920x1080?r=pad"
+    ],
+    "local": "venue-dale-pues.jpg"
+  },
+  {
+    "url": "https://www.google.com/maps/place/@11.253907,-85.87135,17z/data=!4m10!3m9!1s0x8f75b50daa632ca7:0x114fc7d2b676510f!5m2!4m1!1i2!8m2!3d11.253907!4d-85.87135!9m1!1b1",
+    "image": "https://maps.google.com/maps/api/staticmap?center=11.253907%2C-85.87135&zoom=17&size=900x900&language=en&sensor=false&key=AIzaSyBoYjeRtfVI0Jd8Q_9mnflo9i4sOYpShB0&signature=h_47WTOGAvMRdEdRNoGAVmhSQXA",
+    "local": "venue-gastro-garden.png"
+  }
+]

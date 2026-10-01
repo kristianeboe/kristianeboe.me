@@ -15,6 +15,9 @@ import { ImageGallery } from "../blog/ImageGallery";
 import { InfoBox } from "../blog/InfoBox";
 import { Itinerary } from "../blog/Itinerary";
 import { ParallaxHero } from "../blog/ParallaxHero";
+import { PlaceCards } from "../blog/PlaceCards";
+import { MapsCards } from "../blog/MapsCards";
+import { InlineVideo } from "../blog/InlineVideo";
 import { YouTubeEmbed } from "../blog/YouTubeEmbed";
 
 const sharedComponents = {
@@ -30,6 +33,9 @@ const sharedComponents = {
   InfoBox,
   Itinerary,
   ParallaxHero,
+  PlaceCards,
+  MapsCards,
+  InlineVideo,
   YouTubeEmbed,
 };
 

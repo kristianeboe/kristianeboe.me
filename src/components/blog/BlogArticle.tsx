@@ -33,7 +33,7 @@ export function BlogArticle({
 
   if (!meta.showStickyCTA) {
     return (
-      <div className="overflow-x-clip bg-white" lang={meta.language}>
+      <div className="flow-root overflow-x-clip bg-white" lang={meta.language}>
         {reviewBanner}
         {meta.heroImage && (
           <>
@@ -42,7 +42,7 @@ export function BlogArticle({
                 __html: `header:not(.hero-header) { display: none !important; }`,
               }}
             />
-            <TransparentHeader />
+            <TransparentHeader solid={meta.heroVariant === "inset"} />
           </>
         )}
         {meta.heroImage ? (
@@ -51,6 +51,8 @@ export function BlogArticle({
             title={meta.h1}
             subtitle={meta.h1Subtitle}
             size="full"
+            variant={meta.heroVariant}
+            panorama={meta.heroPanorama}
           />
         ) : (
           <div className="mx-auto max-w-4xl px-6 pt-24 lg:px-8">

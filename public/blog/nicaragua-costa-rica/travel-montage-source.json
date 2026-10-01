@@ -1,0 +1,6 @@
+{
+  "method": "Built-in imagegen, compositing edit",
+  "inputs": ["IMG_8633.JPG", "4038740a-ea28-413f-911c-06c6e462eb1a.jpg", "IMG_4318.JPG"],
+  "asset": "travel-montage-hero.jpg",
+  "prompt": "Use case: compositing. Asset: wide horizontal travel blog hero, approximately 3:1 landscape. Stitch these three supplied vertical photographs into one coherent horizontal photographic montage. Image 1 left: man riding a horse along rocky tropical beach at sunset. Image 2 center: same man smiling with his surfboard on beach. Image 3 right: same man in white linen shirt on ocean-facing balcony. Preserve his actual identity, face, expressions, outfits and poses in each original photo; these are three separate memories, not three new people. Keep all three photographs recognizable. Align and softly blend coastal sky and sea across the panel boundaries into an attractive connected composition, with subtle natural feathered transitions, no hard borders or frames. Preserve real photographic detail. Do not invent new subjects, do not merge bodies, do not change faces. Keep each face clearly visible with useful space above for a website title overlay. No text, no lettering, no logos added. Warm natural coastal light, restrained color matching, candid travel photography rather than an illustration."
+}

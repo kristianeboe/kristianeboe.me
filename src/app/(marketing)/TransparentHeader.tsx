@@ -6,7 +6,7 @@ import { cn } from "@/components/ui";
 
 import { SiteHeaderContent } from "./SiteHeaderContent";
 
-export function TransparentHeader() {
+export function TransparentHeader({ solid = false }: { solid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -21,12 +21,13 @@ export function TransparentHeader() {
     <header
       className={cn(
         "hero-header fixed inset-x-0 top-0 z-30 px-6 transition-all duration-300 lg:px-8",
-        scrolled
+        solid && "[--foreground:#15110C]",
+        scrolled || solid
           ? "border-b border-[#15110C]/10 bg-[#FAF6EE]/90 backdrop-blur-lg"
           : "bg-transparent",
       )}
     >
-      <SiteHeaderContent transparent={!scrolled} />
+      <SiteHeaderContent transparent={!scrolled && !solid} />
     </header>
   );
 }
