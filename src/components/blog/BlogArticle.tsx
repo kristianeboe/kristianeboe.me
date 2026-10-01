@@ -48,6 +48,7 @@ export function BlogArticle({
         {meta.heroImage ? (
           <ParallaxHero
             image={meta.heroImage}
+            backgroundPosition={meta.heroBackgroundPosition}
             title={meta.h1}
             subtitle={meta.h1Subtitle}
             size="full"
