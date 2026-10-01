@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BlogArticle } from "@/components/blog/BlogArticle";
 import { env } from "@/env";
 import { AUTHORS } from "@/lib/blog-authors";
+import { blogImageUrl } from "@/lib/blog-og";
 import { posts } from ".velite";
 
 export const dynamic = "force-static";
@@ -34,9 +35,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (isHidden(post) || !post) return {};
 
-  const ogImageUrl = post.socialImage
-    ? post.socialImage
-    : `/api/og/blog?title=${encodeURIComponent(post.metaTitle)}&description=${encodeURIComponent(post.metaDescription || "")}`;
+  const ogImageUrl = blogImageUrl(post);
 
   return {
     title: post.metaTitle,

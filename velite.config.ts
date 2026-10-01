@@ -39,8 +39,10 @@ const posts = defineCollection({
       heroVariant: s.enum(["bleed", "inset"]).default("bleed"),
       heroPanorama: s.boolean().default(false),
 
-      // Social sharing image (falls back to the generated blog card)
+      // Photo used inside the generated sharing card
       socialImage: s.string().optional(),
+      ogTitle: s.string().max(120).optional(),
+      ogDescription: s.string().max(160).optional(),
 
       // SEO metadata (for <head>)
       metaTitle: s.string().max(60),
