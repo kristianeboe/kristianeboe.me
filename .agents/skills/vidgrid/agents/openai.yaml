@@ -1,0 +1,4 @@
+interface:
+  display_name: "VidGrid"
+  short_description: "Turn videos into visual timelines"
+  default_prompt: "Use $vidgrid to turn this video into timestamped contact sheets, analyze the temporal sequence by frame ID, and inspect selected moments in the source."

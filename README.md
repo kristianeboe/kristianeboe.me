@@ -171,6 +171,10 @@ MDX-based blog with:
 - SEO optimization
 - Draft posts support
 
+Imggrid and Vidgrid are included in `.agents/skills/` for agents reviewing blog
+photos and videos. Their scripts need Python with Pillow; Vidgrid also needs
+`ffmpeg` and `ffprobe`.
+
 ### Email System
 
 React Email templates with:

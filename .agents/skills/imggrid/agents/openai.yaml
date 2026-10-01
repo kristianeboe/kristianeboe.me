@@ -1,0 +1,4 @@
+interface:
+  display_name: "ImgGrid"
+  short_description: "Index image batches into labelled boards"
+  default_prompt: "Use $imggrid to build a labelled visual index, run a broad ID-based vision pass, and inspect only the selected originals at full resolution."
