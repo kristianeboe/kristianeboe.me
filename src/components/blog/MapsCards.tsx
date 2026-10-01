@@ -15,7 +15,9 @@ interface MapsPlace {
 /** Compact place-link previews, separate from accommodation recommendations. */
 export function MapsCards({ places }: { places: MapsPlace[] }) {
   return (
-    <div className="not-prose my-8 grid gap-4 md:grid-cols-2">
+    <div
+      className={`not-prose my-8 grid gap-4 ${places.length > 1 ? "md:grid-cols-2" : ""}`}
+    >
       {places.map((place) => (
         <article
           key={place.name}
