@@ -27,6 +27,7 @@ interface ImageGalleryProps {
   layout?:
     | "collage"
     | "natural"
+    | "stacked-natural"
     | "stacked-left"
     | "stacked-right"
     | "landscape-top";
@@ -53,6 +54,31 @@ export function ImageGallery({
     >
       {images.length === 1 ? (
         <GalleryGrid images={images} onSelect={setOpenIndex} />
+      ) : layout === "stacked-natural" && images.length === 3 ? (
+        <div
+          className="grid items-start gap-2 sm:grid-cols-[var(--gallery-columns)]"
+          style={
+            {
+              "--gallery-columns": `${1 / (1 / (images[0]!.aspectRatio ?? 4 / 3) + 1 / (images[1]!.aspectRatio ?? 4 / 3))}fr ${images[2]!.aspectRatio ?? 0.5}fr`,
+            } as React.CSSProperties
+          }
+        >
+          <div className="grid gap-2">
+            {images.slice(0, 2).map((image, index) => (
+              <Tile
+                key={image.src}
+                image={image}
+                onClick={() => setOpenIndex(index)}
+                className="h-auto"
+              />
+            ))}
+          </div>
+          <Tile
+            image={images[2]!}
+            onClick={() => setOpenIndex(2)}
+            className="h-auto"
+          />
+        </div>
       ) : layout === "stacked-right" && images.length === 3 ? (
         <div className="grid items-start gap-2 sm:grid-cols-[1.22fr_1fr]">
           <Tile
