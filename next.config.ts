@@ -6,6 +6,11 @@ import "./src/env.ts";
 import type { NextConfig } from "next";
 
 const config: NextConfig = {
+  // Include Sharp's native library in the sharing-image function on Vercel.
+  outputFileTracingIncludes: {
+    "/api/og/blog": ["./node_modules/@img/sharp-*/**"],
+  },
+
   /** Enable MDX pages */
   pageExtensions: ["ts", "tsx", "md", "mdx"],
 
