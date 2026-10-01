@@ -44,6 +44,7 @@ export function ParallaxHero({
             : "min-h-[44svh] sm:min-h-[56vh] md:min-h-[70vh] lg:min-h-[80vh]",
         variant === "inset" && size === "full" && "mt-24 sm:mt-24",
         panorama && "!bg-scroll sm:aspect-[3/1] sm:!min-h-0",
+        backgroundPosition && "!bg-scroll",
       )}
       style={{
         backgroundImage: `url(${image})`,
